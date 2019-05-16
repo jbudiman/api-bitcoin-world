@@ -15,32 +15,16 @@ search: Yes
 
 # Introduction
 
-Welcome to Bitcoin World partner integration API. 
+Welcome to the Bitcoin World partner integration API. 
 
-This API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This API documentation will guide partners through the integration process with Bitcoin World payment APIs and processes.
 
 
 # Authentication
 
-> To authorize, use this code:
+Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload.  You will be provided with credentials as part of the on-boarding process.
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: FooBar"
-```
-
-> Make sure to replace `FooBar` with your API key.
-
-Bitcoin.World uses API keys to allow access to the API. You can register a new Bitcoin.World API key at our [developer portal](http://example.com/developers).
-
-Bitcoin.World expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: FooBar`
-
-<aside class="notice">
-You must replace <code>FooBar</code> with your personal API key.
-</aside>
+A full explanation of the HMAC protocol will be provided.
 
 # Accounts
 The Api endpoints to manage accounts. 
