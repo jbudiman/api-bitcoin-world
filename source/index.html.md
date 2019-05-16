@@ -26,21 +26,24 @@ Bitcoin.World uses HMAC Authentication to secure the API which utilises an API K
 
 A full explanation of the HMAC protocol will be provided.
 
+
+
 # Accounts
-The Api endpoints to manage accounts. 
+
 ## Get Account
 
+> Example Request:
+
 ```shell
-curl "https://api.bitcoin.world/accounts"
-  -H "Authorization: foobar"
+curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
+  -H "Authorization: TBA"
 ```
 
-> The above command returns JSON structured like this:
-`GET https://api.bitcoin.world/accounts/id/<ACCOUNT_ID>`
+> Example Response:
 
 ```json
 {
-  "id": 1001,
+  "id": "098f6bcd4621d373cade4e832627b4f6",
   "status": "OK",
   "kyc": {
     "status": "incomplete",
@@ -49,46 +52,101 @@ curl "https://api.bitcoin.world/accounts"
 }
 ```
 
-This endpoint retrieves a customer's account details.
+This endpoint retrieves an account's details.
 
-### HTTP Request
-`GET http://api.bitcoin.world/accounts/<ACCOUNT_ID>` 
-### Parameters
+### Request
+
+`GET https://api.bitcoin.world/accounts/<ACCOUNT_ID>` 
+
 Parameter | Required | Description
 --------- | -------- | -----------
 account_id    | Yes  | The customer's account number.  
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+id  | Account ID | string
+kyc status  | Status of the account kyc| string
+kyc reason  | Reason of kyc staus| string
 
 <aside class="notice">
 Must be registered first with *Create Account* API or else, the response will be treated as account does not exist.
 </aside>
 
+
+
 ## Create Account
-This endpoint registers an account for a customer. The account registration requires a bare minimum of an email address 
+
+> Example Request:
+
+```shell
+curl "https://api.bitcoin.world/accounts"
+  -H "Authorization: TBA"
+```
+
+> Example Response:
+
+```json
+{
+  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "status": "OK"
+}
+```
+
+This endpoint registers a new account. The account registration requires a bare minimum of an email address 
 and a mobile phone to create. 
 
-On successful registration, an account id will be provided for the customer.
+On successful registration, an account id will be provided.
 
 You maybe able to update customer details by adding KYC details. Adding KYC detail for the customer will allow them
 to access greater tier benefits such as being able to purchase with more payments and with higher daily limit.
-### HTTP Request
-    POST http://api.bitcoin.world/accounts/
-### Query Parameters
+
+### Request
+
+`POST https://api.bitcoin.world/accounts/<ACCOUNT_ID>` 
+    
 Parameter | Required | Description
 --------- | -------- | -----------
 account_id      | Yes  | Customer's unique account identifier
 mobile_phone    | Yes  | mobile numbers of type *string*. International format `61412708135`
 email           | Yes  | email address of type *string*.
+account_ref           | Yes  | Partner's account reference for the customer \ user *string*.
 
-## Add Customer Details
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+id  | Account ID | string
+
+
+
+## Add Account details
+
+> Example Request:
 
 ```shell
 curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"
-  -H "Authorization: foobar"
+  -H "Authorization: TBA"
 ```
 
-### HTTP Request
-    POST http://api.bitcoin.world/accounts/<ACCOUNT_ID>/details
-### Query Parameters
+> Example Response:
+
+```json
+{
+  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "status": "OK"
+}
+```
+
+This endpoint allows details to be added to the account a new account.
+
+### Request
+
+`POST http://api.bitcoin.world/accounts/<ACCOUNT_ID>/details` 
+    
 Parameter | Required | Description
 --------- | -------- | -----------
 given_name      | Yes  | The first name of the customer
@@ -104,27 +162,38 @@ post_code       | Yes  | The address post code
 country         | Yes  | The country of residence
 dob             | Yes  | The date of birth in *YYYY-MM-DD* format of type *string*
 
-## Add KYC Document (URL Reference Method)
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+
+
+
+## Add KYC Document 
+
+> Example Request:
 
 ```shell
 curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"
-  -H "Authorization: foobar"
+  -H "Authorization: TBA"
 ```
+
+> Example Response:
 
 ```json
-  { 
-    "document_file_urls": [ 
-      "https://example.com/id_front.jpg",
-      "https://example.com/id_back.jpg"
-      ]
-  }
+{
+  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "status": "OK"
+}
 ```
 
-For KYC purposes.
-### HTTP Request
-`POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/documents`
+This endpoint allows KYC document data to be provided for the account
 
-### Query Parameters
+### Request
+
+`POST http://api.bitcoin.world/accounts/<ACCOUNT_ID>/documents` 
+
 Parameter | Required | Description
 --------- | -------- | -----------
 document_type       | Yes  | The identification document of type *string*. e.g. *passport*
@@ -132,19 +201,48 @@ document_number     | Yes  | The document identification number of type *string*
 document_file_name  | Yes  | The document identification number of type *string* 
 document_file_urls  | Yes  | The document link image or pdf file(s) that is accessible by us.
 
-## Add KYC Document (FILE POST method)
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+
+
+## Upload KYC Document
+
+> Example Request:
+
 ```shell
 curl -F 'document_file=@/storage/passport_id_front.png' \
-    https://api.bitcoin.world/v1/accounts/098f6bcd4621d373cade4e832627b4f6/documents/passport/passport_id_front/
+    https://api.bitcoin.world/v1/accounts/098f6bcd4621d373cade4e832627b4f6/documents
 ```
-### HTTP Request
-`POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/documents/{DOCUMENT_TYPE}/{DOCUMENT_FILENAME}`
+
+> Example Response:
+
+```json
+{
+  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "status": "OK"
+}
+```
+
+This endpoint allows KYC document files to be be upload for the account
+
+### Request
+
+`PUT http://api.bitcoin.world/accounts/{ACCOUNT_ID}/documents`
     
-### Query Parameters
 Parameter | Required | Description
 --------- | -------- | -----------
 document_file     | Yes |
 
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+
+        
 
 # Rates
 ## Get 
@@ -160,8 +258,7 @@ curl "https://api.bitcoin.world/rates"
 
 ```json
 {
-	"code": 0,
-	"message": "Success",
+  	"status": "OK",
 	"buyRates": {
 		"AUD": {
 			"BTC": {
@@ -218,8 +315,7 @@ Gets the rate information for each crypto-currency and fiat combination, only th
 
 Field | Description | Format
 --------- | -------- | -----------
-code  | The result code | integer
-message  | The result status message| string
+status  | The result status message| string
 commission  | The commission percentage applied to the rate, expressed as a decimal value| decimal
 value  | The value of 1 unit of crypto-currency (inclusive of commission fee) in fiat currency| decimal
 valueExcFee  | The value of 1 unit of crypto-currency (exclusive of commission fee) in fiat currency| decimal
@@ -228,45 +324,147 @@ feeExcTax  | The fee component (exclusive of taxes) in fiat currency | decimal
 feeTax  | The fee tax component in fiat currency | decimal
 flatFee  | The flat fee component in fiat currency| decimal
 
+
+
 # Orders
-The Api endpoints to manage order creation.
-## Get Orders
-Returns the order status by `order_id`. 
-The `order_id` can be obtained after order has been created with the *Create Orders* API endpoint below.
-### HTTP Request
+## Get
+
+> Example Request:
+
+```shell
+curl "https://api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
+  -H "Authorization: TBA"
+```
+
+> Example Response:
+
+```json
+{
+  	"status": "OK",
+	"order": {
+		"id": "0164d962448fbd34f644ffd65624d8ef",
+		"account_id": "098f6bcd4621d373cade4e832627b4f6",
+		"order_type": "CRYPTO-BUY",
+		"payment_type": "BPAY",
+		"ref": 102412,
+		"fiat_code": "AUD",
+		"fiat_amount": 173,
+		"coin_code": "BTC",
+		"coin_amount": 0.01411267,
+		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
+		"fee": 8.86,
+		"commission": 0.05,
+		"txn": null,
+		"created": "16-May-2019 10:30:43",
+		"status": "pendingPayment"
+	}
+}
+```
+
+Get order details for a previously created order.
+
+### Request
 `GET http://api.bitcoin.world/orders/<ORDER_ID>`
-### Query Parameters
+
 Parameter | Required | Description
 --------- | -------- | -----------
-order_id  | Yes     | The order id returned by `create orders` endpoint
-## Create Coin Orders
-This endpoint creates an order that includes bitcoins. 
-When order is created, customer should be redirected to bitcoin.world url checkout page the url is indicated in the response.
-The response will also contain an `order_id`, that can be used to check the order status.
-### HTTP Request
-`POST https://api.bitcoin.world/orders`
-### Query Parameters
+order_id  | Yes     | The order id returned by `create order` endpoint
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+id  | Unique ID of the order| string
+account_id  | The customer ID for the order | string
+type  | Payment type | string
+ref  | The refrence number that is comminucated to the end user | string
+fiat_code  | Fiat currency code | string
+fiat_amount  | Fiat currency value for the order | decimal
+coin_code  | Cryptocurrency code | string
+coin_amount | Cryptocurrency value for the order | decimal
+wallet_address | Cryptocurrency wallet address | string
+fee | fFe for the order | decimal
+commission | Commission rate | decimal
+txn | Blockchain transaction reference | string
+created | Timestamp whe norder was created in UTC time | string
+status | Staus of the order | string
+
+
+
+## Create
+
+> Example Request:
+
+```shell
+curl "https://api.bitcoin.world/orders"
+  -H "Authorization: TBA"
+```
+
+> Example Response:
+
+```json
+{
+  	"status": "OK",
+	"order": {
+		"id": "0164d962448fbd34f644ffd65624d8ef",
+		"account_id": "098f6bcd4621d373cade4e832627b4f6",
+		"order_type": "CRYPTO-BUY",
+		"type": "BPAY",
+		"ref": 102412,
+		"fiat_code": "AUD",
+		"fiat_amount": 173,
+		"coin_code": "BTC",
+		"coin_amount": 0.01411267,
+		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
+		"fee": 8.86,
+		"commission": 0.05,
+		"txn": null,
+		"created": "16-May-2019 10:30:43",
+		"status": "pendingPayment"
+	}
+}
+```
+
+Get order details for a previously created order.
+
+### Request
+`POST http://api.bitcoin.world/orders`
+
 Parameter | Required | Description
 --------- | -------- | -----------
 account_id                  | Yes  | The account_id the order belongs to
-fiat_amount                 | Yes  | the fiat currency amount of type *float* up to *2* decimal points.
-fiat_code                   | Yes  | the fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
-coin_amount                 | No   | the cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
-coin_code                   | No   | the cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
+fiat_amount                 | Yes  | The fiat currency amount of type *float* up to *2* decimal points.
+fiat_code                   | Yes  | The fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
+coin_amount                 | No   | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
+coin_code                   | No   | The cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
 wallet_address              | No   | Wallet address of type *string*. We would prefer you to do the validation on your side.
 callback_url_on_success     | Yes  |
 callback_url_on_cancelled   | Yes  |
 callback_url_on_failure     | Yes  |
 
-<aside class="notice">
-@todo Need example of the callbacks.
- 
-@todo GET/POST method
- 
-@todo add payload stucture
+### Response
 
-@todo add hash signature with API keys
-</aside>
+Field | Description | Format
+--------- | -------- | -----------
+status  | The result status message| string
+id  | Unique ID of the order| string
+account_id  | The customer ID for the order | string
+type  | Payment type | string
+ref  | The refrence number that is comminucated to the end user | string
+fiat_code  | Fiat currency code | string
+fiat_amount  | Fiat currency value for the order | decimal
+coin_code  | Cryptocurrency code | string
+coin_amount | Cryptocurrency value for the order | decimal
+wallet_address | Cryptocurrency wallet address | string
+fee | fFe for the order | decimal
+commission | Commission rate | decimal
+txn | Blockchain transaction reference | string
+created | Timestamp whe norder was created in UTC time | string
+status | Staus of the order | string
+
+
+
 
 
 
