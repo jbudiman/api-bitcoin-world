@@ -364,20 +364,20 @@ curl "https://api.bitcoin.world/rates"
 			"BTC": {
 				"commission": 0.0500,
 				"value": 12613.00,
-				"valueExcFee": 11955.49,
+				"value_exc_fee": 11955.49,
 				"fee": 657.51,
-				"feeExcTax": 597.74,
-				"feeTax": 59.77,
-				"flatFee": 0.00
+				"fee_fxc_tax": 597.74,
+				"fee_tax": 59.77,
+				"flat_fee": 0.00
 			},
 			"ETH": {
 				"commission": 0.0500,
 				"value": 381.00,
-				"valueExcFee": 361.18,
+				"value_exc_fee": 361.18,
 				"fee": 19.82,
-				"feeExcTax": 18.02,
-				"feeTax": 1.80,
-				"flatFee": 0.00
+				"fee_exc_tax": 18.02,
+				"fee_tax": 1.80,
+				"flat_fee": 0.00
 			}
 		}
 	},
@@ -386,20 +386,20 @@ curl "https://api.bitcoin.world/rates"
 			"BTC": {
 				"commission": 0.0000,
 				"value": 11539.00,
-				"valueExcFee": 11539.00,
+				"value_fxc_fee": 11539.00,
 				"fee": 0.00,
-				"feeExcTax": 0.00,
-				"feeTax": 0.00,
-				"flatFee": 0.00
+				"fee_exc_tax": 0.00,
+				"fee_tax": 0.00,
+				"flat_fee": 0.00
 			},
 			"ETH": {
 				"commission": 0.0000,
 				"value": 350.00,
-				"valueExcFee": 350.00,
+				"value_exc_fee": 350.00,
 				"fee": 0.00,
-				"feeExcTax": 0.00,
-				"feeTax": 0.00,
-				"flatFee": 0.00
+				"fee_exc_tax": 0.00,
+				"fee_tax": 0.00,
+				"flat_fee": 0.00
 			}
 		}
 	}
