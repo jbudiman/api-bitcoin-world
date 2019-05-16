@@ -102,30 +102,35 @@ The `order_id` can be obtained after order has been created with the *Create Ord
 Parameter | Required | Description
 --------- | -------- | -----------
 order_id  | Yes     | The order id returned by `create orders` endpoint
-## Create Orders
-This endpoint creates an order. 
+## Create Coin Orders
+This endpoint creates an order that includes bitcoins. 
 When order is created, customer should be redirected to bitcoin.world url checkout page the url is indicated in the response.
 The response will also contain an `order_id`, that can be used to check the order status.
 ### HTTP Request
-`GET http://api.bitcoin.world/orders`
+`POST https://api.bitcoin.world/orders`
 ### Query Parameters
 Parameter | Required | Description
 --------- | -------- | -----------
-coin_amount                 | Yes  | the cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
-coin_code                   | Yes  | the cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
+account_id                  | Yes  | The account_id the order belongs to
 fiat_amount                 | Yes  | the fiat currency amount of type *float* up to *2* decimal points.
 fiat_code                   | Yes  | the fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
-wallet_address              | Yes  | Wallet address of type *string*. We would prefer you to do the validation on your side.
-account_id                  | Yes  | @internal Discuss with the team if this is necessary. The account_id the order belongs to
-*rate_id                    | No | @internal Discuss with the team if this is necessary
+coin_amount                 | No   | the cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
+coin_code                   | No   | the cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
+wallet_address              | No   | Wallet address of type *string*. We would prefer you to do the validation on your side.
+*rate_id                    | No   | @internal Discuss with the team if this is necessary
 callback_url_on_success     | Yes  |
+callback_url_on_cancelled   | Yes  |
 callback_url_on_failure     | Yes  |
 
-<aside class="success">
-This API endpoint requires an authentication header
+<aside class="notice">
+@todo Need example of the callbacks.
+ 
+@todo GET/POST method
+ 
+@todo add payload stucture
+
+@todo add hash signature with API keys
 </aside>
-
-
 
 # Customers
 The Api endpoints registers the customers KYC _(This can probably be combined with Accounts api)_
