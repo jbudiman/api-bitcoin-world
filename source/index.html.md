@@ -72,9 +72,87 @@ mobile_phone    | Yes  | mobile numbers of type *string*. International format `
 email           | Yes  | email address of type *string*. 
 
 # Rates
-This endpoint returns the exchange rates.
-### HTTP Request
+## Get 
+
+> Example Request:
+
+```shell
+curl "https://api.bitcoin.world/rates"
+  -H "Authorization: TBA"
+```
+
+> Example Response:
+
+```json
+{
+	"code": 0,
+	"message": "Success",
+	"buyRates": {
+		"AUD": {
+			"BTC": {
+				"commission": 0.0500,
+				"value": 12613.00,
+				"valueExcFee": 11955.49,
+				"fee": 657.51,
+				"feeExcTax": 597.74,
+				"feeTax": 59.77,
+				"flatFee": 0.00
+			},
+			"ETH": {
+				"commission": 0.0500,
+				"value": 381.00,
+				"valueExcFee": 361.18,
+				"fee": 19.82,
+				"feeExcTax": 18.02,
+				"feeTax": 1.80,
+				"flatFee": 0.00
+			}
+		}
+	},
+	"sellRates": {
+		"AUD": {
+			"BTC": {
+				"commission": 0.0000,
+				"value": 11539.00,
+				"valueExcFee": 11539.00,
+				"fee": 0.00,
+				"feeExcTax": 0.00,
+				"feeTax": 0.00,
+				"flatFee": 0.00
+			},
+			"ETH": {
+				"commission": 0.0000,
+				"value": 350.00,
+				"valueExcFee": 350.00,
+				"fee": 0.00,
+				"feeExcTax": 0.00,
+				"feeTax": 0.00,
+				"flatFee": 0.00
+			}
+		}
+	}
+}
+```
+
+Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.
+
+### Request
 `GET http://api.bitcoin.world/rates/`
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+code  | The result code | integer
+message  | The result status message| string
+commission  | The commission percentage applied to the rate, expressed as a decimal value| decimal
+value  | The value of 1 unit of crypto-currency (inclusive of commission fee) in fiat currency| decimal
+valueExcFee  | The value of 1 unit of crypto-currency (exclusive of commission fee) in fiat currency| decimal
+fee  | The fee component in fiat currency| decimal
+feeExcTax  | The fee component (exclusive of taxes) in fiat currency | decimal
+feeTax  | The fee tax component in fiat currency | decimal
+flatFee  | The flat fee component in fiat currency| decimal
+
 # Orders
 The Api endpoints to manage order creation.
 ## Get Orders
