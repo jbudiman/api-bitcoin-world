@@ -54,7 +54,14 @@ This endpoint retrieves a customer's account details.
 ### HTTP Request
 `GET http://api.bitcoin.world/accounts/<ACCOUNT_ID>` 
 ### Parameters
-    _TBD_
+Parameter | Required | Description
+--------- | -------- | -----------
+account_id    | Yes  | The customer's account number.  
+
+<aside class="notice">
+Must be registered first with *Create Account* API or else, the response will be treated as account does not exist.
+</aside>
+
 ## Create Account
 This endpoint registers an account for a customer. The account registration requires a bare minimum of an email address 
 and a mobile phone to create. 
@@ -68,8 +75,76 @@ to access greater tier benefits such as being able to purchase with more payment
 ### Query Parameters
 Parameter | Required | Description
 --------- | -------- | -----------
+account_id      | Yes  | Customer's unique account identifier
 mobile_phone    | Yes  | mobile numbers of type *string*. International format `61412708135`
-email           | Yes  | email address of type *string*. 
+email           | Yes  | email address of type *string*.
+
+## Add Customer Details
+
+```shell
+curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"
+  -H "Authorization: foobar"
+```
+
+### HTTP Request
+    POST http://api.bitcoin.world/accounts/<ACCOUNT_ID>/details
+### Query Parameters
+Parameter | Required | Description
+--------- | -------- | -----------
+given_name      | Yes  | The first name of the customer
+middle_name     | No | The middle name of the customer, if any.
+surname         | Yes  | The family name of the customer
+flat_number     | No | The address flat number
+street_number   | Yes  | The address street number
+street_name     | Yes  | The address street name
+street_type     | Yes  | The address street type
+suburb          | Yes  | The address suburb
+state           | Yes  | The address state
+post_code       | Yes  | The address post code
+country         | Yes  | The country of residence
+dob             | Yes  | The date of birth in *YYYY-MM-DD* format of type *string*
+
+## Add KYC Document (URL Reference Method)
+
+```shell
+curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"
+  -H "Authorization: foobar"
+```
+
+```json
+  { 
+    "document_file_urls": [ 
+      "https://example.com/id_front.jpg",
+      "https://example.com/id_back.jpg"
+      ]
+  }
+```
+
+For KYC purposes.
+### HTTP Request
+`POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/documents`
+
+### Query Parameters
+Parameter | Required | Description
+--------- | -------- | -----------
+document_type       | Yes  | The identification document of type *string*. e.g. *passport*
+document_number     | Yes  | The document identification number of type *string* 
+document_file_name  | Yes  | The document identification number of type *string* 
+document_file_urls  | Yes  | The document link image or pdf file(s) that is accessible by us.
+
+## Add KYC Document (FILE POST method)
+```shell
+curl -F 'document_file=@/storage/passport_id_front.png' \
+    https://api.bitcoin.world/v1/accounts/098f6bcd4621d373cade4e832627b4f6/documents/passport/passport_id_front/
+```
+### HTTP Request
+`POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/documents/{DOCUMENT_TYPE}/{DOCUMENT_FILENAME}`
+    
+### Query Parameters
+Parameter | Required | Description
+--------- | -------- | -----------
+document_file     | Yes |
+
 
 # Rates
 ## Get 
@@ -179,7 +254,6 @@ fiat_code                   | Yes  | the fiat currency code of type *string* e.g
 coin_amount                 | No   | the cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
 coin_code                   | No   | the cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
 wallet_address              | No   | Wallet address of type *string*. We would prefer you to do the validation on your side.
-*rate_id                    | No   | @internal Discuss with the team if this is necessary
 callback_url_on_success     | Yes  |
 callback_url_on_cancelled   | Yes  |
 callback_url_on_failure     | Yes  |
@@ -192,58 +266,6 @@ callback_url_on_failure     | Yes  |
 @todo add payload stucture
 
 @todo add hash signature with API keys
-</aside>
-
-# Customers
-The Api endpoints registers the customers KYC _(This can probably be combined with Accounts api)_
-## Register Customer KYC
-```shell
-curl "http://api.bitcoinworld.com/customers"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {}
-]
-```
-### HTTP Request
-`POST http://example.com/api/customers`
-### Query Parameters
-Parameter | Required | Description
---------- | ------- | -----------
-account_id          | Yes  | The account ID
-given_name          | Yes  | The first name of the customer
-middle_name         | No | The middle name of the customer, if any.
-surname             | Yes  | The family name of the customer
-flat_number         | No | The address flat number
-street_number       | Yes  | The address street number
-street_name         | Yes  | The address street name
-street_type         | Yes  | The address street type
-suburb              | Yes  | The address suburb
-state               | Yes  | The address state
-post_code           | Yes  | The address post code
-country             | Yes  | The country of residence
-dob                 | Yes  | The date of birth in *YYYY-MM-DD* format of type *string*
-document_ids        | Yes  | The document identification number of type *string*
-document_type       | No | The identification document of type *string*. e.g. *passport* 
-document_file_urls  | Yes  | The document link image or pdf file(s) that is accessible by us.
-
-You can add multiple file urls `document_file_urls` by adding JSON collection like below:
-
-```json
-  { 
-    "files": [ 
-      "https://example.com/id_front.jpg",
-      "https://example.com/id_back.jpg"
-      ]
-  }
-```
-
-<aside class="success">
-Must attach authentication header
 </aside>
 
 
