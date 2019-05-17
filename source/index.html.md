@@ -15,6 +15,19 @@ search: Yes
 
 # Introduction
 
+> Sandbox Base URL
+
+```bash
+https://sandbox-api.bitcoin.world
+```
+
+> Live Base URL
+
+```bash
+https://api.bitcoin.world
+```
+
+
 Welcome to the Bitcoin World partner integration API. 
 
 This API documentation will guide partners through the integration process with Bitcoin World payment APIs and processes.
@@ -37,7 +50,7 @@ A full explanation of the HMAC protocol will be provided.
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
-  -H "Authorization: TBA"
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
 ```
 
 > Example Response:
@@ -59,6 +72,8 @@ This endpoint retrieves an account's details.
 ### Request
 
 `GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}` 
+
+### Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -86,7 +101,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"account_ref":"unique-partner-reference"
@@ -97,7 +112,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"account_ref":"unique-partner-reference",
@@ -142,7 +157,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 
 `POST https://sandbox-api.bitcoin.world/accounts/` 
 
-### Request Parameters   
+### Parameters   
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -179,7 +194,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"given_name":"John",
@@ -210,6 +225,8 @@ This endpoint allows kyc details to be added and/or modified to the account.
 ### Request
 
 `POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details` 
+
+### Parameters
     
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -245,7 +262,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/documents" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d ' \
     {"account_id":"098f6bcd4621d373cade4e832627b4f6", \
@@ -316,12 +333,14 @@ curl -X POST https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload
 }
 ```
 
-This endpoints accepts KYC document of image file types. Must be initialized with **Create Document** API to get the 
-upload reference `document_id`
+This endpoints accepts KYC document of image file types. Must be initialized with **Create Document** API to obtain the 
+upload reference `document_ref`
 
 ### Request
 
 `POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload`
+
+### Parameters
     
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -348,7 +367,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/rates"
-  -H "Authorization: TBA"
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
 ```
 
 > Example Response:
@@ -432,7 +451,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
-  -H "Authorization: TBA"
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
 ```
 
 > Example Response:
@@ -464,6 +483,8 @@ Get order details for a previously created order.
 
 ### Request
 `GET http://sandbox-api.bitcoin.world/orders/<ORDER_ID>`
+
+### Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -499,7 +520,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/orders" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -516,7 +537,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/orders" \
-  -H "Authorization: TBA" \
+  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -556,6 +577,8 @@ Get order details for a previously created order.
 
 ### Request
 `POST http://sandbox-api.bitcoin.world/orders`
+
+### Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
