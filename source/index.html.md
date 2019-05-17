@@ -36,7 +36,7 @@ A full explanation of the HMAC protocol will be provided.
 > Example Request:
 
 ```shell
-curl "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
+curl "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
   -H "Authorization: TBA"
 ```
 
@@ -58,7 +58,7 @@ This endpoint retrieves an account's details.
 
 ### Request
 
-`GET https://api.bitcoin.world/accounts/{ACCOUNT_ID}` 
+`GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}` 
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -85,7 +85,7 @@ Requires <strong>Authentication</strong>
 > Example Request *without* KYC details:
 
 ```shell
-curl -X POST "https://api.bitcoin.world/accounts" \
+curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
   -H "Authorization: TBA" \
   -H "Content-Type: application/json" \
   -d \
@@ -96,7 +96,7 @@ curl -X POST "https://api.bitcoin.world/accounts" \
 > Example Request *with* KYC details:
 
 ```shell
-curl -X POST "https://api.bitcoin.world/accounts" \
+curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
   -H "Authorization: TBA" \
   -H "Content-Type: application/json" \
   -d \
@@ -138,12 +138,9 @@ to our checkout cart.
 To improve user experience, we recommend our partners to provide the customer's KYC details during 
 account creation. The customer will not be prompted to enter the KYC details in our checkout cart. 
 
-~~You maybe able to update customer details by adding KYC details. Adding KYC detail for the customer will allow them
-to access greater tier benefits such as being able to purchase with more payments and with higher daily limit.~~
-
 ### Request
 
-`POST https://api.bitcoin.world/accounts/` 
+`POST https://sandbox-api.bitcoin.world/accounts/` 
 
 ### Request Parameters   
 
@@ -181,7 +178,7 @@ Requires <strong>Authentication</strong>
 > Example Request:
 
 ```shell
-curl -X POST "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details" \
+curl -X POST "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details" \
   -H "Authorization: TBA" \
   -H "Content-Type: application/json" \
   -d \
@@ -212,7 +209,7 @@ This endpoint allows kyc details to be added and/or modified to the account.
 
 ### Request
 
-`POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/details` 
+`POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details` 
     
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -242,12 +239,12 @@ Requires <strong>Authentication</strong>
 </aside>      
 
 # Documents
-## Create Documents
+## Create Document
 
 > Example Request:
 
 ```shell
-curl -X POST "https://api.bitcoin.world/documents" \
+curl -X POST "https://sandbox-api.bitcoin.world/documents" \
   -H "Authorization: TBA" \
   -H "Content-Type: application/json" \
   -d ' \
@@ -263,7 +260,7 @@ curl -X POST "https://api.bitcoin.world/documents" \
 {
   "id": "098f6bcd4621d373cade4e832627b4f6",
   "status": "OK",
-  "upload_uri": "https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"
+  "upload_uri": "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"
 }
 ```
 
@@ -271,7 +268,7 @@ This endpoint accepts KYC document file.
 
 ### Request
 
-`POST http://api.bitcoin.world/documents/` 
+`POST http://sandbox-api.bitcoin.world/documents/` 
 
 ### Parameters
 
@@ -300,13 +297,13 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -F 'document_file[]=@/path/to/file/passport_id.png' \
-    https://api.bitcoin.world/v1/documents/21d373cad/upload
+    https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload
 ```
 
 > Example Request uploading multiple files:
 
 ```shell
-curl -X POST https://api.bitcoin.world/v1/documents/21d373cad/upload 
+curl -X POST https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload 
     -F 'document_file[]=@/path/to/file/passport_id_front.png' \
     -F 'document_file[]=@/path/to/file/passport_id_back.png'
 ```
@@ -324,7 +321,7 @@ upload reference `document_id`
 
 ### Request
 
-`POST http://api.bitcoin.world/documents/{DOCUMENT_REF}/upload`
+`POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload`
     
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -345,12 +342,12 @@ Requires <strong>Authentication</strong>
 </aside>        
 
 # Rates
-## Get 
+## Get Rates
 
 > Example Request:
 
 ```shell
-curl "https://api.bitcoin.world/rates"
+curl "https://sandbox-api.bitcoin.world/rates"
   -H "Authorization: TBA"
 ```
 
@@ -409,7 +406,7 @@ curl "https://api.bitcoin.world/rates"
 Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.
 
 ### Request
-`GET http://api.bitcoin.world/rates/`
+`GET http://sandbox-api.bitcoin.world/rates/`
 
 ### Response
 
@@ -429,12 +426,12 @@ Requires <strong>Authentication</strong>
 </aside>      
 
 # Orders
-## Get
+## Get Order
 
 > Example Request:
 
 ```shell
-curl "https://api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
+curl "https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
   -H "Authorization: TBA"
 ```
 
@@ -466,7 +463,7 @@ curl "https://api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
 Get order details for a previously created order.
 
 ### Request
-`GET http://api.bitcoin.world/orders/<ORDER_ID>`
+`GET http://sandbox-api.bitcoin.world/orders/<ORDER_ID>`
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -496,12 +493,12 @@ Field | Description | Format
 Requires <strong>Authentication</strong>
 </aside>      
 
-## Create
+## Create Order
 
 > Example Request (*Cryptocurrency Order*):
 
 ```shell
-curl -X POST "https://api.bitcoin.world/orders" \
+curl -X POST "https://sandbox-api.bitcoin.world/orders" \
   -H "Authorization: TBA" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
@@ -518,7 +515,7 @@ curl -X POST "https://api.bitcoin.world/orders" \
 > Example Request (*Payment Processor Only*):
 
 ```shell
-curl -X POST "https://api.bitcoin.world/orders" \
+curl -X POST "https://sandbox-api.bitcoin.world/orders" \
   -H "Authorization: TBA" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
@@ -558,39 +555,39 @@ curl -X POST "https://api.bitcoin.world/orders" \
 Get order details for a previously created order.
 
 ### Request
-`POST http://api.bitcoin.world/orders`
+`POST http://sandbox-api.bitcoin.world/orders`
 
 Parameter | Required | Description
 --------- | -------- | -----------
-account_id                  | Yes  | The account_id the order belongs to
-fiat_amount                 | Yes  | The fiat currency amount of type *float* up to *2* decimal points.
-fiat_code                   | Yes  | The fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
-coin_amount                 | No   | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
-coin_code                   | No   | The cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
-wallet_address              | No   | Wallet address of type *string*. We would prefer you to do the validation on your side.
-callback_url_on_success     | Yes  |
-callback_url_on_cancelled   | Yes  |
-callback_url_on_failure     | Yes  |
+`account_id`                  | Yes  | The account_id the order belongs to
+`fiat_amount`                 | Yes  | The fiat currency amount of type *float* up to *2* decimal points.
+`fiat_code`                   | Yes  | The fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
+`coin_amount`                 | No   | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
+`coin_code`                   | No   | The cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
+`wallet_address`              | No   | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`callback_url_on_success`     | Yes  | The return URL when the customer completed the checkout process
+`callback_url_on_cancelled`   | Yes  | The return URL when the customer cancelled the checkout process
+`callback_url_on_failure`     | Yes  | The return URL when the customer failed to complete the checkout process
 
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
-'status'    | The result status message| string
-'id'        | Unique ID of the order| string
-'account_id'| The customer ID for the order | string
-'type'      | Payment type | string
-'ref'       | The reference number that is communicated to the end user | string
-'fiat_code' | Fiat currency code | string
-'fiat_amount' | Fiat currency value for the order | decimal
-'coin_code' | Cryptocurrency code | string
-'coin_amount' | Cryptocurrency value for the order | decimal
-'wallet_address' | Cryptocurrency wallet address | string
-'fee'       | fee for the order | decimal
-'commission'| Commission rate | decimal
-'txn'       | Blockchain transaction reference | string
-'created'   | Timestamp when order was created in UTC time | string
-'status'    | Status of the order | string
+`status`    | The result status message| string
+`id`        | Unique ID of the order| string
+`account_id`| The customer ID for the order | string
+`type`      | Payment type | string
+`ref`       | The reference number that is communicated to the end user | string
+`fiat_code` | Fiat currency code | string
+`fiat_amount` | Fiat currency value for the order | decimal
+`coin_code` | Cryptocurrency code | string
+`coin_amount` | Cryptocurrency value for the order | decimal
+`wallet_address` | Cryptocurrency wallet address | string
+`fee`       | fee for the order | decimal
+`commission`| Commission rate | decimal
+`txn`       | Blockchain transaction reference | string
+`created`   | Timestamp when order was created in UTC time | string
+`status`    | Status of the order | string
 
 <aside class="warning">
 Requires <strong>Authentication</strong>
