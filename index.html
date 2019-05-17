@@ -280,6 +280,16 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
+<blockquote>
+<p>Sandbox Base URL</p>
+</blockquote>
+<pre class="highlight shell"><code>https://sandbox-api.bitcoin.world
+</code></pre>
+<blockquote>
+<p>Live Base URL</p>
+</blockquote>
+<pre class="highlight shell"><code>https://api.bitcoin.world
+</code></pre>
 <p>Welcome to the Bitcoin World partner integration API. </p>
 
 <p>This API documentation will guide partners through the integration process with Bitcoin World payment APIs and processes.</p>
@@ -294,7 +304,7 @@
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"</span>
-  -H <span class="s2">"Authorization: TBA"</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -312,7 +322,7 @@
 <p>This endpoint retrieves an account&#39;s details.</p>
 <h3 id='request'>Request</h3>
 <p><code>GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
-
+<h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -373,7 +383,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request <em>without</em> KYC details:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_ref":"unique-partner-reference"
@@ -384,7 +394,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request <em>with</em> KYC details:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_ref":"unique-partner-reference",
@@ -424,7 +434,7 @@ to our checkout cart.</p>
 account creation. The customer will not be prompted to enter the KYC details in our checkout cart. </p>
 <h3 id='request-2'>Request</h3>
 <p><code>POST https://sandbox-api.bitcoin.world/accounts/</code> </p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='parameters-2'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -536,7 +546,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"given_name":"John",
@@ -563,7 +573,7 @@ Requires <strong>Authentication</strong>
 <p>This endpoint allows kyc details to be added and/or modified to the account. </p>
 <h3 id='request-3'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
-
+<h3 id='parameters-3'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -665,7 +675,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/documents"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="s1">' \
     {"account_id":"098f6bcd4621d373cade4e832627b4f6", \
@@ -685,7 +695,7 @@ Requires <strong>Authentication</strong>
 <p>This endpoint accepts KYC document file.</p>
 <h3 id='request-4'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/</code> </p>
-<h3 id='parameters'>Parameters</h3>
+<h3 id='parameters-4'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -763,11 +773,11 @@ Requires <strong>Authentication</strong>
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoints accepts KYC document of image file types. Must be initialized with <strong>Create Document</strong> API to get the 
-upload reference <code>document_id</code></p>
+<p>This endpoints accepts KYC document of image file types. Must be initialized with <strong>Create Document</strong> API to obtain the 
+upload reference <code>document_ref</code></p>
 <h3 id='request-5'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
-
+<h3 id='parameters-5'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -813,7 +823,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/rates"</span>
-  -H <span class="s2">"Authorization: TBA"</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -927,7 +937,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"</span>
-  -H <span class="s2">"Authorization: TBA"</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -956,7 +966,7 @@ Requires <strong>Authentication</strong>
 <p>Get order details for a previously created order.</p>
 <h3 id='request-7'>Request</h3>
 <p><code>GET http://sandbox-api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
-
+<h3 id='parameters-6'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1063,7 +1073,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request (<em>Cryptocurrency Order</em>):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -1079,7 +1089,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request (<em>Payment Processor Only</em>):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -1115,7 +1125,7 @@ Requires <strong>Authentication</strong>
 <p>Get order details for a previously created order.</p>
 <h3 id='request-8'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
-
+<h3 id='parameters-7'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1280,15 +1290,15 @@ This error section is a work in progress. We will define more comprehensive erro
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The request is not allowed.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The resource could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -1296,7 +1306,7 @@ This error section is a work in progress. We will define more comprehensive erro
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>Gone -- The requested resource has been removed from our servers.</td>
 </tr>
 <tr>
 <td>418</td>
@@ -1304,7 +1314,7 @@ This error section is a work in progress. We will define more comprehensive erro
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests</td>
 </tr>
 <tr>
 <td>500</td>
