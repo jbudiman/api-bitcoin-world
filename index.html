@@ -326,7 +326,7 @@ The API docs is a work in progress. The content is not finalized yet.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"account_ref"</span><span class="p">:</span><span class="s2">"unique-partner-reference"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"kyc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incomplete"</span><span class="p">,</span><span class="w">
@@ -337,20 +337,6 @@ The API docs is a work in progress. The content is not finalized yet.
 <p>This endpoint retrieves an account&#39;s details.</p>
 <h3 id='request'>Request</h3>
 <p><code>GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
-<h3 id='parameters'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>account_id</code></td>
-<td><strong>Yes</strong></td>
-<td>The customer&#39;s account number.</td>
-</tr>
-</tbody></table>
 <h3 id='response'>Response</h3>
 <table><thead>
 <tr>
@@ -365,7 +351,7 @@ The API docs is a work in progress. The content is not finalized yet.
 <td>string</td>
 </tr>
 <tr>
-<td><code>id</code></td>
+<td><code>account_id</code></td>
 <td>Account ID</td>
 <td>string</td>
 </tr>
@@ -432,7 +418,7 @@ Requires <strong>Authentication</strong>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -449,7 +435,7 @@ to our checkout cart.</p>
 account creation. The customer will not be prompted to enter the KYC details in our checkout cart. </p>
 <h3 id='request-2'>Request</h3>
 <p><code>POST https://sandbox-api.bitcoin.world/accounts/</code> </p>
-<h3 id='parameters-2'>Parameters</h3>
+<h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -547,7 +533,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 <td>string</td>
 </tr>
 <tr>
-<td><code>id</code></td>
+<td><code>account_id</code></td>
 <td>Account ID</td>
 <td>string</td>
 </tr>
@@ -588,7 +574,7 @@ Requires <strong>Authentication</strong>
 <p>This endpoint allows kyc details to be added and/or modified to the account. </p>
 <h3 id='request-3'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
-<h3 id='parameters-3'>Parameters</h3>
+<h3 id='parameters-2'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -710,7 +696,7 @@ Requires <strong>Authentication</strong>
 <p>This endpoint accepts KYC document file.</p>
 <h3 id='request-4'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/</code> </p>
-<h3 id='parameters-4'>Parameters</h3>
+<h3 id='parameters-3'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -721,7 +707,7 @@ Requires <strong>Authentication</strong>
 <tr>
 <td>account_id</td>
 <td><strong>Yes</strong></td>
-<td></td>
+<td>The account id belongs to the customer.</td>
 </tr>
 <tr>
 <td>document_number</td>
@@ -792,7 +778,7 @@ Requires <strong>Authentication</strong>
 upload reference <code>document_ref</code></p>
 <h3 id='request-5'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
-<h3 id='parameters-5'>Parameters</h3>
+<h3 id='parameters-4'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -801,14 +787,9 @@ upload reference <code>document_ref</code></p>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>document_ref</code></td>
-<td><strong>Yes</strong></td>
-<td>ID reference</td>
-</tr>
-<tr>
 <td><code>document_files</code></td>
 <td><strong>Yes</strong></td>
-<td>One or more files. Accepted file extensions: <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code></td>
+<td>One or more files. Accepted file extensions: <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code>, and <code>.pdf</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-5'>Response</h3>
@@ -978,23 +959,11 @@ Requires <strong>Authentication</strong>
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Get order details for a previously created order.</p>
+<p>Get order details for a previously created order. </p>
+
+<p>The order id is returned from <code>create order</code> endpoint </p>
 <h3 id='request-7'>Request</h3>
 <p><code>GET http://sandbox-api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
-<h3 id='parameters-6'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>order_id</code></td>
-<td>Yes</td>
-<td>The order id returned by <code>create order</code> endpoint</td>
-</tr>
-</tbody></table>
 <h3 id='response-7'>Response</h3>
 <table><thead>
 <tr>
@@ -1140,7 +1109,7 @@ Requires <strong>Authentication</strong>
 <p>Get order details for a previously created order.</p>
 <h3 id='request-8'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
-<h3 id='parameters-7'>Parameters</h3>
+<h3 id='parameters-5'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
