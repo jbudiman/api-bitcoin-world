@@ -544,16 +544,13 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
 		"id": "0164d962448fbd34f644ffd65624d8ef",
 		"account_id": "098f6bcd4621d373cade4e832627b4f6",
 		"order_type": "CRYPTO-BUY",
-		"type": "BPAY",
-		"ref": 102412,
 		"fiat_code": "AUD",
 		"fiat_amount": 173,
 		"coin_code": "BTC",
 		"coin_amount": 0.01411267,
 		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
-		"created_at": "16-May-2019 10:30:43",
-		"status": "pendingPayment",
-        "checkout_url": "https://partner-site.bitcoin.world"
+        "checkout_url": "https://partner-site.bitcoin.world",
+        "created_at": "16-May-2019 10:30:43"
 	}
 }
 ```
@@ -582,13 +579,11 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
 		"id": "0164d962448fbd34f644ffd65624d8ef",
 		"account_id": "098f6bcd4621d373cade4e832627b4f6",
 		"order_type": "PAYMENT",
-		"type": "BPAY",
 		"ref": 102412,
 		"fiat_code": "AUD",
 		"fiat_amount": 173,
-		"created_at": "16-May-2019 10:30:43",
-		"status": "pendingPayment",
-        "checkout_url": "https://partner-site.bitcoin.world"
+	    "checkout_url": "https://partner-site.bitcoin.world",
+        "created_at": "16-May-2019 10:30:43"	    
 	}
 }
 ```
@@ -630,7 +625,6 @@ Field | Description | Format
 `coin_amount`     | Cryptocurrency value for the order | decimal
 `wallet_address`  | Cryptocurrency wallet address | string
 `created_at`      | Timestamp when order was created in UTC time | string
-`status`          | Status of the order | string
 `checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
 <aside class="notice">
