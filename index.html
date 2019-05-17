@@ -242,7 +242,7 @@
             <a href="#documents" class="toc-h1 toc-link" data-title="Documents">Documents</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-documents" class="toc-h2 toc-link" data-title="Create Documents">Create Documents</a>
+                    <a href="#create-document" class="toc-h2 toc-link" data-title="Create Document">Create Document</a>
                   </li>
                   <li>
                     <a href="#upload-documents" class="toc-h2 toc-link" data-title="Upload Documents">Upload Documents</a>
@@ -253,7 +253,7 @@
             <a href="#rates" class="toc-h1 toc-link" data-title="Rates">Rates</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get" class="toc-h2 toc-link" data-title="Get">Get</a>
+                    <a href="#get-rates" class="toc-h2 toc-link" data-title="Get Rates">Get Rates</a>
                   </li>
               </ul>
           </li>
@@ -261,10 +261,10 @@
             <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-2" class="toc-h2 toc-link" data-title="Get">Get</a>
+                    <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
                   </li>
                   <li>
-                    <a href="#create" class="toc-h2 toc-link" data-title="Create">Create</a>
+                    <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
                   </li>
               </ul>
           </li>
@@ -293,7 +293,7 @@
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"</span>
   -H <span class="s2">"Authorization: TBA"</span>
 </code></pre>
 <blockquote>
@@ -311,7 +311,7 @@
 </span></code></pre>
 <p>This endpoint retrieves an account&#39;s details.</p>
 <h3 id='request'>Request</h3>
-<p><code>GET https://api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
+<p><code>GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
 
 <table><thead>
 <tr>
@@ -372,7 +372,7 @@ Requires <strong>Authentication</strong>
 <blockquote>
 <p>Example Request <em>without</em> KYC details:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/accounts"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
@@ -383,7 +383,7 @@ Requires <strong>Authentication</strong>
 <blockquote>
 <p>Example Request <em>with</em> KYC details:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/accounts"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
@@ -422,11 +422,8 @@ to our checkout cart.</p>
 
 <p>To improve user experience, we recommend our partners to provide the customer&#39;s KYC details during 
 account creation. The customer will not be prompted to enter the KYC details in our checkout cart. </p>
-
-<p><del>You maybe able to update customer details by adding KYC details. Adding KYC detail for the customer will allow them
-to access greater tier benefits such as being able to purchase with more payments and with higher daily limit.</del></p>
 <h3 id='request-2'>Request</h3>
-<p><code>POST https://api.bitcoin.world/accounts/</code> </p>
+<p><code>POST https://sandbox-api.bitcoin.world/accounts/</code> </p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -538,7 +535,7 @@ Requires <strong>Authentication</strong>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
@@ -565,7 +562,7 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>This endpoint allows kyc details to be added and/or modified to the account. </p>
 <h3 id='request-3'>Request</h3>
-<p><code>POST http://api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
+<p><code>POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
 
 <table><thead>
 <tr>
@@ -663,11 +660,11 @@ Requires <strong>Authentication</strong>
 <aside class="warning">
 Requires <strong>Authentication</strong>
 </aside>      
-<h1 id='documents'>Documents</h1><h2 id='create-documents'>Create Documents</h2>
+<h1 id='documents'>Documents</h1><h2 id='create-document'>Create Document</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/documents"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/documents"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="s1">' \
@@ -682,12 +679,12 @@ Requires <strong>Authentication</strong>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"upload_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"</span><span class="w">
+  </span><span class="s2">"upload_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint accepts KYC document file.</p>
 <h3 id='request-4'>Request</h3>
-<p><code>POST http://api.bitcoin.world/documents/</code> </p>
+<p><code>POST http://sandbox-api.bitcoin.world/documents/</code> </p>
 <h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
@@ -750,12 +747,12 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -F <span class="s1">'document_file[]=@/path/to/file/passport_id.png'</span> <span class="se">\</span>
-    https://api.bitcoin.world/v1/documents/21d373cad/upload
+    https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload
 </code></pre>
 <blockquote>
 <p>Example Request uploading multiple files:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://api.bitcoin.world/v1/documents/21d373cad/upload 
+<pre class="highlight shell tab-shell"><code>curl -X POST https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload 
     -F <span class="s1">'document_file[]=@/path/to/file/passport_id_front.png'</span> <span class="se">\</span>
     -F <span class="s1">'document_file[]=@/path/to/file/passport_id_back.png'</span>
 </code></pre>
@@ -769,7 +766,7 @@ Requires <strong>Authentication</strong>
 <p>This endpoints accepts KYC document of image file types. Must be initialized with <strong>Create Document</strong> API to get the 
 upload reference <code>document_id</code></p>
 <h3 id='request-5'>Request</h3>
-<p><code>POST http://api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
+<p><code>POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
 
 <table><thead>
 <tr>
@@ -811,11 +808,11 @@ Must be initialized with <strong>Create Documents</strong> API beforehand.
 <aside class="warning">
 Requires <strong>Authentication</strong>
 </aside>        
-<h1 id='rates'>Rates</h1><h2 id='get'>Get</h2>
+<h1 id='rates'>Rates</h1><h2 id='get-rates'>Get Rates</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bitcoin.world/rates"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/rates"</span>
   -H <span class="s2">"Authorization: TBA"</span>
 </code></pre>
 <blockquote>
@@ -828,20 +825,20 @@ Requires <strong>Authentication</strong>
             </span><span class="s2">"BTC"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0500</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">12613.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"valueExcFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11955.49</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11955.49</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">657.51</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeExcTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">597.74</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">59.77</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flatFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
+                </span><span class="s2">"fee_fxc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">597.74</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">59.77</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0500</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">381.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"valueExcFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">361.18</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">361.18</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.82</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeExcTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.02</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.80</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flatFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
+                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.02</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.80</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -850,20 +847,20 @@ Requires <strong>Authentication</strong>
             </span><span class="s2">"BTC"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0000</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">11539.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"valueExcFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11539.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value_fxc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11539.00</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeExcTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flatFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
+                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0000</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"valueExcFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.00</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeExcTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"feeTax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flatFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
+                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -871,7 +868,7 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.</p>
 <h3 id='request-6'>Request</h3>
-<p><code>GET http://api.bitcoin.world/rates/</code></p>
+<p><code>GET http://sandbox-api.bitcoin.world/rates/</code></p>
 <h3 id='response-6'>Response</h3>
 <table><thead>
 <tr>
@@ -925,11 +922,11 @@ Requires <strong>Authentication</strong>
 <aside class="warning">
 Requires <strong>Authentication</strong>
 </aside>      
-<h1 id='orders'>Orders</h1><h2 id='get-2'>Get</h2>
+<h1 id='orders'>Orders</h1><h2 id='get-order'>Get Order</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"</span>
   -H <span class="s2">"Authorization: TBA"</span>
 </code></pre>
 <blockquote>
@@ -958,7 +955,7 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>Get order details for a previously created order.</p>
 <h3 id='request-7'>Request</h3>
-<p><code>GET http://api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
+<p><code>GET http://sandbox-api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
 
 <table><thead>
 <tr>
@@ -1061,11 +1058,11 @@ Requires <strong>Authentication</strong>
 <aside class="warning">
 Requires <strong>Authentication</strong>
 </aside>      
-<h2 id='create'>Create</h2>
+<h2 id='create-order'>Create Order</h2>
 <blockquote>
 <p>Example Request (<em>Cryptocurrency Order</em>):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/orders"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
@@ -1081,7 +1078,7 @@ Requires <strong>Authentication</strong>
 <blockquote>
 <p>Example Request (<em>Payment Processor Only</em>):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.bitcoin.world/orders"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: TBA"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
@@ -1117,7 +1114,7 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>Get order details for a previously created order.</p>
 <h3 id='request-8'>Request</h3>
-<p><code>POST http://api.bitcoin.world/orders</code></p>
+<p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
 
 <table><thead>
 <tr>
@@ -1127,49 +1124,49 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td>account_id</td>
+<td><code>account_id</code></td>
 <td>Yes</td>
 <td>The account_id the order belongs to</td>
 </tr>
 <tr>
-<td>fiat_amount</td>
+<td><code>fiat_amount</code></td>
 <td>Yes</td>
 <td>The fiat currency amount of type <em>float</em> up to <em>2</em> decimal points.</td>
 </tr>
 <tr>
-<td>fiat_code</td>
+<td><code>fiat_code</code></td>
 <td>Yes</td>
 <td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;. Code must be offered in the rates API</td>
 </tr>
 <tr>
-<td>coin_amount</td>
+<td><code>coin_amount</code></td>
 <td>No</td>
 <td>The cryptocurrency amount of type <em>float</em> up to <em>8</em> decimal points. e.g 0.12345678</td>
 </tr>
 <tr>
-<td>coin_code</td>
+<td><code>coin_code</code></td>
 <td>No</td>
 <td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39;. Code must be offered in the rates API</td>
 </tr>
 <tr>
-<td>wallet_address</td>
+<td><code>wallet_address</code></td>
 <td>No</td>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 <tr>
-<td>callback_url_on_success</td>
+<td><code>callback_url_on_success</code></td>
 <td>Yes</td>
-<td></td>
+<td>The return URL when the customer completed the checkout process</td>
 </tr>
 <tr>
-<td>callback_url_on_cancelled</td>
+<td><code>callback_url_on_cancelled</code></td>
 <td>Yes</td>
-<td></td>
+<td>The return URL when the customer cancelled the checkout process</td>
 </tr>
 <tr>
-<td>callback_url_on_failure</td>
+<td><code>callback_url_on_failure</code></td>
 <td>Yes</td>
-<td></td>
+<td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
 </tbody></table>
 <h3 id='response-8'>Response</h3>
@@ -1181,77 +1178,77 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td>&#39;status&#39;</td>
+<td><code>status</code></td>
 <td>The result status message</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;id&#39;</td>
+<td><code>id</code></td>
 <td>Unique ID of the order</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;account_id&#39;</td>
+<td><code>account_id</code></td>
 <td>The customer ID for the order</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;type&#39;</td>
+<td><code>type</code></td>
 <td>Payment type</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;ref&#39;</td>
+<td><code>ref</code></td>
 <td>The reference number that is communicated to the end user</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;fiat_code&#39;</td>
+<td><code>fiat_code</code></td>
 <td>Fiat currency code</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;fiat_amount&#39;</td>
+<td><code>fiat_amount</code></td>
 <td>Fiat currency value for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td>&#39;coin_code&#39;</td>
+<td><code>coin_code</code></td>
 <td>Cryptocurrency code</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;coin_amount&#39;</td>
+<td><code>coin_amount</code></td>
 <td>Cryptocurrency value for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td>&#39;wallet_address&#39;</td>
+<td><code>wallet_address</code></td>
 <td>Cryptocurrency wallet address</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;fee&#39;</td>
+<td><code>fee</code></td>
 <td>fee for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td>&#39;commission&#39;</td>
+<td><code>commission</code></td>
 <td>Commission rate</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td>&#39;txn&#39;</td>
+<td><code>txn</code></td>
 <td>Blockchain transaction reference</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;created&#39;</td>
+<td><code>created</code></td>
 <td>Timestamp when order was created in UTC time</td>
 <td>string</td>
 </tr>
 <tr>
-<td>&#39;status&#39;</td>
+<td><code>status</code></td>
 <td>Status of the order</td>
 <td>string</td>
 </tr>
@@ -1262,10 +1259,10 @@ Requires <strong>Authentication</strong>
 </aside>      
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+This error section is a work in progress. We will define more comprehensive errors on each API endpoints 
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The API uses the following error codes:</p>
 
 <table><thead>
 <tr>
