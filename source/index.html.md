@@ -34,6 +34,10 @@ This API documentation will guide partners through the integration process with 
 
 All API responses are in JSON format
 
+<aside class="notice">
+The API docs is a work in progress. The content is not finalized yet. 
+</aside>
+
 # Authentication
 
 Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload.  You will be provided with credentials as part of the on-boarding process.
@@ -615,6 +619,29 @@ Field | Description | Format
 <aside class="warning">
 Requires <strong>Authentication</strong>
 </aside>      
+
+# Callbacks
+
+## Customer Return URL
+
+Callbacks are used to redirect the customers back to the partner page when they complete the checkout process.
+The callback url must be specified in **Create Order** API parameters. 
+When the customer completes the checkout page,  callback_url_on_success
+
+## Payment Notification
+
+As soon as a payment has been confirmed and received, we can notify our partners through their webhook.
+
+### Payloads
+
+Field | Description | Format
+--------- | -------- | -----------
+`order_id`      | The order id of the completed payment
+`fiat_amount`   | The received fiat amount
+`currency_code` | The currency of the amount
+`received_at`   | the timestamp of received payment UTC+0
+
+
 
 
 
