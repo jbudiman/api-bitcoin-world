@@ -1271,6 +1271,12 @@ The callback url must be specified in <strong>Create Order</strong> API paramete
 When the customer completes the checkout page,  callback_url_on_success</p>
 <h2 id='payment-notification'>Payment Notification</h2>
 <p>As soon as a payment has been confirmed and received, we can notify our partners through their webhook.</p>
+
+<p>The request sent by us will also contain a signature of the payloads. 
+The details to verify the signature is coming soon.</p>
+
+<p>The partners webhook needs to respond with <strong>200 OK</strong> as an acknowledgement, or respond with
+suitable HTTP response code with the error message. </p>
 <h3 id='payloads'>Payloads</h3>
 <table><thead>
 <tr>
@@ -1299,7 +1305,19 @@ When the customer completes the checkout page,  callback_url_on_success</p>
 <td>the timestamp of received payment UTC+0</td>
 <td></td>
 </tr>
+<tr>
+<td><code>signature</code></td>
+<td>the signature hash of the request to validate authenticity</td>
+<td></td>
+</tr>
 </tbody></table>
+
+<aside class="warning">
+We strongly recommend for all partners to verify the signature of notifications to ensure the request comes from us
+and the content has not been tampered with.
+</aside>
+<h3 id='signature-verification-guide'>Signature Verification Guide</h3>
+<p>TBD</p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is a work in progress. We will define more comprehensive errors on each API endpoints 
