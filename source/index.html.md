@@ -2,10 +2,10 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
+  # - shell
 
-toc_footers:
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+# toc_footers:
+#  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -30,12 +30,16 @@ https://api.bitcoin.world
 
 Welcome to the Bitcoin World partner integration API. 
 
-This API documentation will guide partners through the integration process with Bitcoin World payment APIs and processes.
+This API documentation will guide partners through the integration with Bitcoin World payment APIs and processes.
 
-All API responses are in JSON format
+<aside class="success">
+All API responses are in <strong>JSON</strong> format
+</aside>
 
 <aside class="notice">
-The API docs is a work in progress. The content is not finalized yet. 
+This API docs is a <strong>draft version</strong>. The contents wihtnin this document are <strong>subject to change</strong>.
+<br/>
+The API Base and all URL references indicated in this document are not finalized.  
 </aside>
 
 # Authentication
@@ -43,7 +47,6 @@ The API docs is a work in progress. The content is not finalized yet.
 Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload.  You will be provided with credentials as part of the on-boarding process.
 
 A full explanation of the HMAC protocol will be provided.
-
 
 
 # Accounts
@@ -82,17 +85,19 @@ This endpoint retrieves an account's details.
 Field | Description | Format
 --------- | -------- | -----------
 `status`       | The result status message | string
-`account_id`           | Account ID | string
+`account_id`   | Account ID | string
 `customer_ref` | Partner's unique customer reference | string
-`kyc[status]`   | Status of the account KYC | string
-`kyc[reason]`   | Reason of KYC status | string
+`kyc[status]`  | Status of the account KYC | string
+`kyc[reason]`  | Reason of KYC status | string
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>
 
 <aside class="notice">
 Must be registered with <strong>Create Account</strong> API beforehand.
 </aside>
-<aside class="warning">
-Requires <strong>Authentication</strong>
-</aside>
+
 
 ## Create Account
 > Example Request *without* KYC details:
@@ -182,7 +187,7 @@ Field | Description | Format
 `status`  | The result status message| string
 `account_id`      | Account ID | string
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
@@ -249,7 +254,7 @@ Field | Description | Format
 --------- | -------- | -----------
 `status`  | The result status message| string
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
@@ -302,7 +307,7 @@ Field | Description | Format
 `document_ref` | ID Reference for upload | string
 `upload_uri` | API endpoint for document uploads | string
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
@@ -353,7 +358,7 @@ Field | Description | Format
 <aside class="notice">
 Must be initialized with <strong>Create Documents</strong> API beforehand.
 </aside>
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>        
 
@@ -421,6 +426,8 @@ curl "https://sandbox-api.bitcoin.world/rates"
 
 Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.
 
+The rates are updated every minute.
+
 ### Request
 `GET http://sandbox-api.bitcoin.world/rates/`
 
@@ -437,7 +444,7 @@ Field | Description | Format
 `fee_tax`       | The fee tax component in fiat currency | decimal
 `flat_fee`      | The flat fee component in fiat currency| decimal
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
@@ -469,8 +476,8 @@ curl "https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
 		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
 		"fee": 8.86,
 		"commission": 0.05,
-		"txn": null,
-		"created": "16-May-2019 10:30:43",
+		"tx_hash": null,
+		"created_at": "16-May-2019 10:30:43",
 		"status": "pendingPayment"
 	}
 }
@@ -487,8 +494,8 @@ The order id is returned from `create order` endpoint
 
 Field | Description | Format
 --------- | -------- | -----------
-`status`        | The result status message| string
-`id`            | Unique ID of the order| string
+`status`        | The result status message | string
+`id`            | Unique ID of the order | string
 `account_id`    | The customer ID for the order | string
 `type`          | Payment type | string
 `ref`           | The reference number that is comminucated to the end user | string
@@ -499,11 +506,13 @@ Field | Description | Format
 `wallet_address` | Cryptocurrency wallet address | string
 `fee`           | fFe for the order | decimal
 `commission`    | Commission rate | decimal
-`txn`           | Blockchain transaction reference | string
-`created`       | Timestamp whe norder was created in UTC time | string
+`tx_hash`           | Blockchain transaction reference | string
+`created_at`    | Timestamp when order was created in UTC time | string
+`paid_at`       | Timestamp when order was paid in UTC time | string
+`completed_at`  | Timestamp when order was completed in UTC time | string
 `status`        | Status of the order | string
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
@@ -524,6 +533,29 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
     "callback_url_on_success": "https://partner-site.com/callback/success",
     "callback_url_on_cancelled": "https://partner-site.com/callback/cancelled",
     "callback_url_on_failure": "https://partner-site.com/callback/failure"}'
+```
+
+> Example Response:
+
+```json
+{
+  	"status": "OK",
+	"order": {
+		"id": "0164d962448fbd34f644ffd65624d8ef",
+		"account_id": "098f6bcd4621d373cade4e832627b4f6",
+		"order_type": "CRYPTO-BUY",
+		"type": "BPAY",
+		"ref": 102412,
+		"fiat_code": "AUD",
+		"fiat_amount": 173,
+		"coin_code": "BTC",
+		"coin_amount": 0.01411267,
+		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
+		"created_at": "16-May-2019 10:30:43",
+		"status": "pendingPayment",
+        "checkout_url": "https://partner-site.bitcoin.world"
+	}
+}
 ```
 
 > Example Request (*Payment Processor Only*):
@@ -549,24 +581,22 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
 	"order": {
 		"id": "0164d962448fbd34f644ffd65624d8ef",
 		"account_id": "098f6bcd4621d373cade4e832627b4f6",
-		"order_type": "CRYPTO-BUY",
+		"order_type": "PAYMENT",
 		"type": "BPAY",
 		"ref": 102412,
 		"fiat_code": "AUD",
 		"fiat_amount": 173,
-		"coin_code": "BTC",
-		"coin_amount": 0.01411267,
-		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
-		"fee": 8.86,
-		"commission": 0.05,
-		"txn": null,
-		"created": "16-May-2019 10:30:43",
-		"status": "pendingPayment"
+		"created_at": "16-May-2019 10:30:43",
+		"status": "pendingPayment",
+        "checkout_url": "https://partner-site.bitcoin.world"
 	}
 }
 ```
 
-Get order details for a previously created order.
+Create an order.
+
+The customer should be redirected to bitcoin.world partner checkout page to complete the process.
+The redirect URL will be provided on successful order registration.
 
 ### Request
 `POST http://sandbox-api.bitcoin.world/orders`
@@ -595,17 +625,19 @@ Field | Description | Format
 `type`      | Payment type | string
 `ref`       | The reference number that is communicated to the end user | string
 `fiat_code` | Fiat currency code | string
-`fiat_amount` | Fiat currency value for the order | decimal
-`coin_code` | Cryptocurrency code | string
-`coin_amount` | Cryptocurrency value for the order | decimal
-`wallet_address` | Cryptocurrency wallet address | string
-`fee`       | fee for the order | decimal
-`commission`| Commission rate | decimal
-`txn`       | Blockchain transaction reference | string
-`created`   | Timestamp when order was created in UTC time | string
-`status`    | Status of the order | string
+`fiat_amount`     | Fiat currency value for the order | decimal
+`coin_code`       | Cryptocurrency code | string
+`coin_amount`     | Cryptocurrency value for the order | decimal
+`wallet_address`  | Cryptocurrency wallet address | string
+`created_at`      | Timestamp when order was created in UTC time | string
+`status`          | Status of the order | string
+`checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
-<aside class="warning">
+<aside class="notice">
+The URI structure of the checkout 'checkout_url' is TBD
+</aside>  
+
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
