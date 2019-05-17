@@ -166,7 +166,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 Parameter | Required | Description
 --------- | -------- | -----------
 `customer_ref`    | **Yes**  | Partner's account reference for the customer / user *string*.
-`mobile_phone`    | **Yes**  | mobile numbers of type *string*. International format `61412708135`
+`mobile_phone`    | **Yes**  | mobile numbers of type *string*. International format `61400000000`
 `email`           | **Yes**  | email address of type *string*.
 `given_name`      | No   | The first name of the customer
 `middle_name`     | No   | The middle name of the customer, if any.
@@ -234,7 +234,7 @@ This endpoint allows kyc details to be added and/or modified to the account.
     
 Parameter | Required | Description
 --------- | -------- | -----------
-`mobile_phone`    | No | mobile numbers of type *string*. International format `61412708135`
+`mobile_phone`    | No | mobile numbers of type *string*. International format `61400000000`
 `email`           | No | email address of type *string*.
 `given_name`      | **Yes**  | The first name of the customer
 `middle_name`     | No | The middle name of the customer, if any.
