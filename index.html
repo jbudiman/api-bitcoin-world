@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,9 +210,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -283,9 +280,6 @@
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
@@ -303,12 +297,16 @@
 </code></pre>
 <p>Welcome to the Bitcoin World partner integration API. </p>
 
-<p>This API documentation will guide partners through the integration process with Bitcoin World payment APIs and processes.</p>
+<p>This API documentation will guide partners through the integration with Bitcoin World payment APIs and processes.</p>
 
-<p>All API responses are in JSON format</p>
+<aside class="success">
+All API responses are in <strong>JSON</strong> format
+</aside>
 
 <aside class="notice">
-The API docs is a work in progress. The content is not finalized yet. 
+This API docs is a <strong>draft version</strong>. The contents wihtnin this document are <strong>subject to change</strong>.
+<br/>
+The API Base and all URL references indicated in this document are not finalized.  
 </aside>
 <h1 id='authentication'>Authentication</h1>
 <p>Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload.  You will be provided with credentials as part of the on-boarding process.</p>
@@ -373,11 +371,11 @@ The API docs is a work in progress. The content is not finalized yet.
 </tbody></table>
 
 <aside class="notice">
-Must be registered with <strong>Create Account</strong> API beforehand.
+Requires <strong>Authentication</strong>
 </aside>
 
-<aside class="warning">
-Requires <strong>Authentication</strong>
+<aside class="notice">
+Must be registered with <strong>Create Account</strong> API beforehand.
 </aside>
 <h2 id='create-account'>Create Account</h2>
 <blockquote>
@@ -539,7 +537,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 </tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h2 id='create-kyc-details'>Create KYC Details</h2>
@@ -668,7 +666,7 @@ Requires <strong>Authentication</strong>
 </tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h1 id='documents'>Documents</h1><h2 id='create-document'>Create Document</h2>
@@ -750,7 +748,7 @@ Requires <strong>Authentication</strong>
 </tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h2 id='upload-documents'>Upload Documents</h2>
@@ -811,7 +809,7 @@ upload reference <code>document_ref</code></p>
 Must be initialized with <strong>Create Documents</strong> API beforehand.
 </aside>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>        
 <h1 id='rates'>Rates</h1><h2 id='get-rates'>Get Rates</h2>
@@ -873,6 +871,8 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.</p>
+
+<p>The rates are updated every minute.</p>
 <h3 id='request-6'>Request</h3>
 <p><code>GET http://sandbox-api.bitcoin.world/rates/</code></p>
 <h3 id='response-6'>Response</h3>
@@ -925,7 +925,7 @@ Requires <strong>Authentication</strong>
 </tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h1 id='orders'>Orders</h1><h2 id='get-order'>Get Order</h2>
@@ -953,8 +953,8 @@ Requires <strong>Authentication</strong>
         </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.86</span><span class="p">,</span><span class="w">
         </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"txn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pendingPayment"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1033,13 +1033,23 @@ Requires <strong>Authentication</strong>
 <td>decimal</td>
 </tr>
 <tr>
-<td><code>txn</code></td>
+<td><code>tx_hash</code></td>
 <td>Blockchain transaction reference</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>created</code></td>
-<td>Timestamp whe norder was created in UTC time</td>
+<td><code>created_at</code></td>
+<td>Timestamp when order was created in UTC time</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>paid_at</code></td>
+<td>Timestamp when order was paid in UTC time</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>completed_at</code></td>
+<td>Timestamp when order was completed in UTC time</td>
 <td>string</td>
 </tr>
 <tr>
@@ -1049,7 +1059,7 @@ Requires <strong>Authentication</strong>
 </tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h2 id='create-order'>Create Order</h2>
@@ -1069,6 +1079,28 @@ Requires <strong>Authentication</strong>
     "callback_url_on_cancelled": "https://partner-site.com/callback/cancelled",
     "callback_url_on_failure": "https://partner-site.com/callback/failure"}'</span>
 </code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BPAY"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">102412</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01411267</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pendingPayment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner-site.bitcoin.world"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <blockquote>
 <p>Example Request (<em>Payment Processor Only</em>):</p>
 </blockquote>
@@ -1090,23 +1122,21 @@ Requires <strong>Authentication</strong>
     </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BPAY"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">102412</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01411267</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.86</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"txn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pendingPayment"</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pendingPayment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner-site.bitcoin.world"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Get order details for a previously created order.</p>
+<p>Create an order.</p>
+
+<p>The customer should be redirected to bitcoin.world partner checkout page to complete the process.
+The redirect URL will be provided on successful order registration.</p>
 <h3 id='request-8'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
 <h3 id='parameters-5'>Parameters</h3>
@@ -1222,22 +1252,7 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fee</code></td>
-<td>fee for the order</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>commission</code></td>
-<td>Commission rate</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>txn</code></td>
-<td>Blockchain transaction reference</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>created</code></td>
+<td><code>created_at</code></td>
 <td>Timestamp when order was created in UTC time</td>
 <td>string</td>
 </tr>
@@ -1246,9 +1261,18 @@ Requires <strong>Authentication</strong>
 <td>Status of the order</td>
 <td>string</td>
 </tr>
+<tr>
+<td><code>checkout_url</code></td>
+<td>The url redirect for the customer to complete the checkout process</td>
+<td>string</td>
+</tr>
 </tbody></table>
 
-<aside class="warning">
+<aside class="notice">
+The URI structure of the checkout 'checkout_url' is TBD
+</aside>  
+
+<aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 <h1 id='callbacks'>Callbacks</h1><h2 id='customer-return-url'>Customer Return URL</h2>
@@ -1328,10 +1352,6 @@ This error section is a work in progress. We will define more comprehensive erro
 <td>Gone -- The requested resource has been removed from our servers.</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
 <td>429</td>
 <td>Too Many Requests</td>
 </tr>
@@ -1347,9 +1367,6 @@ This error section is a work in progress. We will define more comprehensive erro
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-          </div>
       </div>
     </div>
   </body>
