@@ -62,7 +62,7 @@ curl "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f
 ```json
 {
   "status": "OK",
-  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "account_id": "098f6bcd4621d373cade4e832627b4f6",
   "account_ref":"unique-partner-reference",
   "kyc": {
     "status": "incomplete",
@@ -77,18 +77,12 @@ This endpoint retrieves an account's details.
 
 `GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}` 
 
-### Parameters
-
-Parameter | Required | Description
---------- | -------- | -----------
-`account_id`    | **Yes**  | The customer's account number.  
-
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
 `status`       | The result status message | string
-`id`           | Account ID | string
+`account_id`           | Account ID | string
 `customer_ref` | Partner's unique customer reference | string
 `kyc[status]`   | Status of the account KYC | string
 `kyc[reason]`   | Reason of KYC status | string
@@ -140,7 +134,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
 
 ```json
 {
-  "id": "098f6bcd4621d373cade4e832627b4f6",
+  "account_id": "098f6bcd4621d373cade4e832627b4f6",
   "status": "OK"
 }
 ```
@@ -186,7 +180,7 @@ Parameter | Required | Description
 Field | Description | Format
 --------- | -------- | -----------
 `status`  | The result status message| string
-`id`      | Account ID | string
+`account_id`      | Account ID | string
 
 <aside class="warning">
 Requires <strong>Authentication</strong>
@@ -295,7 +289,7 @@ This endpoint accepts KYC document file.
 
 Parameter | Required | Description
 --------- | -------- | -----------
-account_id      | **Yes**  | 
+account_id      | **Yes**  | The account id belongs to the customer.
 document_number | **Yes**  | The document identification number 
 document_file   | **Yes**  | The document filename 
 document_type   | No  | The identification document 
@@ -348,8 +342,7 @@ upload reference `document_ref`
     
 Parameter | Required | Description
 --------- | -------- | -----------
-`document_ref`    | **Yes** | ID reference 
-`document_files`  | **Yes** | One or more files. Accepted file extensions: `.png`, `.jpg`, `.jpeg`
+`document_files`  | **Yes** | One or more files. Accepted file extensions: `.png`, `.jpg`, `.jpeg`, and `.pdf`
 
 ### Response
 
@@ -483,16 +476,12 @@ curl "https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
 }
 ```
 
-Get order details for a previously created order.
+Get order details for a previously created order. 
+
+The order id is returned from `create order` endpoint 
 
 ### Request
 `GET http://sandbox-api.bitcoin.world/orders/<ORDER_ID>`
-
-### Parameters
-
-Parameter | Required | Description
---------- | -------- | -----------
-`order_id`  | Yes     | The order id returned by `create order` endpoint
 
 ### Response
 
