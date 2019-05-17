@@ -647,6 +647,12 @@ When the customer completes the checkout page,  callback_url_on_success
 
 As soon as a payment has been confirmed and received, we can notify our partners through their webhook.
 
+The request sent by us will also contain a signature of the payloads. 
+The details to verify the signature is coming soon.
+
+The partners webhook needs to respond with **200 OK** as an acknowledgement, or respond with
+suitable HTTP response code with the error message. 
+
 ### Payloads
 
 Field | Description | Format
@@ -655,8 +661,16 @@ Field | Description | Format
 `fiat_amount`   | The received fiat amount
 `currency_code` | The currency of the amount
 `received_at`   | the timestamp of received payment UTC+0
+`signature`     | the signature hash of the request to validate authenticity 
 
+<aside class="warning">
+We strongly recommend for all partners to verify the signature of notifications to ensure the request comes from us
+and the content has not been tampered with.
+</aside>
 
+### Signature Verification Guide
+TBD
+      
 
 
 
