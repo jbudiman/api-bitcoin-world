@@ -101,7 +101,7 @@ The numeric value with value greater than the previous successful request. (e.g.
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+  -H "Authentication: HMAC xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
 ```
 
 > Example Response:
