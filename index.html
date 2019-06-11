@@ -457,6 +457,11 @@ account creation. The customer will not be prompted to enter the KYC details in 
 <td>email address of type <em>string</em>.</td>
 </tr>
 <tr>
+<td><code>country</code></td>
+<td><strong>Yes</strong></td>
+<td>The country of residence</td>
+</tr>
+<tr>
 <td><code>given_name</code></td>
 <td>No</td>
 <td>The first name of the customer</td>
@@ -505,11 +510,6 @@ account creation. The customer will not be prompted to enter the KYC details in 
 <td><code>post_code</code></td>
 <td>No</td>
 <td>The address post code</td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td>No</td>
-<td>The country of residence</td>
 </tr>
 <tr>
 <td><code>date_of_birth</code></td>
@@ -580,16 +580,6 @@ Requires <strong>Authentication</strong>
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td><code>mobile_phone</code></td>
-<td>No</td>
-<td>mobile numbers of type <em>string</em>. International format <code>61400000000</code></td>
-</tr>
-<tr>
-<td><code>email</code></td>
-<td>No</td>
-<td>email address of type <em>string</em>.</td>
-</tr>
 <tr>
 <td><code>given_name</code></td>
 <td><strong>Yes</strong></td>
@@ -831,7 +821,7 @@ Requires <strong>Authentication</strong>
                 </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">12613.00</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11955.49</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">657.51</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_fxc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">597.74</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">597.74</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">59.77</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
             </span><span class="p">},</span><span class="w">
@@ -952,6 +942,7 @@ Requires <strong>Authentication</strong>
         </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01411267</span><span class="p">,</span><span class="w">
         </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.86</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"payment_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.00</span><span class="p">,</span><span class="w">
         </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
         </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
@@ -1024,12 +1015,17 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>fee</code></td>
-<td>fFe for the order</td>
+<td>fee for the order</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td><code>payment_fee</code></td>
+<td>Fixed fee on top of the commission for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
 <td><code>commission</code></td>
-<td>Commission rate</td>
+<td>Commission rate in percentage</td>
 <td>decimal</td>
 </tr>
 <tr>
@@ -1288,21 +1284,6 @@ suitable HTTP response code with the error message. </p>
 <tr>
 <td><code>order_id</code></td>
 <td>The order id of the completed payment</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fiat_amount</code></td>
-<td>The received fiat amount</td>
-<td></td>
-</tr>
-<tr>
-<td><code>currency_code</code></td>
-<td>The currency of the amount</td>
-<td></td>
-</tr>
-<tr>
-<td><code>received_at</code></td>
-<td>the timestamp of received payment UTC+0</td>
 <td></td>
 </tr>
 <tr>
