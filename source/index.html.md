@@ -44,10 +44,54 @@ The API Base and all URL references indicated in this document are not finalized
 
 # Authentication
 
-Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload.  You will be provided with credentials as part of the on-boarding process.
+Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload. The API credential will be provided as part of the on-boarding process.
 
-A full explanation of the HMAC protocol will be provided.
+For all of the requests, add an authentication digest to the header.
+The authentication header structure must be in the following format:
 
+<aside style="background-color:#dddddd">
+<p style="font-family:monospace; font-size: 1.1em; padding-top: 1em;">
+"Authentication: HMAC <strong>API_Key</strong>:<strong>Signature</strong>:<strong>Nonce</strong>"
+</p>
+</aside>
+
+### API Key
+The API public key credential. The credential api key and secret pair will be provided once registered. 
+### Signature
+Message authentication signature. The request message is hashed with the API secret key using SHA256 algorithm.
+The structure of the message:
+<ul>
+ <li>Request method. (e.g. "GET or "POST")</li>
+ <li>Request URI. (Without the host name. e.g. `/accounts` instead of `https://api.bitcoin.world/accounts`)</li>
+ <li>The <em>nonce</em> value (e.g. using unix timestamp value)</li>
+ <li>The payload in JSON data structure</li>
+</ul>
+### Nonce
+The numeric value with value greater than the previous successful request. (e.g. unix timestamp)
+
+<aside class="info">
+<p><strong>Example authentication header</strong></p>
+<div style="font-family:monospace; font-size: 0.9em">
+<p style="margin-bottom:0">
+"Authentication: HMAC " + "PARTNER-API-KEY" + ":" 
+</p>
+<p style="padding-left:2.5em; margin-bottom:0">
++ hmac_sha256('POST' + '\n'
+</p>
+<p style="padding-left:2.5em; margin-bottom:0">
++ 'accounts' + '\n'
+</p>
+<p style="padding-left:2.5em; margin-bottom:0">
++ '1560227834' + "\n"
+</p>
+<p style="padding-left:2.5em; margin-bottom:0">
++ '{"account_ref":"unique-partner-reference", "mobile_phone":"61400000000", "email":"email@example.com"}'
+</p>
+<p style="padding-left:2.5em">
+) + ":" + "1560227834"
+</p>
+</div>
+</aside>
 
 # Accounts
 
@@ -107,7 +151,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
   -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
-  '{"account_ref":"unique-partner-reference"
+  '{"account_ref":"unique-partner-reference",
     "mobile_phone":"61400000000",
     "email":"email@example.com"}'  
 ```
