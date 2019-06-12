@@ -368,7 +368,7 @@ The structure of the message:
 + '1560227834' + "\n"
 </p>
 <p style="padding-left:2.5em; margin-bottom:0">
-+ '{"account_ref":"unique-partner-reference", "mobile_phone":"61400000000", "email":"email@example.com"}'
++ '{"customer_ref":"unique-partner-reference", "mobile_phone":"61400000000", "email":"email@example.com"}'
 </p>
 <p style="padding-left:2.5em">
 ) + ":" + "1560227834"
@@ -416,7 +416,7 @@ Response TBD
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"account_ref"</span><span class="p">:</span><span class="s2">"unique-partner-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"customer_ref"</span><span class="p">:</span><span class="s2">"unique-partner-reference"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"kyc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incomplete"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"missing document"</span><span class="w">
@@ -445,7 +445,7 @@ Response TBD
 <td>string</td>
 </tr>
 <tr>
-<td><code>account_ref</code></td>
+<td><code>customer_ref</code></td>
 <td>Partner&#39;s unique customer reference</td>
 <td>string</td>
 </tr>
@@ -476,7 +476,7 @@ Must be registered with <strong>Create Account</strong> API beforehand.
   -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
-  <span class="s1">'{"account_ref":"unique-partner-reference",
+  <span class="s1">'{"customer_ref":"unique-partner-reference",
     "mobile_phone":"61400000000",
     "email":"email@example.com"}'</span>  
 </code></pre>
@@ -487,7 +487,7 @@ Must be registered with <strong>Create Account</strong> API beforehand.
   -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
-  <span class="s1">'{"account_ref":"unique-partner-reference",
+  <span class="s1">'{"customer_ref":"unique-partner-reference",
     "mobile_phone":"61400000000",
     "email":"email@example.com",
     "given_name":"John",
@@ -516,7 +516,7 @@ and a mobile phone to create. </p>
 
 <p>On successful registration, the api will return an <em>account id</em>.</p>
 
-<p>To create an account, the following parameters <em>a account_ref, a mobile number</em> and <em>an email address</em> are required.
+<p>To create an account, the following parameters <em>a customer_ref, a mobile number</em> and <em>an email address</em> are required.
 If no KYC details are provided, the customer will be prompted with a form to enter the KYC details when redirected
 to our checkout cart.</p>
 
@@ -533,7 +533,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 </tr>
 </thead><tbody>
 <tr>
-<td><code>account_ref</code></td>
+<td><code>customer_ref</code></td>
 <td><strong>Yes</strong></td>
 <td>Partner&#39;s account reference for the customer / user <em>string</em>.</td>
 </tr>
