@@ -233,6 +233,14 @@
               </ul>
           </li>
           <li>
+            <a href="#settings" class="toc-h1 toc-link" data-title="Settings">Settings</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-available-payments" class="toc-h2 toc-link" data-title="Get Available Payments">Get Available Payments</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
               <ul class="toc-list-h2">
                   <li>
@@ -367,12 +375,40 @@ The structure of the message:
 </p>
 </div>
 </aside>
+<h1 id='settings'>Settings</h1><h2 id='get-available-payments'>Get Available Payments</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/settings/payments"</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a list of all available payments (Both global and local).</p>
+<h3 id='request'>Request</h3>
+<p><code>GET https://sandbox-api.bitcoin.world/settings/payments</code> </p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>
+
+<aside class="notice">
+Response TBD
+</aside>
 <h1 id='accounts'>Accounts</h1><h2 id='get-account'>Get Account</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -388,7 +424,7 @@ The structure of the message:
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves an account&#39;s details.</p>
-<h3 id='request'>Request</h3>
+<h3 id='request-2'>Request</h3>
 <p><code>GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
 <h3 id='response'>Response</h3>
 <table><thead>
@@ -437,7 +473,7 @@ Must be registered with <strong>Create Account</strong> API beforehand.
 <p>Example Request <em>without</em> KYC details:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_ref":"unique-partner-reference",
@@ -448,7 +484,7 @@ Must be registered with <strong>Create Account</strong> API beforehand.
 <p>Example Request <em>with</em> KYC details:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_ref":"unique-partner-reference",
@@ -486,7 +522,7 @@ to our checkout cart.</p>
 
 <p>To improve user experience, we recommend our partners to provide the customer&#39;s KYC details during 
 account creation. The customer will not be prompted to enter the KYC details in our checkout cart. </p>
-<h3 id='request-2'>Request</h3>
+<h3 id='request-3'>Request</h3>
 <p><code>POST https://sandbox-api.bitcoin.world/accounts/</code> </p>
 <h3 id='parameters'>Parameters</h3>
 <table><thead>
@@ -600,7 +636,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"given_name":"John",
@@ -625,7 +661,7 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint allows kyc details to be added and/or modified to the account. </p>
-<h3 id='request-3'>Request</h3>
+<h3 id='request-4'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
 <h3 id='parameters-2'>Parameters</h3>
 <table><thead>
@@ -719,7 +755,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/documents"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="s1">' \
     {"account_id":"098f6bcd4621d373cade4e832627b4f6", \
@@ -737,7 +773,7 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint accepts KYC document file.</p>
-<h3 id='request-4'>Request</h3>
+<h3 id='request-5'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/</code> </p>
 <h3 id='parameters-3'>Parameters</h3>
 <table><thead>
@@ -819,7 +855,7 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>This endpoints accepts KYC document of image file types. Must be initialized with <strong>Create Document</strong> API to obtain the 
 upload reference <code>document_ref</code></p>
-<h3 id='request-5'>Request</h3>
+<h3 id='request-6'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
 <h3 id='parameters-4'>Parameters</h3>
 <table><thead>
@@ -862,7 +898,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/rates"</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -918,7 +954,7 @@ Requires <strong>Authentication</strong>
 <p>Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.</p>
 
 <p>The rates are updated every minute.</p>
-<h3 id='request-6'>Request</h3>
+<h3 id='request-7'>Request</h3>
 <p><code>GET http://sandbox-api.bitcoin.world/rates/</code></p>
 <h3 id='response-6'>Response</h3>
 <table><thead>
@@ -978,7 +1014,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -1008,7 +1044,7 @@ Requires <strong>Authentication</strong>
 <p>Get order details for a previously created order. </p>
 
 <p>The order id is returned from <code>create order</code> endpoint </p>
-<h3 id='request-7'>Request</h3>
+<h3 id='request-8'>Request</h3>
 <p><code>GET http://sandbox-api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
 <h3 id='response-7'>Response</h3>
 <table><thead>
@@ -1118,7 +1154,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request (<em>Cryptocurrency Order</em>):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -1153,7 +1189,7 @@ Requires <strong>Authentication</strong>
 <p>Example Request (<em>Payment Processor Only</em>):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -1183,7 +1219,7 @@ Requires <strong>Authentication</strong>
 
 <p>The customer should be redirected to bitcoin.world partner checkout page to complete the process.
 The redirect URL will be provided on successful order registration.</p>
-<h3 id='request-8'>Request</h3>
+<h3 id='request-9'>Request</h3>
 <p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
 <h3 id='parameters-5'>Parameters</h3>
 <table><thead>
