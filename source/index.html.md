@@ -130,7 +130,7 @@ Field | Description | Format
 --------- | -------- | -----------
 `status`       | The result status message | string
 `account_id`   | Account ID | string
-`customer_ref` | Partner's unique customer reference | string
+`account_ref` | Partner's unique customer reference | string
 `kyc[status]`  | Status of the account KYC | string
 `kyc[reason]`  | Reason of KYC status | string
 
@@ -193,7 +193,7 @@ and a mobile phone to create.
 
 On successful registration, the api will return an *account id*.
 
-To create an account, the following parameters *a customer_ref, a mobile number* and *an email address* are required.
+To create an account, the following parameters *a account_ref, a mobile number* and *an email address* are required.
 If no KYC details are provided, the customer will be prompted with a form to enter the KYC details when redirected
 to our checkout cart.
  
@@ -208,7 +208,7 @@ account creation. The customer will not be prompted to enter the KYC details in 
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`customer_ref`    | **Yes**  | Partner's account reference for the customer / user *string*.
+`account_ref`    | **Yes**  | Partner's account reference for the customer / user *string*.
 `mobile_phone`    | **Yes**  | mobile numbers of type *string*. International format `61400000000`
 `email`           | **Yes**  | email address of type *string*.
 `country`         | **Yes**   | The country of residence
