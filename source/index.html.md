@@ -93,6 +93,42 @@ The numeric value with value greater than the previous successful request. (e.g.
 </div>
 </aside>
 
+# Settings
+
+## Get Available Payments
+
+> Example Request:
+
+```shell
+curl "https://sandbox-api.bitcoin.world/settings/payments"
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"
+```
+
+> Example Response:
+
+```json
+{
+  "status": "OK",
+  "payments": {
+    ...
+  }
+}
+```
+
+This endpoint retrieves a list of all available payments (Both global and local).
+
+### Request
+
+`GET https://sandbox-api.bitcoin.world/settings/payments` 
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>
+
+<aside class="notice">
+Response TBD
+</aside>
+
 # Accounts
 
 ## Get Account
@@ -101,7 +137,7 @@ The numeric value with value greater than the previous successful request. (e.g.
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"
-  -H "Authentication: HMAC xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"
 ```
 
 > Example Response:
@@ -148,7 +184,7 @@ Must be registered with <strong>Create Account</strong> API beforehand.
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"account_ref":"unique-partner-reference",
@@ -159,7 +195,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"account_ref":"unique-partner-reference",
@@ -241,7 +277,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d \
   '{"given_name":"John",
@@ -307,7 +343,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/documents" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d ' \
     {"account_id":"098f6bcd4621d373cade4e832627b4f6", \
@@ -411,7 +447,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/rates"
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"
 ```
 
 > Example Response:
@@ -497,7 +533,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl "https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"
 ```
 
 > Example Response:
@@ -566,7 +602,7 @@ Requires <strong>Authentication</strong>
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/orders" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
@@ -603,7 +639,7 @@ curl -X POST "https://sandbox-api.bitcoin.world/orders" \
 
 ```shell
 curl -X POST "https://sandbox-api.bitcoin.world/orders" \
-  -H "Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx" \
+  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -d \
   '{"account_id": "098f6bcd4621d373cade4e832627b4f6",
     "fiat_amount": "10000",
