@@ -321,7 +321,7 @@ To ensure the signature is successfully validated, please be aware of the follow
   <span class="s1">'{"account_reference": "partner_ref",
     "coin_code": "BTC",
     "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
-    "redirect_url_on_success": "https://partner-site.com/callback/success"}'</span>
+    "redirect_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -335,7 +335,7 @@ To ensure the signature is successfully validated, please be aware of the follow
         </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner.banxa.com/UNIQUE_CHECKOUT_CODE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner.banxa.com/portal?expires=xxx&amp;oid=xxx&amp;signature=xxx"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -387,7 +387,7 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>wallet_address</code></td>
-<td>No</td>
+<td>Yes</td>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 <tr>
@@ -406,6 +406,10 @@ Requires <strong>Authentication</strong>
 <td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+    The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://partner.com becomes https:\/\/partner.com
+</aside>      
 <h3 id='response'>Response</h3>
 <table><thead>
 <tr>
