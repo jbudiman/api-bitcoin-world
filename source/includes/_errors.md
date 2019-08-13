@@ -1,16 +1,11 @@
 # Errors
 
-<aside class="notice">
-This error section is a work in progress. We will define more comprehensive errors on each API endpoints 
-</aside>
-
 The API uses the following error codes:
-
 
 Error Code | Meaning
 ---------- | -------
 400 | Bad Request -- Your request is invalid.
-401 | Unauthorized -- Your API key is wrong.
+401 | Unauthorized -- Your API key is incorrect or the packet was malformed.
 403 | Forbidden -- The request is not allowed.
 404 | Not Found -- The resource could not be found.
 405 | Method Not Allowed -- You tried to access an invalid method.
