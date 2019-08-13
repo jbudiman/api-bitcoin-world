@@ -233,52 +233,8 @@
               </ul>
           </li>
           <li>
-            <a href="#settings" class="toc-h1 toc-link" data-title="Settings">Settings</a>
+            <a href="#order" class="toc-h1 toc-link" data-title="Order">Order</a>
               <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-available-payments" class="toc-h2 toc-link" data-title="Get Available Payments">Get Available Payments</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-account" class="toc-h2 toc-link" data-title="Get Account">Get Account</a>
-                  </li>
-                  <li>
-                    <a href="#create-account" class="toc-h2 toc-link" data-title="Create Account">Create Account</a>
-                  </li>
-                  <li>
-                    <a href="#create-kyc-details" class="toc-h2 toc-link" data-title="Create KYC Details">Create KYC Details</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#documents" class="toc-h1 toc-link" data-title="Documents">Documents</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#create-document" class="toc-h2 toc-link" data-title="Create Document">Create Document</a>
-                  </li>
-                  <li>
-                    <a href="#upload-documents" class="toc-h2 toc-link" data-title="Upload Documents">Upload Documents</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#rates" class="toc-h1 toc-link" data-title="Rates">Rates</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-rates" class="toc-h2 toc-link" data-title="Get Rates">Get Rates</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
-                  </li>
                   <li>
                     <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
                   </li>
@@ -289,9 +245,6 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#customer-return-url" class="toc-h2 toc-link" data-title="Customer Return URL">Customer Return URL</a>
-                  </li>
-                  <li>
-                    <a href="#payment-notification" class="toc-h2 toc-link" data-title="Payment Notification">Payment Notification</a>
                   </li>
               </ul>
           </li>
@@ -304,31 +257,29 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<blockquote>
-<p>Sandbox Base URL</p>
-</blockquote>
-<pre class="highlight shell"><code>https://sandbox-api.bitcoin.world
-</code></pre>
-<blockquote>
-<p>Live Base URL</p>
-</blockquote>
-<pre class="highlight shell"><code>https://api.bitcoin.world
-</code></pre>
-<p>Welcome to the Bitcoin World partner integration API. </p>
+<p>Welcome to the Banxa partner integration API. </p>
 
-<p>This API documentation will guide partners through the integration with Bitcoin World payment APIs and processes.</p>
+<p>This API documentation will guide partners through the integration with Banxa payment APIs and processes.</p>
 
 <aside class="success">
 All API responses are in <strong>JSON</strong> format
 </aside>
 
-<aside class="notice">
-This API docs is a <strong>draft version</strong>. The contents wihtnin this document are <strong>subject to change</strong>.
-<br/>
-The API Base and all URL references indicated in this document are not finalized.  
-</aside>
+<p>Please contact your account representative or <a href="mailto:support@banxa.com">support@banxa.com</a> to receive your production and testing URLs and your API credentials.</p>
+
+<p>The URLs will be of the format https://partner.banxa.com and https://partner.banxa-sandbox.com </p>
 <h1 id='authentication'>Authentication</h1>
-<p>Bitcoin.World uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload. The API credential will be provided as part of the on-boarding process.</p>
+<blockquote>
+<p>Example authentication header:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="s2">"Authentication: HMAC "</span> + <span class="s2">"PARTNER-API-KEY"</span> + <span class="s2">":"</span>
+  + hmac_sha256<span class="o">(</span><span class="s1">'POST'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> 
+  + <span class="s1">'/api/orders'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+  + <span class="s1">'1560227834'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+  + <span class="s1">'{"account_reference":"partner_ref","coin_code":"BTC","wallet_address":"1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2","redirect_url_on_success":"https://partner-site.com/callback/success"}'</span>
+  , <span class="s2">"PARTNER-API-SECRET"</span><span class="o">)</span> + <span class="s2">":"</span> + <span class="s2">"1560227834"</span>
+</code></pre>
+<p>Banxa uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload. The API credentials will be provided as part of the on-boarding process.</p>
 
 <p>For all of the requests, add an authentication digest to the header.
 The authentication header structure must be in the following format:</p>
@@ -339,93 +290,122 @@ The authentication header structure must be in the following format:</p>
 </p>
 </aside>
 <h3 id='api-key'>API Key</h3>
-<p>The API public key credential. The credential api key and secret pair will be provided once registered. </p>
+<p>The API public key credential. This is the one provided by us during on-boarding.</p>
 <h3 id='signature'>Signature</h3>
 <p>Message authentication signature. The request message is hashed with the API secret key using SHA256 algorithm.
 The structure of the message:
 <ul>
  <li>Request method. (e.g. &quot;GET or &quot;POST&quot;)</li>
- <li>Request URI. (Without the host name. e.g. <code>/accounts</code> instead of <code>https://api.bitcoin.world/accounts</code>)</li>
+ <li>Request URI.</li>
  <li>The <em>nonce</em> value (e.g. using unix timestamp value)</li>
- <li>The payload in JSON data structure</li>
+ <li>The payload in JSON format.</li>
 </ul></p>
-<h3 id='nonce'>Nonce</h3>
-<p>The numeric value with value greater than the previous successful request. (e.g. unix timestamp)</p>
 
-<aside class="info">
-<p><strong>Example authentication header</strong></p>
-<div style="font-family:monospace; font-size: 0.9em">
-<p style="margin-bottom:0">
-"Authentication: HMAC " + "PARTNER-API-KEY" + ":" 
-</p>
-<p style="padding-left:2.5em; margin-bottom:0">
-+ hmac_sha256('POST' + '\n'
-</p>
-<p style="padding-left:2.5em; margin-bottom:0">
-+ 'accounts' + '\n'
-</p>
-<p style="padding-left:2.5em; margin-bottom:0">
-+ '1560227834' + "\n"
-</p>
-<p style="padding-left:2.5em; margin-bottom:0">
-+ '{"customer_ref":"unique-partner-reference", "mobile_phone":"61400000000", "email":"email@example.com"}'
-</p>
-<p style="padding-left:2.5em">
-) + ":" + "1560227834"
-</p>
-</div>
-</aside>
-<h1 id='settings'>Settings</h1><h2 id='get-available-payments'>Get Available Payments</h2>
+<aside class="notice">
+To ensure the signature is successfully validated, please be aware of the following:
+<ul>
+    <li>Each piece of information in the signature message should be separated by a new line. (see the example)</li>
+    <li>The payload should not contain any whitespace between the names and values</li>
+    <li>The Request URI should not contain the host name. e.g. `/api/orders` instead of `https://partner.banxa.com/api/orders`</li>
+</ul>
+</aside>      
+<h3 id='nonce'>Nonce</h3>
+<p>A numeric value with value greater than the one sent with the previous successful request. (e.g. unix timestamp)</p>
+<h1 id='order'>Order</h1><h2 id='create-order'>Create Order</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/settings/payments"</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://partner.banxa-sandbox.com/api/orders"</span> <span class="se">\</span>
+  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  -d <span class="se">\</span>
+  <span class="s1">'{"account_reference": "partner_ref",
+    "coin_code": "BTC",
+    "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    "redirect_url_on_success": "https://partner-site.com/callback/success"}'</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"payments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"account_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner.banxa.com/UNIQUE_CHECKOUT_CODE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a list of all available payments (Both global and local).</p>
+<p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. The customer should be redirected to this URL to complete the checkout process. The URL will expire after 1 minute if a redirect does not occur.</p>
 <h3 id='request'>Request</h3>
-<p><code>GET https://sandbox-api.bitcoin.world/settings/payments</code> </p>
+<p><code>POST https://partner.banxa-sandbox.com/api/orders</code></p>
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
-</aside>
-
-<aside class="notice">
-Response TBD
-</aside>
-<h1 id='accounts'>Accounts</h1><h2 id='get-account'>Get Account</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6"</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"customer_ref"</span><span class="p">:</span><span class="s2">"unique-partner-reference"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"kyc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incomplete"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"missing document"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves an account&#39;s details.</p>
-<h3 id='request-2'>Request</h3>
-<p><code>GET https://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}</code> </p>
+</aside>      
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>account_reference</code></td>
+<td>Yes</td>
+<td>Partner&#39;s account reference for the customer / user string.</td>
+</tr>
+<tr>
+<td><code>account_id</code></td>
+<td>No</td>
+<td>The account_id the order belongs to</td>
+</tr>
+<tr>
+<td><code>fiat_amount</code></td>
+<td>No</td>
+<td>The fiat currency amount of type <em>float</em> up to <em>2</em> decimal points.</td>
+</tr>
+<tr>
+<td><code>fiat_code</code></td>
+<td>No</td>
+<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;. Code must be offered in the rates API</td>
+</tr>
+<tr>
+<td><code>coin_amount</code></td>
+<td>No</td>
+<td>The cryptocurrency amount of type <em>float</em> up to <em>8</em> decimal points. e.g 0.12345678</td>
+</tr>
+<tr>
+<td><code>coin_code</code></td>
+<td>Yes</td>
+<td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39;. Code must be offered in the rates API</td>
+</tr>
+<tr>
+<td><code>wallet_address</code></td>
+<td>No</td>
+<td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
+</tr>
+<tr>
+<td><code>redirect_url_on_success</code></td>
+<td>Yes</td>
+<td>The return URL when the customer completed the checkout process</td>
+</tr>
+<tr>
+<td><code>redirect_url_on_cancelled</code></td>
+<td>No</td>
+<td>The return URL when the customer cancelled the checkout process</td>
+</tr>
+<tr>
+<td><code>redirect_url_on_failure</code></td>
+<td>No</td>
+<td>The return URL when the customer failed to complete the checkout process</td>
+</tr>
+</tbody></table>
 <h3 id='response'>Response</h3>
 <table><thead>
 <tr>
@@ -440,872 +420,23 @@ Response TBD
 <td>string</td>
 </tr>
 <tr>
-<td><code>account_id</code></td>
-<td>Account ID</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>customer_ref</code></td>
-<td>Partner&#39;s unique customer reference</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>kyc[status]</code></td>
-<td>Status of the account KYC</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>kyc[reason]</code></td>
-<td>Reason of KYC status</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>
-
-<aside class="notice">
-Must be registered with <strong>Create Account</strong> API beforehand.
-</aside>
-<h2 id='create-account'>Create Account</h2>
-<blockquote>
-<p>Example Request <em>without</em> KYC details:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="se">\</span>
-  <span class="s1">'{"customer_ref":"unique-partner-reference",
-    "mobile_phone":"61400000000",
-    "email":"email@example.com"}'</span>  
-</code></pre>
-<blockquote>
-<p>Example Request <em>with</em> KYC details:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="se">\</span>
-  <span class="s1">'{"customer_ref":"unique-partner-reference",
-    "mobile_phone":"61400000000",
-    "email":"email@example.com",
-    "given_name":"John",
-    "middle_name":"",
-    "surname":"Doe",
-    "flat_number":"1",
-    "street_number":"11",
-    "street_name":"Somer",
-    "street_type":"Street",
-    "suburb":"City",
-    "state":"NSW",
-    "post_code":"2000",
-    "country":"Australia",
-    "date_of_birth":"1980-12-31"}'</span>  
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint registers a new account. The account registration requires a bare minimum of an email address 
-and a mobile phone to create. </p>
-
-<p>On successful registration, the api will return an <em>account id</em>.</p>
-
-<p>To create an account, the following parameters <em>a customer_ref, a mobile number</em> and <em>an email address</em> are required.
-If no KYC details are provided, the customer will be prompted with a form to enter the KYC details when redirected
-to our checkout cart.</p>
-
-<p>To improve user experience, we recommend our partners to provide the customer&#39;s KYC details during 
-account creation. The customer will not be prompted to enter the KYC details in our checkout cart. </p>
-<h3 id='request-3'>Request</h3>
-<p><code>POST https://sandbox-api.bitcoin.world/accounts/</code> </p>
-<h3 id='parameters'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>customer_ref</code></td>
-<td><strong>Yes</strong></td>
-<td>Partner&#39;s account reference for the customer / user <em>string</em>.</td>
-</tr>
-<tr>
-<td><code>mobile_phone</code></td>
-<td><strong>Yes</strong></td>
-<td>mobile numbers of type <em>string</em>. International format <code>61400000000</code></td>
-</tr>
-<tr>
-<td><code>email</code></td>
-<td><strong>Yes</strong></td>
-<td>email address of type <em>string</em>.</td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td><strong>Yes</strong></td>
-<td>The country of residence</td>
-</tr>
-<tr>
-<td><code>given_name</code></td>
-<td>No</td>
-<td>The first name of the customer</td>
-</tr>
-<tr>
-<td><code>middle_name</code></td>
-<td>No</td>
-<td>The middle name of the customer, if any.</td>
-</tr>
-<tr>
-<td><code>surname</code></td>
-<td>No</td>
-<td>The family name of the customer</td>
-</tr>
-<tr>
-<td><code>flat_number</code></td>
-<td>No</td>
-<td>The address flat number</td>
-</tr>
-<tr>
-<td><code>street_number</code></td>
-<td>No</td>
-<td>The address street number</td>
-</tr>
-<tr>
-<td><code>street_name</code></td>
-<td>No</td>
-<td>The address street name</td>
-</tr>
-<tr>
-<td><code>street_type</code></td>
-<td>No</td>
-<td>The address street type</td>
-</tr>
-<tr>
-<td><code>suburb</code></td>
-<td>No</td>
-<td>The address suburb</td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>No</td>
-<td>The address state</td>
-</tr>
-<tr>
-<td><code>post_code</code></td>
-<td>No</td>
-<td>The address post code</td>
-</tr>
-<tr>
-<td><code>date_of_birth</code></td>
-<td>No</td>
-<td>The date of birth in <em>YYYY-MM-DD</em> format of type <em>string</em></td>
-</tr>
-</tbody></table>
-<h3 id='response-2'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>account_id</code></td>
-<td>Account ID</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
-<h2 id='create-kyc-details'>Create KYC Details</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/details"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="se">\</span>
-  <span class="s1">'{"given_name":"John",
-    "middle_name":"",
-    "surname":"Doe",
-    "flat_number":"1",
-    "street_number":"11",
-    "street_name":"Somer",
-    "street_type":"Street",
-    "suburb":"City",
-    "state":"NSW",
-    "post_code":"2000",
-    "country":"Australia",
-    "date_of_birth":"1980-12-31"}'</span>  
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint allows kyc details to be added and/or modified to the account. </p>
-<h3 id='request-4'>Request</h3>
-<p><code>POST http://sandbox-api.bitcoin.world/accounts/{ACCOUNT_ID}/details</code> </p>
-<h3 id='parameters-2'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>given_name</code></td>
-<td><strong>Yes</strong></td>
-<td>The first name of the customer</td>
-</tr>
-<tr>
-<td><code>middle_name</code></td>
-<td>No</td>
-<td>The middle name of the customer, if any.</td>
-</tr>
-<tr>
-<td><code>surname</code></td>
-<td><strong>Yes</strong></td>
-<td>The family name of the customer</td>
-</tr>
-<tr>
-<td><code>flat_number</code></td>
-<td>No</td>
-<td>The address flat number</td>
-</tr>
-<tr>
-<td><code>street_number</code></td>
-<td><strong>Yes</strong></td>
-<td>The address street number</td>
-</tr>
-<tr>
-<td><code>street_name</code></td>
-<td><strong>Yes</strong></td>
-<td>The address street name</td>
-</tr>
-<tr>
-<td><code>street_type</code></td>
-<td><strong>Yes</strong></td>
-<td>The address street type</td>
-</tr>
-<tr>
-<td><code>suburb</code></td>
-<td><strong>Yes</strong></td>
-<td>The address suburb</td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td><strong>Yes</strong></td>
-<td>The address state</td>
-</tr>
-<tr>
-<td><code>post_code</code></td>
-<td><strong>Yes</strong></td>
-<td>The address post code</td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td><strong>Yes</strong></td>
-<td>The country of residence</td>
-</tr>
-<tr>
-<td><code>date_of_birth</code></td>
-<td><strong>Yes</strong></td>
-<td>The date of birth in <em>YYYY-MM-DD</em> format of type <em>string</em></td>
-</tr>
-</tbody></table>
-<h3 id='response-3'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
-<h1 id='documents'>Documents</h1><h2 id='create-document'>Create Document</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/documents"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="s1">' \
-    {"account_id":"098f6bcd4621d373cade4e832627b4f6", \
-    "document_number":"A 123456", \
-    "document_filename":"passport_file_front.jpeg", \
-    "document_type":"passport"}'</span>  
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"upload_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sandbox-api.bitcoin.world/accounts/098f6bcd4621d373cade4e832627b4f6/documents"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint accepts KYC document file.</p>
-<h3 id='request-5'>Request</h3>
-<p><code>POST http://sandbox-api.bitcoin.world/documents/</code> </p>
-<h3 id='parameters-3'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>account_id</td>
-<td><strong>Yes</strong></td>
-<td>The account id belongs to the customer.</td>
-</tr>
-<tr>
-<td>document_number</td>
-<td><strong>Yes</strong></td>
-<td>The document identification number</td>
-</tr>
-<tr>
-<td>document_file</td>
-<td><strong>Yes</strong></td>
-<td>The document filename</td>
-</tr>
-<tr>
-<td>document_type</td>
-<td>No</td>
-<td>The identification document</td>
-</tr>
-</tbody></table>
-<h3 id='response-4'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>document_ref</code></td>
-<td>ID Reference for upload</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>upload_uri</code></td>
-<td>API endpoint for document uploads</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
-<h2 id='upload-documents'>Upload Documents</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -F <span class="s1">'document_file[]=@/path/to/file/passport_id.png'</span> <span class="se">\</span>
-    https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload
-</code></pre>
-<blockquote>
-<p>Example Request uploading multiple files:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://sandbox-api.bitcoin.world/v1/documents/21d373cad/upload 
-    -F <span class="s1">'document_file[]=@/path/to/file/passport_id_front.png'</span> <span class="se">\</span>
-    -F <span class="s1">'document_file[]=@/path/to/file/passport_id_back.png'</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoints accepts KYC document of image file types. Must be initialized with <strong>Create Document</strong> API to obtain the 
-upload reference <code>document_ref</code></p>
-<h3 id='request-6'>Request</h3>
-<p><code>POST http://sandbox-api.bitcoin.world/documents/{DOCUMENT_REF}/upload</code></p>
-<h3 id='parameters-4'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>document_files</code></td>
-<td><strong>Yes</strong></td>
-<td>One or more files. Accepted file extensions: <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code>, and <code>.pdf</code></td>
-</tr>
-</tbody></table>
-<h3 id='response-5'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Must be initialized with <strong>Create Documents</strong> API beforehand.
-</aside>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>        
-<h1 id='rates'>Rates</h1><h2 id='get-rates'>Get Rates</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/rates"</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buyRates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"AUD"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"BTC"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0500</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">12613.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11955.49</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">657.51</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">597.74</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">59.77</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0500</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">381.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">361.18</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.82</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.02</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.80</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"sellRates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"AUD"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"BTC"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0000</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">11539.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value_fxc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">11539.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0000</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"value_exc_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_exc_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"fee_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"flat_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Gets the rate information for each crypto-currency and fiat combination, only the relevant currencies will be returned for each of the Buy and Sell functions.</p>
-
-<p>The rates are updated every minute.</p>
-<h3 id='request-7'>Request</h3>
-<p><code>GET http://sandbox-api.bitcoin.world/rates/</code></p>
-<h3 id='response-6'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>commission</code></td>
-<td>The commission percentage applied to the rate, expressed as a decimal value</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>The value of 1 unit of crypto-currency (inclusive of commission fee) in fiat currency</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>value_exc_fee</code></td>
-<td>The value of 1 unit of crypto-currency (exclusive of commission fee) in fiat currency</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>fee</code></td>
-<td>The fee component in fiat currency</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>fee_exc_tax</code></td>
-<td>The fee component (exclusive of taxes) in fiat currency</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>fee_tax</code></td>
-<td>The fee tax component in fiat currency</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>flat_fee</code></td>
-<td>The flat fee component in fiat currency</td>
-<td>decimal</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
-<h1 id='orders'>Orders</h1><h2 id='get-order'>Get Order</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://sandbox-api.bitcoin.world/orders/0164d962448fbd34f644ffd65624d8ef"</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BPAY"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">102412</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01411267</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.86</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"payment_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.00</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pendingPayment"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Get order details for a previously created order. </p>
-
-<p>The order id is returned from <code>create order</code> endpoint </p>
-<h3 id='request-8'>Request</h3>
-<p><code>GET http://sandbox-api.bitcoin.world/orders/&lt;ORDER_ID&gt;</code></p>
-<h3 id='response-7'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-<tr>
 <td><code>id</code></td>
 <td>Unique ID of the order</td>
 <td>string</td>
 </tr>
 <tr>
 <td><code>account_id</code></td>
-<td>The customer ID for the order</td>
+<td>The account ID for the order</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>type</code></td>
+<td><code>account_reference</code></td>
+<td>Partner&#39;s account reference for the customer / user string.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>order_type</code></td>
 <td>Payment type</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>ref</code></td>
-<td>The reference number that is comminucated to the end user</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>fiat_code</code></td>
-<td>Fiat currency code</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>fiat_amount</code></td>
-<td>Fiat currency value for the order</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>coin_code</code></td>
-<td>Cryptocurrency code</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>coin_amount</code></td>
-<td>Cryptocurrency value for the order</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>wallet_address</code></td>
-<td>Cryptocurrency wallet address</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>fee</code></td>
-<td>fee for the order</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>payment_fee</code></td>
-<td>Fixed fee on top of the commission for the order</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>commission</code></td>
-<td>Commission rate in percentage</td>
-<td>decimal</td>
-</tr>
-<tr>
-<td><code>tx_hash</code></td>
-<td>Blockchain transaction reference</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>created_at</code></td>
-<td>Timestamp when order was created in UTC time</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>paid_at</code></td>
-<td>Timestamp when order was paid in UTC time</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>completed_at</code></td>
-<td>Timestamp when order was completed in UTC time</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>status</code></td>
-<td>Status of the order</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
-<h2 id='create-order'>Create Order</h2>
-<blockquote>
-<p>Example Request (<em>Cryptocurrency Order</em>):</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -d <span class="se">\</span>
-  <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
-    "fiat_amount": "10000",
-    "fiat_code": "AUD",
-    "coin_amount": "1",
-    "coin_code": "BTC",
-    "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
-    "callback_url_on_success": "https://partner-site.com/callback/success",
-    "callback_url_on_cancelled": "https://partner-site.com/callback/cancelled",
-    "callback_url_on_failure": "https://partner-site.com/callback/failure"}'</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01411267</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner-site.bitcoin.world"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>Example Request (<em>Payment Processor Only</em>):</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://sandbox-api.bitcoin.world/orders"</span> <span class="se">\</span>
-  -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  -d <span class="se">\</span>
-  <span class="s1">'{"account_id": "098f6bcd4621d373cade4e832627b4f6",
-    "fiat_amount": "10000",
-    "fiat_code": "AUD",
-    "callback_url_on_success": "https://partner-site.com/callback/success",
-    "callback_url_on_cancelled": "https://partner-site.com/callback/cancelled",
-    "callback_url_on_failure": "https://partner-site.com/callback/failure"}'</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0164d962448fbd34f644ffd65624d8ef"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">102412</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partner-site.bitcoin.world"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-May-2019 10:30:43"</span><span class="w">        
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Create an order.</p>
-
-<p>The customer should be redirected to bitcoin.world partner checkout page to complete the process.
-The redirect URL will be provided on successful order registration.</p>
-<h3 id='request-9'>Request</h3>
-<p><code>POST http://sandbox-api.bitcoin.world/orders</code></p>
-<h3 id='parameters-5'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>account_id</code></td>
-<td>Yes</td>
-<td>The account_id the order belongs to</td>
-</tr>
-<tr>
-<td><code>fiat_amount</code></td>
-<td>Yes</td>
-<td>The fiat currency amount of type <em>float</em> up to <em>2</em> decimal points.</td>
-</tr>
-<tr>
-<td><code>fiat_code</code></td>
-<td>Yes</td>
-<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;. Code must be offered in the rates API</td>
-</tr>
-<tr>
-<td><code>coin_amount</code></td>
-<td>No</td>
-<td>The cryptocurrency amount of type <em>float</em> up to <em>8</em> decimal points. e.g 0.12345678</td>
-</tr>
-<tr>
-<td><code>coin_code</code></td>
-<td>No</td>
-<td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39;. Code must be offered in the rates API</td>
-</tr>
-<tr>
-<td><code>wallet_address</code></td>
-<td>No</td>
-<td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
-</tr>
-<tr>
-<td><code>callback_url_on_success</code></td>
-<td>Yes</td>
-<td>The return URL when the customer completed the checkout process</td>
-</tr>
-<tr>
-<td><code>callback_url_on_cancelled</code></td>
-<td>Yes</td>
-<td>The return URL when the customer cancelled the checkout process</td>
-</tr>
-<tr>
-<td><code>callback_url_on_failure</code></td>
-<td>Yes</td>
-<td>The return URL when the customer failed to complete the checkout process</td>
-</tr>
-</tbody></table>
-<h3 id='response-8'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>status</code></td>
-<td>The result status message</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>Unique ID of the order</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>account_id</code></td>
-<td>The customer ID for the order</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>type</code></td>
-<td>Payment type</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>ref</code></td>
-<td>The reference number that is communicated to the end user</td>
 <td>string</td>
 </tr>
 <tr>
@@ -1344,57 +475,16 @@ The redirect URL will be provided on successful order registration.</p>
 <td>string</td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-The URI structure of the checkout 'checkout_url' is TBD
-</aside>  
-
-<aside class="notice">
-Requires <strong>Authentication</strong>
-</aside>      
 <h1 id='callbacks'>Callbacks</h1><h2 id='customer-return-url'>Customer Return URL</h2>
-<p>Callbacks are used to redirect the customers back to the partner page when they complete the checkout process.
-The callback url must be specified in <strong>Create Order</strong> API parameters. 
-When the customer completes the checkout page,  callback_url_on_success</p>
-<h2 id='payment-notification'>Payment Notification</h2>
-<p>As soon as a payment has been confirmed and received, we can notify our partners through their webhook.</p>
+<p>The redirect URLs are used to navigate the customers back to the partner page when they complete the checkout process.
+The redirect URL must be specified in <strong>Create Order</strong> API parameters. </p>
 
-<p>The request sent by us will also contain a signature of the payloads. 
-The details to verify the signature is coming soon.</p>
+<p>When the customer completes the checkout page the customer will be redirected to redirect_url_on_success.</p>
 
-<p>The partners webhook needs to respond with <strong>200 OK</strong> as an acknowledgement, or respond with
-suitable HTTP response code with the error message. </p>
-<h3 id='payloads'>Payloads</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>order_id</code></td>
-<td>The order id of the completed payment</td>
-<td></td>
-</tr>
-<tr>
-<td><code>signature</code></td>
-<td>the signature hash of the request to validate authenticity</td>
-<td></td>
-</tr>
-</tbody></table>
+<p>If there are any issues completing the order then they will be redirected to redirect_url_on_failure.</p>
 
-<aside class="warning">
-We strongly recommend for all partners to verify the signature of notifications to ensure the request comes from us
-and the content has not been tampered with.
-</aside>
-<h3 id='signature-verification-guide'>Signature Verification Guide</h3>
-<p>TBD</p>
+<p>If the customer cancels the flow at any point, they will be redirected to the redirect_url_on_cancelled.</p>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is a work in progress. We will define more comprehensive errors on each API endpoints 
-</aside>
-
 <p>The API uses the following error codes:</p>
 
 <table><thead>
@@ -1409,7 +499,7 @@ This error section is a work in progress. We will define more comprehensive erro
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized -- Your API key is incorrect or the packet was malformed.</td>
 </tr>
 <tr>
 <td>403</td>
