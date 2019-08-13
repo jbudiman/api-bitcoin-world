@@ -88,7 +88,7 @@ curl -X POST "https://partner.banxa-sandbox.com/api/orders" \
   '{"account_reference": "partner_ref",
     "coin_code": "BTC",
     "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
-    "redirect_url_on_success": "https://partner-site.com/callback/success"}'
+    "redirect_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'
 ```
 
 > Example Response:
@@ -103,7 +103,7 @@ curl -X POST "https://partner.banxa-sandbox.com/api/orders" \
 		"order_type": "CRYPTO-BUY",
 		"coin_code": "BTC",
 		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
-        "checkout_url": "https://partner.banxa.com/UNIQUE_CHECKOUT_CODE",
+        "checkout_url": "https://partner.banxa.com/portal?expires=xxx&oid=xxx&signature=xxx",
         "created_at": "16-May-2019 10:30:43"
 	}
 }
@@ -128,10 +128,14 @@ Parameter | Required | Description
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'. Code must be offered in the rates API
 `coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
 `coin_code`                   | Yes | The cryptocurrency code of type *string*. e.g. 'BTC'. Code must be offered in the rates API
-`wallet_address`              | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`wallet_address`              | Yes  | Wallet address of type *string*. We would prefer you to do the validation on your side.
 `redirect_url_on_success`     | Yes | The return URL when the customer completed the checkout process
 `redirect_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `redirect_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
+
+<aside class="notice">
+    The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://partner.com becomes https:\/\/partner.com
+</aside>      
 
 ### Response
 
