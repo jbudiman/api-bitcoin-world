@@ -69,7 +69,6 @@ To ensure the signature is successfully validated, please be aware of the follow
     <li>Each piece of information in the signature message should be separated by a new line. (see the example)</li>
     <li>The payload should not contain any whitespace between the names and values</li>
     <li>The Request URI should not contain the host name. e.g. `/api/orders` instead of `https://partner.banxa.com/api/orders`</li>
-    <li>The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://partner.com becomes https:\/\/partner.com</li>
 </ul>
 </aside>      
 
@@ -133,6 +132,10 @@ Parameter | Required | Description
 `redirect_url_on_success`     | Yes | The return URL when the customer completed the checkout process
 `redirect_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `redirect_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
+
+<aside class="notice">
+    The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://partner.com becomes https:\/\/partner.com
+</aside>      
 
 ### Response
 
