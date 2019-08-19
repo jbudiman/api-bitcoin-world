@@ -415,6 +415,95 @@ Requires <strong>Authentication</strong>
 <td>The cryptocurrency code of type <em>string</em> e.g. &#39;BTC&#39;</td>
 </tr>
 </tbody></table>
+<h3 id='response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>payment_methods</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>The id of the payment method</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>The name of the payment method</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Description of the payment method which can be displayed to customers</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>logo_url</code></td>
+<td>Url to get a logo for this payment method</td>
+<td>uri</td>
+</tr>
+<tr>
+<td><code>info_url</code></td>
+<td>Url to direct user to get more information</td>
+<td>uri</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>ACTIVE or INACTIVE</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>supported_fiat</code></td>
+<td>List of supported currencies</td>
+<td>array&lt;string&gt;</td>
+</tr>
+<tr>
+<td><code>supported_coin</code></td>
+<td>List of supported crypto coins</td>
+<td>array&lt;string&gt;</td>
+</tr>
+<tr>
+<td><strong>fees</strong></td>
+<td></td>
+<td>array&lt;object&gt;</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>The name of the fee</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>The amount of the fee based on the type, e.g. if 5 with percentage then read as 5%</td>
+<td>number</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>The fee type. One of percentage or fixed</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>buy_limits</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>min</code></td>
+<td>The minimum order size for this payment method</td>
+<td>number</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>The maximum order size for this payment method</td>
+<td>number</td>
+</tr>
+</tbody></table>
 <h1 id='price'>Price</h1><h2 id='get-prices'>Get Prices</h2>
 <blockquote>
 <p>Example Request (without filtering):</p>
@@ -576,6 +665,95 @@ Requires <strong>Authentication</strong>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 </tbody></table>
+<h3 id='response-2'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>prices</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>fiat_code</code></td>
+<td>The fiat currency of the price</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>crypto_currencies</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>coin_code</code></td>
+<td>The cryptocurrency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>coin_name</code></td>
+<td>The fullname of the cryptocurrency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>spot_price</code></td>
+<td>The spot price of the cryptocurrency</td>
+<td>number</td>
+</tr>
+<tr>
+<td><strong>payment_methods</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>The id of the payment method</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>spot_price_fee</code></td>
+<td>The fee charged on the spot price</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>spot_price_including_fee</code></td>
+<td>The adjusted spot price including the fee</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>buy_price</strong></td>
+<td></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>coin_amount</code></td>
+<td>The amount of this crytocurrency to receive based on the fiat amount and fees</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>coin_code</code></td>
+<td>The cryptocurrency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>fiat_amount</code></td>
+<td>The fiat amount the customer is spending</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>fiat_code</code></td>
+<td>The fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>fee_amount</code></td>
+<td>The fees calculated on the fiat amount</td>
+<td>string</td>
+</tr>
+</tbody></table>
 <h1 id='order'>Order</h1><h2 id='create-order'>Create Order</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -631,6 +809,11 @@ Requires <strong>Authentication</strong>
 <td>The account_id the order belongs to</td>
 </tr>
 <tr>
+<td><code>payment_method_id</code></td>
+<td>No</td>
+<td>The payment method to be used for this order</td>
+</tr>
+<tr>
 <td><code>fiat_amount</code></td>
 <td>No</td>
 <td>The fiat currency amount of type <em>float</em> up to <em>2</em> decimal points.</td>
@@ -675,7 +858,7 @@ Requires <strong>Authentication</strong>
 <aside class="notice">
     The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://[partner].com becomes https:\/\/[partner].com
 </aside>      
-<h3 id='response'>Response</h3>
+<h3 id='response-3'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -687,6 +870,11 @@ Requires <strong>Authentication</strong>
 <td><code>status</code></td>
 <td>The result status message</td>
 <td>string</td>
+</tr>
+<tr>
+<td><strong>order</strong></td>
+<td></td>
+<td>object</td>
 </tr>
 <tr>
 <td><code>id</code></td>
