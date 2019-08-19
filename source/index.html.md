@@ -160,6 +160,26 @@ Parameter | Required | Description
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
 `coin_code`                   | No  | The cryptocurrency code of type *string* e.g. 'BTC'
 
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+**payment_methods**        | | object
+`id`    | The id of the payment method | string
+`name`    | The name of the payment method | string
+`description`    | Description of the payment method which can be displayed to customers | string
+`logo_url`    | Url to get a logo for this payment method | uri
+`info_url`    | Url to direct user to get more information | uri
+`status`    | ACTIVE or INACTIVE | string
+`supported_fiat`    | List of supported currencies | array&lt;string&gt;
+`supported_coin`    | List of supported crypto coins | array&lt;string&gt;
+**fees**    |  | array&lt;object&gt;
+`name`    | The name of the fee | string
+`amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
+`type`    | The fee type. One of percentage or fixed | string
+**buy_limits**    |  | object
+`min`    | The minimum order size for this payment method | number
+`max`    | The maximum order size for this payment method | number
 
 # Price
 
@@ -307,6 +327,27 @@ Parameter | Required | Description
 `coin_code`                   | No  | The cryptocurrency code of type *string*. e.g. 'BTC'
 `payment_method_id`           | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
 
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+**prices**||object
+`fiat_code`    | The fiat currency of the price | string
+**crypto_currencies**||object
+`coin_code`        | The cryptocurrency code | string
+`coin_name`        | The fullname of the cryptocurrency code | string
+`spot_price`        | The spot price of the cryptocurrency | number
+**payment_methods**||object
+`id`        | The id of the payment method | string
+`spot_price_fee`        | The fee charged on the spot price | string
+`spot_price_including_fee`        | The adjusted spot price including the fee | string
+**buy_price**||object
+`coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
+`coin_code`        | The cryptocurrency code | string
+`fiat_amount`        | The fiat amount the customer is spending | string
+`fiat_code`        | The fiat currency | string
+`fee_amount`        | The fees calculated on the fiat amount | string
+
 # Order
 
 ## Create Order
@@ -356,6 +397,7 @@ Parameter | Required | Description
 --------- | -------- | -----------
 `account_reference`           | Yes | Partner's account reference for the customer / user string.
 `account_id`                  | No  | The account_id the order belongs to
+`payment_method_id`           | No  | The payment method to be used for this order
 `fiat_amount`                 | No  | The fiat currency amount of type *float* up to *2* decimal points.
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
 `coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
@@ -374,6 +416,7 @@ Parameter | Required | Description
 Field | Description | Format
 --------- | -------- | -----------
 `status`    | The result status message| string
+**order**        | | object
 `id`        | Unique ID of the order| string
 `account_id`| The account ID for the order | string
 `account_reference`| Partner's account reference for the customer / user string. | string
