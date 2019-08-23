@@ -17,7 +17,7 @@ search: Yes
 
 Welcome to the Banxa partner integration API. 
 
-This API documentation will guide partners through the integration with Banxa payment APIs and processes.
+This API documentation will guide you through the integration with Banxa payment APIs and processes.
 
 <aside class="success">
 All API responses are in <strong>JSON</strong> format
@@ -242,7 +242,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 }
 ```
 
-This allows the partner to retrieve all possible payment methods or filter the available by a fiat or coin code.
+Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target. Currently only fiat codes are supported in source and crypto codes in target.
 
 ### Request
 
@@ -256,9 +256,8 @@ Requires <strong>Authentication</strong>
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
-`coin_code`                   | No  | The cryptocurrency code of type *string* e.g. 'BTC'
-`type`                   | No  | The exchange type *string* e.g. 'FIAT_TO_CRYPTO'
+`source` | No  | The source currency of type *string* e.g. 'AUD'
+`target` | No  | The target currency of type *string* e.g. 'BTC'
 
 ### Response
 
@@ -290,7 +289,7 @@ Field | Description | Format
 
 ```shell
 curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
-  "https://[partner].banxa.com/api/fiats/AUD/coins/BTC/prices?fiat_amount='200'"
+  "https://[partner].banxa.com/api/prices?source_amount=200&source=AUD&target=BTC"
 ```
 
 > Example Response:
@@ -301,6 +300,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "payment_methods": [
       {
         "id": "1",
+        "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
         "price": {
@@ -313,6 +313,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
       },
       {
         "id": "2",
+        "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 1078,
         "spot_price_including_fee": 14324,
         "price": {
@@ -331,7 +332,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```shell
 curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
-  "https://[partner].banxa.com/api/fiats/AUD/coins/BTC/prices?fiat_amount=200&fiat_code=AUD&coin_code=BTC&payment_method_id=1"
+  "https://[partner].banxa.com/api/prices?source_amount=200&source=AUD&target=BTC&payment_method_id=1"
 ```
 
 > Example Response:
@@ -342,6 +343,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "payment_methods": [
       {
         "id": "1",
+        "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
         "price": {
@@ -356,28 +358,23 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 }
 ```
 
-The allows the partner to get prices for the different payment methods that Banxa offer.
+Get prices for the different payment methods that Banxa offer. Currently only fiat codes are supported in source and crypto codes in target.
 
 ### Request
-`GET https://[partner].banxa.com/api/fiats/{fiat_code}/coins/{coin_code}/prices`
+`GET https://[partner].banxa.com/api/prices`
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
-### URI Parameters
-
-Parameter | Required | Description
---------- | -------- | -----------
-`fiat_code`                   | Yes  | The fiat currency code of type *string* e.g. 'AUD'
-`coin_code`                   | Yes  | The cryptocurrency code of type *string*. e.g. 'BTC'
-
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`fiat_amount`                 | No  | The fiat currency amount of type *float* up to *2* decimal points.
-`coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678. Defaulted to 1 if no fiat or coin amount provided 
+`source`                   | Yes  | The source currency code of type *string* e.g. 'AUD'
+`target`                   | Yes  | The target currency code of type *string*. e.g. 'BTC'
+`source_amount`                 | No  | The source amount of type *float*
+`target_amount`                 | No  | The target amount of type *float* 
 `payment_method_id`           | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
 
 ### Response
@@ -386,6 +383,7 @@ Field | Description | Format
 --------- | -------- | -----------
 `spot_price`        | The spot price of the cryptocurrency | number
 `payment_methods.id`        | The id of the payment method | string
+`payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
 `payment_methods.spot_price_fee`        | The fee charged on the spot price | string
 `payment_methods.spot_price_including_fee`        | The adjusted spot price including the fee | string
 `payment_methods.price.coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
