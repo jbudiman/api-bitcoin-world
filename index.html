@@ -233,6 +233,17 @@
               </ul>
           </li>
           <li>
+            <a href="#currencies" class="toc-h1 toc-link" data-title="Currencies">Currencies</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-fiat-currencies" class="toc-h2 toc-link" data-title="Get Fiat Currencies">Get Fiat Currencies</a>
+                  </li>
+                  <li>
+                    <a href="#get-crypto-currencies" class="toc-h2 toc-link" data-title="Get Crypto Currencies">Get Crypto Currencies</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#payment-methods" class="toc-h1 toc-link" data-title="Payment Methods">Payment Methods</a>
               <ul class="toc-list-h2">
                   <li>
@@ -275,7 +286,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Banxa partner integration API. </p>
 
-<p>This API documentation will guide partners through the integration with Banxa payment APIs and processes.</p>
+<p>This API documentation will guide you through the integration with Banxa payment APIs and processes.</p>
 
 <aside class="success">
 All API responses are in <strong>JSON</strong> format
@@ -327,6 +338,100 @@ To ensure the signature is successfully validated, please be aware of the follow
 </aside>      
 <h3 id='nonce'>Nonce</h3>
 <p>A numeric value with value greater than the one sent with the previous successful request. (e.g. unix timestamp)</p>
+<h1 id='currencies'>Currencies</h1><h2 id='get-fiat-currencies'>Get Fiat Currencies</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/fiats"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"fiats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fiat_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australian Dollar"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieve all available fiat currencies</p>
+<h3 id='request'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/fiats</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>fiats.fiat_code</code></td>
+<td>The fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>fiats.fiat_name</code></td>
+<td>The fiat currency full name</td>
+<td>string</td>
+</tr>
+</tbody></table>
+<h2 id='get-crypto-currencies'>Get Crypto Currencies</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/coins"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"coins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"coin_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"coin_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethereum"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieve all available crypto-currencies</p>
+<h3 id='request-2'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/coins</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='response-2'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>coins.coin_code</code></td>
+<td>The crypto currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>coins.coin_name</code></td>
+<td>The crypto currency full name</td>
+<td>string</td>
+</tr>
+</tbody></table>
 <h1 id='payment-methods'>Payment Methods</h1><h2 id='get-payment-methods'>Get Payment Methods</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -346,19 +451,29 @@ To ensure the signature is successfully validated, please be aware of the follow
         </span><span class="s2">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/poli.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"info_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/pay/poli"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
         </span><span class="s2">"supported_coin"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">],</span><span class="w">
-        </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"transaction_fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commission"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percentage"</span><span class="w">
+            </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"surcharge"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percentage"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"buy_limits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"transaction_limits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
@@ -367,36 +482,41 @@ To ensure the signature is successfully validated, please be aware of the follow
         </span><span class="s2">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/newsagent.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"info_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/pay/newsagent"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
         </span><span class="s2">"supported_coin"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">],</span><span class="w">
-        </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"transaction_fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commission"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percentage"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retail"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percentage"</span><span class="w">
+            </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"surcharge"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percentage"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"buy_limits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"transaction_limits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This allows the partner to retrieve all possible payment methods or filter the available by a fiat or coin code.</p>
-<h3 id='request'>Request</h3>
+<p>Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target. Currently only fiat codes are supported in source and crypto codes in target.</p>
+<h3 id='request-3'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/payment-methods</code></p>
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
-<h3 id='parameters'>Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -405,17 +525,17 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>fiat_code</code></td>
+<td><code>source</code></td>
 <td>No</td>
-<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;</td>
+<td>The source currency of type <em>string</em> e.g. &#39;AUD&#39;</td>
 </tr>
 <tr>
-<td><code>coin_code</code></td>
+<td><code>target</code></td>
 <td>No</td>
-<td>The cryptocurrency code of type <em>string</em> e.g. &#39;BTC&#39;</td>
+<td>The target currency of type <em>string</em> e.g. &#39;BTC&#39;</td>
 </tr>
 </tbody></table>
-<h3 id='response'>Response</h3>
+<h3 id='response-3'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -424,82 +544,87 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>payment_methods</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>id</code></td>
+<td><code>payment_methods.id</code></td>
 <td>The id of the payment method</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td><code>payment_methods.name</code></td>
 <td>The name of the payment method</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>description</code></td>
+<td><code>payment_methods.description</code></td>
 <td>Description of the payment method which can be displayed to customers</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>logo_url</code></td>
+<td><code>payment_methods.logo_url</code></td>
 <td>Url to get a logo for this payment method</td>
 <td>uri</td>
 </tr>
 <tr>
-<td><code>info_url</code></td>
+<td><code>payment_methods.info_url</code></td>
 <td>Url to direct user to get more information</td>
 <td>uri</td>
 </tr>
 <tr>
-<td><code>status</code></td>
+<td><code>payment_methods.status</code></td>
 <td>ACTIVE or INACTIVE</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>supported_fiat</code></td>
+<td><code>payment_methods.type</code></td>
+<td>The exchange type e.g. &#39;FIAT_TO_CRYPTO&#39;</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>payment_methods.supported_fiat</code></td>
 <td>List of supported currencies</td>
 <td>array&lt;string&gt;</td>
 </tr>
 <tr>
-<td><code>supported_coin</code></td>
+<td><code>payment_methods.supported_coin</code></td>
 <td>List of supported crypto coins</td>
 <td>array&lt;string&gt;</td>
 </tr>
 <tr>
-<td><strong>fees</strong></td>
-<td></td>
-<td>array&lt;object&gt;</td>
+<td><code>payment_methods.transaction_fees.fiat_code</code></td>
+<td>The currency of the fee</td>
+<td>string</td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td><code>payment_methods.transaction_fees.coin_code</code></td>
+<td>The coin this fee applies to</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>payment_methods.transaction_fees.fees.name</code></td>
 <td>The name of the fee</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>amount</code></td>
+<td><code>payment_methods.transaction_fees.amount</code></td>
 <td>The amount of the fee based on the type, e.g. if 5 with percentage then read as 5%</td>
 <td>number</td>
 </tr>
 <tr>
-<td><code>type</code></td>
+<td><code>payment_methods.transaction_fees.type</code></td>
 <td>The fee type. One of percentage or fixed</td>
 <td>string</td>
 </tr>
 <tr>
-<td><strong>buy_limits</strong></td>
-<td></td>
-<td>object</td>
+<td><code>payment_methods.transaction_limits.fiat_code</code></td>
+<td>The currency of the limits</td>
+<td>number</td>
 </tr>
 <tr>
-<td><code>min</code></td>
+<td><code>payment_methods.transaction_limits.min</code></td>
 <td>The minimum order size for this payment method</td>
 <td>number</td>
 </tr>
 <tr>
-<td><code>max</code></td>
+<td><code>payment_methods.transaction_limits.max</code></td>
 <td>The maximum order size for this payment method</td>
 <td>number</td>
 </tr>
@@ -509,79 +634,39 @@ Requires <strong>Authentication</strong>
 <p>Example Request (without filtering):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  <span class="s2">"https://[partner].banxa.com/api/prices?fiat_amount='200'"</span>
+  <span class="s2">"https://[partner].banxa.com/api/prices?source_amount=200&amp;source=AUD&amp;target=BTC"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"spot_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">15402</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"payment_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"crypto_currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"coin_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"spot_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">15402</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"payment_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">770</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14632</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"buy_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230770</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">1078</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14324</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"buy_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230026</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-           </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"coin_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethereum"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"spot_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">277</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"payment_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">263</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"buy_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.68253271</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">257</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"buy_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.66859054</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">770</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14632</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230770</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">1078</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14324</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230026</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -590,48 +675,38 @@ Requires <strong>Authentication</strong>
 <p>Example Request (with filtering):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
-  <span class="s2">"https://[partner].banxa.com/api/prices?fiat_amount=200&amp;fiat_code=AUD&amp;coin_code=BTC&amp;payment_method_id=1"</span>
+  <span class="s2">"https://[partner].banxa.com/api/prices?source_amount=200&amp;source=AUD&amp;target=BTC&amp;payment_method_id=1"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"spot_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">15402</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"payment_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"crypto_currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"coin_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"spot_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">15402</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"payment_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">770</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14632</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"buy_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230770</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">770</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"spot_price_including_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">14632</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01230770</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The allows the partner to get prices for the different payment methods that Banxa offer. It is possible to request everything available or to filter by a specific customer request. Note we advise caching on the partner&#39;s side if you want to get a regular updated price for our services</p>
-<h3 id='request-2'>Request</h3>
-<p><code>GET https://[partner].banxa.com/api/price</code></p>
+<p>Get prices for the different payment methods that Banxa offer. Currently only fiat codes are supported in source and crypto codes in target.</p>
+<h3 id='request-4'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/prices</code></p>
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
-<h3 id='parameters-2'>Parameters</h3>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -640,24 +715,24 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>fiat_amount</code></td>
-<td>No</td>
-<td>The fiat currency amount of type <em>float</em> up to <em>2</em> decimal points.</td>
+<td><code>source</code></td>
+<td>Yes</td>
+<td>The source currency code of type <em>string</em> e.g. &#39;AUD&#39;</td>
 </tr>
 <tr>
-<td><code>fiat_code</code></td>
-<td>No</td>
-<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;</td>
+<td><code>target</code></td>
+<td>Yes</td>
+<td>The target currency code of type <em>string</em>. e.g. &#39;BTC&#39;</td>
 </tr>
 <tr>
-<td><code>coin_amount</code></td>
+<td><code>source_amount</code></td>
 <td>No</td>
-<td>The cryptocurrency amount of type <em>float</em> up to <em>8</em> decimal points. e.g 0.12345678. Defaulted to 1 if no fiat or coin amount provided</td>
+<td>The source amount of type <em>float</em></td>
 </tr>
 <tr>
-<td><code>coin_code</code></td>
+<td><code>target_amount</code></td>
 <td>No</td>
-<td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39;</td>
+<td>The target amount of type <em>float</em></td>
 </tr>
 <tr>
 <td><code>payment_method_id</code></td>
@@ -665,7 +740,7 @@ Requires <strong>Authentication</strong>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 </tbody></table>
-<h3 id='response-2'>Response</h3>
+<h3 id='response-4'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -674,82 +749,52 @@ Requires <strong>Authentication</strong>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>prices</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>fiat_code</code></td>
-<td>The fiat currency of the price</td>
-<td>string</td>
-</tr>
-<tr>
-<td><strong>crypto_currencies</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>coin_code</code></td>
-<td>The cryptocurrency code</td>
-<td>string</td>
-</tr>
-<tr>
-<td><code>coin_name</code></td>
-<td>The fullname of the cryptocurrency code</td>
-<td>string</td>
-</tr>
-<tr>
 <td><code>spot_price</code></td>
 <td>The spot price of the cryptocurrency</td>
 <td>number</td>
 </tr>
 <tr>
-<td><strong>payment_methods</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>id</code></td>
+<td><code>payment_methods.id</code></td>
 <td>The id of the payment method</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>spot_price_fee</code></td>
+<td><code>payment_methods.type</code></td>
+<td>The exchange type e.g. &#39;FIAT_TO_CRYPTO&#39;</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>payment_methods.spot_price_fee</code></td>
 <td>The fee charged on the spot price</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>spot_price_including_fee</code></td>
+<td><code>payment_methods.spot_price_including_fee</code></td>
 <td>The adjusted spot price including the fee</td>
 <td>string</td>
 </tr>
 <tr>
-<td><strong>buy_price</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>coin_amount</code></td>
+<td><code>payment_methods.price.coin_amount</code></td>
 <td>The amount of this crytocurrency to receive based on the fiat amount and fees</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>coin_code</code></td>
+<td><code>payment_methods.price.coin_code</code></td>
 <td>The cryptocurrency code</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fiat_amount</code></td>
+<td><code>payment_methods.price.fiat_amount</code></td>
 <td>The fiat amount the customer is spending</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fiat_code</code></td>
+<td><code>payment_methods.price.fiat_code</code></td>
 <td>The fiat currency</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fee_amount</code></td>
+<td><code>payment_methods.price.fee_amount</code></td>
 <td>The fees calculated on the fiat amount</td>
 <td>string</td>
 </tr>
@@ -784,13 +829,13 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. The customer should be redirected to this URL to complete the checkout process. The URL will expire after 1 minute if a redirect does not occur.</p>
-<h3 id='request-3'>Request</h3>
+<h3 id='request-5'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/orders</code></p>
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
-<h3 id='parameters-3'>Parameters</h3>
+<h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -854,11 +899,7 @@ Requires <strong>Authentication</strong>
 <td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-    The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://[partner].com becomes https:\/\/[partner].com
-</aside>      
-<h3 id='response-3'>Response</h3>
+<h3 id='response-5'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -872,62 +913,57 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 <tr>
-<td><strong>order</strong></td>
-<td></td>
-<td>object</td>
-</tr>
-<tr>
-<td><code>id</code></td>
+<td><code>order.id</code></td>
 <td>Unique ID of the order</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>account_id</code></td>
+<td><code>order.account_id</code></td>
 <td>The account ID for the order</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>account_reference</code></td>
+<td><code>order.account_reference</code></td>
 <td>Partner&#39;s account reference for the customer / user string.</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>order_type</code></td>
+<td><code>order.order_type</code></td>
 <td>Payment type</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fiat_code</code></td>
+<td><code>order.fiat_code</code></td>
 <td>Fiat currency code</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>fiat_amount</code></td>
+<td><code>order.fiat_amount</code></td>
 <td>Fiat currency value for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td><code>coin_code</code></td>
+<td><code>order.coin_code</code></td>
 <td>Cryptocurrency code</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>coin_amount</code></td>
+<td><code>order.coin_amount</code></td>
 <td>Cryptocurrency value for the order</td>
 <td>decimal</td>
 </tr>
 <tr>
-<td><code>wallet_address</code></td>
+<td><code>order.wallet_address</code></td>
 <td>Cryptocurrency wallet address</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>created_at</code></td>
+<td><code>order.created_at</code></td>
 <td>Timestamp when order was created in UTC time</td>
 <td>string</td>
 </tr>
 <tr>
-<td><code>checkout_url</code></td>
+<td><code>order.checkout_url</code></td>
 <td>The url redirect for the customer to complete the checkout process</td>
 <td>string</td>
 </tr>
