@@ -76,6 +76,90 @@ To ensure the signature is successfully validated, please be aware of the follow
 ### Nonce
 A numeric value with value greater than the one sent with the previous successful request. (e.g. unix timestamp)
 
+# Currencies
+
+## Get Fiat Currencies
+
+> Example Request:
+
+```shell
+curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  "https://[partner].banxa.com/api/fiats"
+```
+
+> Example Response:
+
+```json
+{
+  "fiats": [
+    {
+      "fiat_code": "AUD",
+      "fiat_name": "Australian Dollar"
+    }
+  ]
+}
+```
+
+Retrieve all available fiat currencies
+
+### Request
+
+`GET https://[partner].banxa.com/api/fiats`
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+`fiats.fiat_code`    | The fiat currency | string
+`fiats.fiat_name`    | The fiat currency full name | string
+
+## Get Crypto Currencies
+
+> Example Request:
+
+```shell
+curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  "https://[partner].banxa.com/api/coins"
+```
+
+> Example Response:
+
+```json
+{
+  "coins": [
+    {
+      "coin_code": "BTC",
+      "coin_name": "Bitcoin"
+    },
+    {
+      "coin_code": "ETH",
+      "coin_name": "Ethereum"
+    }
+  ]
+}
+```
+
+Retrieve all available crypto-currencies
+
+### Request
+
+`GET https://[partner].banxa.com/api/coins`
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+`coins.coin_code`    | The crypto currency | string
+`coins.coin_name`    | The crypto currency full name | string
+
 # Payment Methods
 
 ## Get Payment Methods
@@ -99,19 +183,29 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "logo_url": "https://banxa.com/img/poli.png",
         "info_url": "https://banxa.com/pay/poli",
         "status": "ACTIVE",
+        "type": "FIAT_TO_CRYPTO",
         "supported_fiat": ["AUD"],
         "supported_coin": ["BTC", "ETH"],
-        "fees": [
+        "transaction_fees": [
           {
-            "name": "commission",
-            "amount": 5,
-            "type": "percentage"
+            "fiat_code": "AUD",
+            "coin_code": "BTC",
+            "fees": [
+              {
+                "name": "surcharge",
+                "amount": 2,
+                "type": "percentage"
+              }
+            ]
           }
         ],
-        "buy_limits": {
-          "min": 100,
-          "max": 2000
-        }
+        "transaction_limits": [
+            {
+              "fiat_code": "AUD",
+              "min": 100,
+              "max": 2000
+            }
+        ]
       },
       {
         "id": "2",
@@ -120,24 +214,29 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "logo_url": "https://banxa.com/img/newsagent.png",
         "info_url": "https://banxa.com/pay/newsagent",
         "status": "ACTIVE",
+        "type": "FIAT_TO_CRYPTO",
         "supported_fiat": ["AUD"],
         "supported_coin": ["BTC", "ETH"],
-        "fees": [
+        "transaction_fees": [
           {
-            "name": "commission",
-            "amount": 5,
-            "type": "percentage"
-          },
-          {
-            "name": "retail",
-            "amount": 2,
-            "type": "percentage"
+            "fiat_code": "AUD",
+            "coin_code": "BTC",
+            "fees": [
+              {
+                "name": "surcharge",
+                "amount": 1,
+                "type": "percentage"
+              }
+            ]
           }
         ],
-        "buy_limits": {
-          "min": 50,
-          "max": 9000
-        }
+        "transaction_limits": [
+            {
+              "fiat_code": "AUD",
+              "min": 100,
+              "max": 9000
+            }
+        ]
       }
     ]
 }
@@ -153,33 +252,35 @@ This allows the partner to retrieve all possible payment methods or filter the a
 Requires <strong>Authentication</strong>
 </aside>      
 
-### Parameters
+### Query Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
 `coin_code`                   | No  | The cryptocurrency code of type *string* e.g. 'BTC'
+`type`                   | No  | The exchange type *string* e.g. 'FIAT_TO_CRYPTO'
 
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
-**payment_methods**        | | object
-`id`    | The id of the payment method | string
-`name`    | The name of the payment method | string
-`description`    | Description of the payment method which can be displayed to customers | string
-`logo_url`    | Url to get a logo for this payment method | uri
-`info_url`    | Url to direct user to get more information | uri
-`status`    | ACTIVE or INACTIVE | string
-`supported_fiat`    | List of supported currencies | array&lt;string&gt;
-`supported_coin`    | List of supported crypto coins | array&lt;string&gt;
-**fees**    |  | array&lt;object&gt;
-`name`    | The name of the fee | string
-`amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
-`type`    | The fee type. One of percentage or fixed | string
-**buy_limits**    |  | object
-`min`    | The minimum order size for this payment method | number
-`max`    | The maximum order size for this payment method | number
+`payment_methods.id`    | The id of the payment method | string
+`payment_methods.name`    | The name of the payment method | string
+`payment_methods.description`    | Description of the payment method which can be displayed to customers | string
+`payment_methods.logo_url`    | Url to get a logo for this payment method | uri
+`payment_methods.info_url`    | Url to direct user to get more information | uri
+`payment_methods.status`    | ACTIVE or INACTIVE | string
+`payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
+`payment_methods.supported_fiat`    | List of supported currencies | array&lt;string&gt;
+`payment_methods.supported_coin`    | List of supported crypto coins | array&lt;string&gt;
+`payment_methods.transaction_fees.fiat_code`    | The currency of the fee | string
+`payment_methods.transaction_fees.coin_code`    | The coin this fee applies to | string
+`payment_methods.transaction_fees.fees.name`    | The name of the fee | string
+`payment_methods.transaction_fees.amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
+`payment_methods.transaction_fees.type`    | The fee type. One of percentage or fixed | string
+`payment_methods.transaction_limits.fiat_code`    | The currency of the limits | number
+`payment_methods.transaction_limits.min`    | The minimum order size for this payment method | number
+`payment_methods.transaction_limits.max`    | The maximum order size for this payment method | number
 
 # Price
 
@@ -189,80 +290,38 @@ Field | Description | Format
 
 ```shell
 curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
-  "https://[partner].banxa.com/api/prices?fiat_amount='200'"
+  "https://[partner].banxa.com/api/fiats/AUD/coins/BTC/prices?fiat_amount='200'"
 ```
 
 > Example Response:
 
 ```json
 {
-  "prices": [
+    "spot_price": 15402,
+    "payment_methods": [
       {
-        "fiat_code": "AUD",
-        "crypto_currencies": [
-          {
-            "coin_code": "BTC",
-            "coin_name": "Bitcoin",
-            "spot_price": 15402,
-            "payment_methods": [
-              {
-                "id": "1",
-                "spot_price_fee": 770,
-                "spot_price_including_fee": 14632,
-                "buy_price": {
-                  "coin_amount": 0.01230770,
-                  "coin_code": "BTC",
-                  "fiat_amount": 200,
-                  "fiat_code": "AUD",
-                  "fee_amount": 10
-                }
-              },
-              {
-                "id": "2",
-                "spot_price_fee": 1078,
-                "spot_price_including_fee": 14324,
-                "buy_price": {
-                  "coin_amount": 0.01230026,
-                  "coin_code": "BTC",
-                  "fiat_amount": 200,
-                  "fiat_code": "AUD",
-                  "fee_amount": 14
-                }
-              }
-            ]
-          },
-          {
-           "coin_code": "ETH",
-            "coin_name": "Ethereum",
-            "spot_price": 277,
-            "payment_methods": [
-              {
-                "id": "1",
-                "spot_price_fee": 14,
-                "spot_price_including_fee": 263,
-                "buy_price": {
-                  "coin_amount": 0.68253271,
-                  "coin_code": "BTC",
-                  "fiat_amount": 200,
-                  "fiat_code": "AUD",
-                  "fee_amount": 10
-                }
-              },
-              {
-                "id": "2",
-                "spot_price_fee": 20,
-                "spot_price_including_fee": 257,
-                "buy_price": {
-                  "coin_amount": 0.66859054,
-                  "coin_code": "BTC",
-                  "fiat_amount": 200,
-                  "fiat_code": "AUD",
-                  "fee_amount": 14
-                }
-              }
-            ]
-          }
-        ]
+        "id": "1",
+        "spot_price_fee": 770,
+        "spot_price_including_fee": 14632,
+        "price": {
+          "coin_amount": 0.01230770,
+          "coin_code": "BTC",
+          "fiat_amount": 200,
+          "fiat_code": "AUD",
+          "fee_amount": 10
+        }
+      },
+      {
+        "id": "2",
+        "spot_price_fee": 1078,
+        "spot_price_including_fee": 14324,
+        "price": {
+          "coin_amount": 0.01230026,
+          "coin_code": "BTC",
+          "fiat_amount": 200,
+          "fiat_code": "AUD",
+          "fee_amount": 14
+        }
       }
     ]
 }
@@ -272,81 +331,68 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```shell
 curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
-  "https://[partner].banxa.com/api/prices?fiat_amount=200&fiat_code=AUD&coin_code=BTC&payment_method_id=1"
+  "https://[partner].banxa.com/api/fiats/AUD/coins/BTC/prices?fiat_amount=200&fiat_code=AUD&coin_code=BTC&payment_method_id=1"
 ```
 
 > Example Response:
 
 ```json
 {
-  "prices": [
+    "spot_price": 15402,
+    "payment_methods": [
       {
-        "fiat_code": "AUD",
-        "crypto_currencies": [
-          {
-            "coin_code": "BTC",
-            "coin_name": "Bitcoin",
-            "spot_price": 15402,
-            "payment_methods": [
-              {
-                "id": "1",
-                "spot_price_fee": 770,
-                "spot_price_including_fee": 14632,
-                "buy_price": {
-                  "coin_amount": 0.01230770,
-                  "coin_code": "BTC",
-                  "fiat_amount": 200,
-                  "fiat_code": "AUD",
-                  "fee_amount": 10
-                }
-              }
-            ]
-          }
-        ]
+        "id": "1",
+        "spot_price_fee": 770,
+        "spot_price_including_fee": 14632,
+        "price": {
+          "coin_amount": 0.01230770,
+          "coin_code": "BTC",
+          "fiat_amount": 200,
+          "fiat_code": "AUD",
+          "fee_amount": 10
+        }
       }
     ]
 }
 ```
 
-The allows the partner to get prices for the different payment methods that Banxa offer. It is possible to request everything available or to filter by a specific customer request. Note we advise caching on the partner's side if you want to get a regular updated price for our services
+The allows the partner to get prices for the different payment methods that Banxa offer.
 
 ### Request
-`GET https://[partner].banxa.com/api/price`
+`GET https://[partner].banxa.com/api/fiats/{fiat_code}/coins/{coin_code}/prices`
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
 
-### Parameters
+### URI Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+`fiat_code`                   | Yes  | The fiat currency code of type *string* e.g. 'AUD'
+`coin_code`                   | Yes  | The cryptocurrency code of type *string*. e.g. 'BTC'
+
+### Query Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
 `fiat_amount`                 | No  | The fiat currency amount of type *float* up to *2* decimal points.
-`fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
 `coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678. Defaulted to 1 if no fiat or coin amount provided 
-`coin_code`                   | No  | The cryptocurrency code of type *string*. e.g. 'BTC'
 `payment_method_id`           | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
 
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
-**prices**||object
-`fiat_code`    | The fiat currency of the price | string
-**crypto_currencies**||object
-`coin_code`        | The cryptocurrency code | string
-`coin_name`        | The fullname of the cryptocurrency code | string
 `spot_price`        | The spot price of the cryptocurrency | number
-**payment_methods**||object
-`id`        | The id of the payment method | string
-`spot_price_fee`        | The fee charged on the spot price | string
-`spot_price_including_fee`        | The adjusted spot price including the fee | string
-**buy_price**||object
-`coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
-`coin_code`        | The cryptocurrency code | string
-`fiat_amount`        | The fiat amount the customer is spending | string
-`fiat_code`        | The fiat currency | string
-`fee_amount`        | The fees calculated on the fiat amount | string
+`payment_methods.id`        | The id of the payment method | string
+`payment_methods.spot_price_fee`        | The fee charged on the spot price | string
+`payment_methods.spot_price_including_fee`        | The adjusted spot price including the fee | string
+`payment_methods.price.coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
+`payment_methods.price.coin_code`        | The cryptocurrency code | string
+`payment_methods.price.fiat_amount`        | The fiat amount the customer is spending | string
+`payment_methods.price.fiat_code`        | The fiat currency | string
+`payment_methods.price.fee_amount`        | The fees calculated on the fiat amount | string
 
 # Order
 
@@ -391,7 +437,7 @@ This allows the partner to create an order in Banxa. Upon success of this reques
 Requires <strong>Authentication</strong>
 </aside>      
 
-### Parameters
+### Body Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -407,27 +453,22 @@ Parameter | Required | Description
 `redirect_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `redirect_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
 
-<aside class="notice">
-    The redirect URLs should be JSON encoded, which will escape the forward slashes e.g. https://[partner].com becomes https:\/\/[partner].com
-</aside>      
-
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
 `status`    | The result status message| string
-**order**        | | object
-`id`        | Unique ID of the order| string
-`account_id`| The account ID for the order | string
-`account_reference`| Partner's account reference for the customer / user string. | string
-`order_type`      | Payment type | string
-`fiat_code` | Fiat currency code | string
-`fiat_amount`     | Fiat currency value for the order | decimal
-`coin_code`       | Cryptocurrency code | string
-`coin_amount`     | Cryptocurrency value for the order | decimal
-`wallet_address`  | Cryptocurrency wallet address | string
-`created_at`      | Timestamp when order was created in UTC time | string
-`checkout_url`    | The url redirect for the customer to complete the checkout process | string
+`order.id`        | Unique ID of the order| string
+`order.account_id`| The account ID for the order | string
+`order.account_reference`| Partner's account reference for the customer / user string. | string
+`order.order_type`      | Payment type | string
+`order.fiat_code` | Fiat currency code | string
+`order.fiat_amount`     | Fiat currency value for the order | decimal
+`order.coin_code`       | Cryptocurrency code | string
+`order.coin_amount`     | Cryptocurrency value for the order | decimal
+`order.wallet_address`  | Cryptocurrency wallet address | string
+`order.created_at`      | Timestamp when order was created in UTC time | string
+`order.checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
 # Callbacks
 
