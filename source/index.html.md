@@ -20,19 +20,40 @@ Welcome to the Banxa partner integration API.
 This API documentation will guide you through the integration with Banxa payment APIs and processes.
 
 <aside class="success">
-All API responses are in <strong>JSON</strong> format
+All API responses are in <strong>JSON</strong> format and follow <a href="https://jsonapi.org">JSON:API</a> format
 </aside>
 
 Please contact your account representative or <a href="mailto:support@banxa.com">support@banxa.com</a> to receive your production and testing URLs and your API credentials.
 
 The URLs will be of the format https://[partner].banxa.com and https://[partner].banxa-sandbox.com 
 
+# Headers
+
+Please include the Accept header for Json as per the below in all requests
+
+<aside style="background-color:#dddddd">
+<p style="font-family:monospace; font-size: 1.1em; padding-top: 1em;">
+"Accept: application/json"
+</p>
+</aside>
+
+
 # Authentication
 
-> Example authentication header:
+> Example authentication header (GET):
 
 ```shell
-"Authentication: HMAC " + "PARTNER-API-KEY" + ":"
+"Authorization: Bearer " + "PARTNER-API-KEY" + ":"
+  + hmac_sha256('GET' + "\n" 
+  + '/api/payment-methods?source=AUD' + "\n"
+  + '1560227834'
+  , "PARTNER-API-SECRET") + ":" + "1560227834"
+```
+
+> Example authentication header (POST):
+
+```shell
+"Authorization: Bearer " + "PARTNER-API-KEY" + ":"
   + hmac_sha256('POST' + "\n" 
   + '/api/orders' + "\n"
   + '1560227834' + "\n"
@@ -47,7 +68,7 @@ The authentication header structure must be in the following format:
 
 <aside style="background-color:#dddddd">
 <p style="font-family:monospace; font-size: 1.1em; padding-top: 1em;">
-"Authentication: HMAC <strong>API_Key</strong>:<strong>Signature</strong>:<strong>Nonce</strong>"
+"Authorization: Bearer <strong>API_Key</strong>:<strong>Signature</strong>:<strong>Nonce</strong>"
 </p>
 </aside>
 
@@ -59,9 +80,9 @@ Message authentication signature. The request message is hashed with the API sec
 The structure of the message:
 <ul>
  <li>Request method. (e.g. "GET or "POST")</li>
- <li>Request URI.</li>
+ <li>Request URI including the query parameters for GET.</li>
  <li>The <em>nonce</em> value (e.g. using unix timestamp value)</li>
- <li>The payload in JSON format.</li>
+ <li>The payload in JSON format only for POST.</li>
 </ul>
 
 <aside class="notice">
@@ -83,7 +104,8 @@ A numeric value with value greater than the one sent with the previous successfu
 > Example Request:
 
 ```shell
-curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   "https://[partner].banxa.com/api/fiats"
 ```
 
@@ -91,12 +113,15 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```json
 {
-  "fiats": [
-    {
-      "fiat_code": "AUD",
-      "fiat_name": "Australian Dollar"
-    }
-  ]
+  "data" : {
+    "fiats": [
+      {
+        "fiat_code": "AUD",
+        "fiat_name": "Australian Dollar",
+        "fiat_symbol": "A$"
+      }
+    ]  
+  }
 }
 ```
 
@@ -114,15 +139,17 @@ Requires <strong>Authentication</strong>
 
 Field | Description | Format
 --------- | -------- | -----------
-`fiats.fiat_code`    | The fiat currency | string
-`fiats.fiat_name`    | The fiat currency full name | string
+`data.fiats.fiat_code`    | The fiat currency | string
+`data.fiats.fiat_name`    | The fiat currency full name | string
+`data.fiats.fiat_symbol`    | The fiat currency symbol | string
 
 ## Get Crypto Currencies
 
 > Example Request:
 
 ```shell
-curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   "https://[partner].banxa.com/api/coins"
 ```
 
@@ -130,20 +157,22 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```json
 {
-  "coins": [
-    {
-      "coin_code": "BTC",
-      "coin_name": "Bitcoin"
-    },
-    {
-      "coin_code": "ETH",
-      "coin_name": "Ethereum"
-    }
-  ]
+  "data": {  
+    "coins": [
+      {
+        "coin_code": "BTC",
+        "coin_name": "Bitcoin"
+      },
+      {
+        "coin_code": "ETH",
+        "coin_name": "Ethereum"
+      }
+    ]
+  }
 }
 ```
 
-Retrieve all available crypto-currencies
+Retrieve all available crypto currencies
 
 ### Request
 
@@ -157,8 +186,8 @@ Requires <strong>Authentication</strong>
 
 Field | Description | Format
 --------- | -------- | -----------
-`coins.coin_code`    | The crypto currency | string
-`coins.coin_name`    | The crypto currency full name | string
+`data.coins.coin_code`    | The crypto currency | string
+`data.coins.coin_name`    | The crypto currency full name | string
 
 # Payment Methods
 
@@ -167,7 +196,8 @@ Field | Description | Format
 > Example Request:
 
 ```shell
-curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   "https://[partner].banxa.com/api/payment-methods"
 ```
 
@@ -175,6 +205,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```json
 {
+  "data": {
     "payment_methods": [
       {
         "id": "1",
@@ -239,6 +270,7 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         ]
       }
     ]
+  }
 }
 ```
 
@@ -263,23 +295,23 @@ Parameter | Required | Description
 
 Field | Description | Format
 --------- | -------- | -----------
-`payment_methods.id`    | The id of the payment method | string
-`payment_methods.name`    | The name of the payment method | string
-`payment_methods.description`    | Description of the payment method which can be displayed to customers | string
-`payment_methods.logo_url`    | Url to get a logo for this payment method | uri
-`payment_methods.info_url`    | Url to direct user to get more information | uri
-`payment_methods.status`    | ACTIVE or INACTIVE | string
-`payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
-`payment_methods.supported_fiat`    | List of supported currencies | array&lt;string&gt;
-`payment_methods.supported_coin`    | List of supported crypto coins | array&lt;string&gt;
-`payment_methods.transaction_fees.fiat_code`    | The currency of the fee | string
-`payment_methods.transaction_fees.coin_code`    | The coin this fee applies to | string
-`payment_methods.transaction_fees.fees.name`    | The name of the fee | string
-`payment_methods.transaction_fees.amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
-`payment_methods.transaction_fees.type`    | The fee type. One of percentage or fixed | string
-`payment_methods.transaction_limits.fiat_code`    | The currency of the limits | number
-`payment_methods.transaction_limits.min`    | The minimum order size for this payment method | number
-`payment_methods.transaction_limits.max`    | The maximum order size for this payment method | number
+`data.payment_methods.id`    | The id of the payment method | string
+`data.payment_methods.name`    | The name of the payment method | string
+`data.payment_methods.description`    | Description of the payment method which can be displayed to customers | string
+`data.payment_methods.logo_url`    | Url to get a logo for this payment method | uri
+`data.payment_methods.info_url`    | Url to direct user to get more information | uri
+`data.payment_methods.status`    | ACTIVE or INACTIVE | string
+`data.payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
+`data.payment_methods.supported_fiat`    | List of supported currencies | array&lt;string&gt;
+`data.payment_methods.supported_coin`    | List of supported crypto coins | array&lt;string&gt;
+`data.payment_methods.transaction_fees.fiat_code`    | The currency of the fee | string
+`data.payment_methods.transaction_fees.coin_code`    | The coin this fee applies to | string
+`data.payment_methods.transaction_fees.fees.name`    | The name of the fee | string
+`data.payment_methods.transaction_fees.amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
+`data.payment_methods.transaction_fees.type`    | The fee type. One of percentage or fixed | string
+`data.payment_methods.transaction_limits.fiat_code`    | The currency of the limits | number
+`data.payment_methods.transaction_limits.min`    | The minimum order size for this payment method | number
+`data.payment_methods.transaction_limits.max`    | The maximum order size for this payment method | number
 
 # Price
 
@@ -288,7 +320,8 @@ Field | Description | Format
 > Example Request (without filtering):
 
 ```shell
-curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   "https://[partner].banxa.com/api/prices?source_amount=200&source=AUD&target=BTC"
 ```
 
@@ -296,42 +329,41 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```json
 {
+  "data": {
     "spot_price": 15402,
-    "payment_methods": [
+    "prices": [
       {
-        "id": "1",
+        "payment_method_id": "1",
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
-        "price": {
-          "coin_amount": 0.01230770,
-          "coin_code": "BTC",
-          "fiat_amount": 200,
-          "fiat_code": "AUD",
-          "fee_amount": 10
-        }
+        "coin_amount": 0.01230770,
+        "coin_code": "BTC",
+        "fiat_amount": 200,
+        "fiat_code": "AUD",
+        "fee_amount": 10
       },
       {
-        "id": "2",
+        "payment_method_id": "2",
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 1078,
         "spot_price_including_fee": 14324,
-        "price": {
-          "coin_amount": 0.01230026,
-          "coin_code": "BTC",
-          "fiat_amount": 200,
-          "fiat_code": "AUD",
-          "fee_amount": 14
-        }
+        "coin_amount": 0.01230026,
+        "coin_code": "BTC",
+        "fiat_amount": 200,
+        "fiat_code": "AUD",
+        "fee_amount": 14
       }
     ]
+  }
 }
 ```
 
 > Example Request (with filtering):
 
 ```shell
-curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   "https://[partner].banxa.com/api/prices?source_amount=200&source=AUD&target=BTC&payment_method_id=1"
 ```
 
@@ -339,22 +371,22 @@ curl -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 ```json
 {
+  "data": {
     "spot_price": 15402,
-    "payment_methods": [
+    "prices": [
       {
-        "id": "1",
+        "payment_method_id": "1",
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
-        "price": {
-          "coin_amount": 0.01230770,
-          "coin_code": "BTC",
-          "fiat_amount": 200,
-          "fiat_code": "AUD",
-          "fee_amount": 10
-        }
+        "coin_amount": 0.01230770,
+        "coin_code": "BTC",
+        "fiat_amount": 200,
+        "fiat_code": "AUD",
+        "fee_amount": 10
       }
     ]
+  }  
 }
 ```
 
@@ -373,24 +405,24 @@ Parameter | Required | Description
 --------- | -------- | -----------
 `source`                   | Yes  | The source currency code of type *string* e.g. 'AUD'
 `target`                   | Yes  | The target currency code of type *string*. e.g. 'BTC'
-`source_amount`                 | No  | The source amount of type *float*
-`target_amount`                 | No  | The target amount of type *float* 
+`source_amount`                 | No  | The source amount of type *float*, cannot be sent with target_amount
+`target_amount`                 | No  | The target amount of type *float*, cannot be sent with source_amount 
 `payment_method_id`           | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
 
 ### Response
 
 Field | Description | Format
 --------- | -------- | -----------
-`spot_price`        | The spot price of the cryptocurrency | number
-`payment_methods.id`        | The id of the payment method | string
-`payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
-`payment_methods.spot_price_fee`        | The fee charged on the spot price | string
-`payment_methods.spot_price_including_fee`        | The adjusted spot price including the fee | string
-`payment_methods.price.coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
-`payment_methods.price.coin_code`        | The cryptocurrency code | string
-`payment_methods.price.fiat_amount`        | The fiat amount the customer is spending | string
-`payment_methods.price.fiat_code`        | The fiat currency | string
-`payment_methods.price.fee_amount`        | The fees calculated on the fiat amount | string
+`data.spot_price`        | The spot price of the cryptocurrency | number
+`data.prices.payment_method_id`        | The id of the payment method | string
+`data.prices.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
+`data.prices.spot_price_fee`        | The fee charged on the spot price | string
+`data.prices.spot_price_including_fee`        | The adjusted spot price including the fee | string
+`data.prices.coin_amount`        | The amount of this crytocurrency to receive based on the fiat amount and fees | string
+`data.prices.coin_code`        | The cryptocurrency code | string
+`data.prices.fiat_amount`        | The fiat amount the customer is spending | string
+`data.prices.fiat_code`        | The fiat currency | string
+`data.prices.fee_amount`        | The fees calculated on the fiat amount | string
 
 # Order
 
@@ -400,7 +432,8 @@ Field | Description | Format
 
 ```shell
 curl -X POST "https://[partner].banxa.com/api/orders" \
-  -H "Authentication: HMAC xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
   -d \
   '{"account_reference": "partner_ref",
     "coin_code": "BTC",
@@ -412,17 +445,18 @@ curl -X POST "https://[partner].banxa.com/api/orders" \
 
 ```json
 {
-  	"status": "OK",
+  "data": {
 	"order": {
-		"id": "0164d962448fbd34f644ffd65624d8ef",
-		"account_id": "098f6bcd4621d373cade4e832627b4f6",
-		"account_reference": "098f6bcd4621d373cade4e832627b4f6",
-		"order_type": "CRYPTO-BUY",
-		"coin_code": "BTC",
-		"wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
-        "checkout_url": "https://[partner].banxa.com/portal?expires=xxx&oid=xxx&signature=xxx",
-        "created_at": "16-May-2019 10:30:43"
+	  "id": "0164d962448fbd34f644ffd65624d8ef",
+	  "account_id": "098f6bcd4621d373cade4e832627b4f6",
+	  "account_reference": "098f6bcd4621d373cade4e832627b4f6",
+      "order_type": "CRYPTO-BUY",
+      "coin_code": "BTC",
+      "wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
+      "checkout_url": "https://[partner].banxa.com/portal?expires=xxx&oid=xxx&signature=xxx",
+      "created_at": "16-May-2019 10:30:43"
 	}
+  }
 }
 ```
 
@@ -455,18 +489,17 @@ Parameter | Required | Description
 
 Field | Description | Format
 --------- | -------- | -----------
-`status`    | The result status message| string
-`order.id`        | Unique ID of the order| string
-`order.account_id`| The account ID for the order | string
-`order.account_reference`| Partner's account reference for the customer / user string. | string
-`order.order_type`      | Payment type | string
-`order.fiat_code` | Fiat currency code | string
-`order.fiat_amount`     | Fiat currency value for the order | decimal
-`order.coin_code`       | Cryptocurrency code | string
-`order.coin_amount`     | Cryptocurrency value for the order | decimal
-`order.wallet_address`  | Cryptocurrency wallet address | string
-`order.created_at`      | Timestamp when order was created in UTC time | string
-`order.checkout_url`    | The url redirect for the customer to complete the checkout process | string
+`data.order.id`        | Unique ID of the order| string
+`data.order.account_id`| The account ID for the order | string
+`data.order.account_reference`| Partner's account reference for the customer / user string. | string
+`data.order.order_type`      | Payment type | string
+`data.order.fiat_code` | Fiat currency code | string
+`data.order.fiat_amount`     | Fiat currency value for the order | decimal
+`data.order.coin_code`       | Cryptocurrency code | string
+`data.order.coin_amount`     | Cryptocurrency value for the order | decimal
+`data.order.wallet_address`  | Cryptocurrency wallet address | string
+`data.order.created_at`      | Timestamp when order was created in UTC time | string
+`data.order.checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
 # Callbacks
 
