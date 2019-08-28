@@ -212,7 +212,6 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "name": "POLi",
         "description": "POLi is an online payment option that allows you to use your internet banking system to securely buy crypto currency",
         "logo_url": "https://banxa.com/img/poli.png",
-        "info_url": "https://banxa.com/pay/poli",
         "status": "ACTIVE",
         "type": "FIAT_TO_CRYPTO",
         "supported_fiat": ["AUD"],
@@ -243,7 +242,6 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "name": "Newsagent",
         "description": "Pay for your crypto in cash at your local newsagent",
         "logo_url": "https://banxa.com/img/newsagent.png",
-        "info_url": "https://banxa.com/pay/newsagent",
         "status": "ACTIVE",
         "type": "FIAT_TO_CRYPTO",
         "supported_fiat": ["AUD"],
@@ -299,7 +297,6 @@ Field | Description | Format
 `data.payment_methods.name`    | The name of the payment method | string
 `data.payment_methods.description`    | Description of the payment method which can be displayed to customers | string
 `data.payment_methods.logo_url`    | Url to get a logo for this payment method | uri
-`data.payment_methods.info_url`    | Url to direct user to get more information | uri
 `data.payment_methods.status`    | ACTIVE or INACTIVE | string
 `data.payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
 `data.payment_methods.supported_fiat`    | List of supported currencies | array&lt;string&gt;
