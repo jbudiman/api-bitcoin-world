@@ -328,7 +328,7 @@ All API responses are in <strong>JSON</strong> format and follow <a href="https:
   + hmac_sha256<span class="o">(</span><span class="s1">'POST'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> 
   + <span class="s1">'/api/orders'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
   + <span class="s1">'1560227834'</span> + <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
-  + <span class="s1">'{"account_reference":"partner_ref","coin_code":"BTC","wallet_address":"1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2","redirect_url_on_success":"https://partner-site.com/callback/success"}'</span>
+  + <span class="s1">'{"account_reference":"partner_ref","coin_code":"BTC","wallet_address":"1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2","return_url_on_success":"https://partner-site.com/callback/success"}'</span>
   , <span class="s2">"PARTNER-API-SECRET"</span><span class="o">)</span> + <span class="s2">":"</span> + <span class="s2">"1560227834"</span>
 </code></pre>
 <p>Banxa uses HMAC Authentication to secure the API which utilises an API Key and Secret to hash the message payload. The API credentials will be provided as part of the on-boarding process.</p>
@@ -488,7 +488,6 @@ Requires <strong>Authentication</strong>
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLi"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLi is an online payment option that allows you to use your internet banking system to securely buy crypto currency"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/poli.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"info_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/pay/poli"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
@@ -519,7 +518,6 @@ Requires <strong>Authentication</strong>
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newsagent"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pay for your crypto in cash at your local newsagent"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/newsagent.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"info_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/pay/newsagent"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
@@ -601,11 +599,6 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>data.payment_methods.logo_url</code></td>
 <td>Url to get a logo for this payment method</td>
-<td>uri</td>
-</tr>
-<tr>
-<td><code>data.payment_methods.info_url</code></td>
-<td>Url to direct user to get more information</td>
 <td>uri</td>
 </tr>
 <tr>
@@ -850,7 +843,7 @@ Requires <strong>Authentication</strong>
   <span class="s1">'{"account_reference": "partner_ref",
     "coin_code": "BTC",
     "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
-    "redirect_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'</span>
+    "return_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -926,17 +919,17 @@ Requires <strong>Authentication</strong>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 <tr>
-<td><code>redirect_url_on_success</code></td>
+<td><code>return_url_on_success</code></td>
 <td>Yes</td>
 <td>The return URL when the customer completed the checkout process</td>
 </tr>
 <tr>
-<td><code>redirect_url_on_cancelled</code></td>
+<td><code>return_url_on_cancelled</code></td>
 <td>No</td>
 <td>The return URL when the customer cancelled the checkout process</td>
 </tr>
 <tr>
-<td><code>redirect_url_on_failure</code></td>
+<td><code>return_url_on_failure</code></td>
 <td>No</td>
 <td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
@@ -1009,11 +1002,11 @@ Requires <strong>Authentication</strong>
 <p>The redirect URLs are used to navigate the customers back to the partner page when they complete the checkout process.
 The redirect URL must be specified in <strong>Create Order</strong> API parameters. </p>
 
-<p>When the customer completes the checkout page the customer will be redirected to redirect_url_on_success.</p>
+<p>When the customer completes the checkout page the customer will be redirected to return_url_on_success.</p>
 
-<p>If there are any issues completing the order then they will be redirected to redirect_url_on_failure.</p>
+<p>If there are any issues completing the order then they will be redirected to return_url_on_failure.</p>
 
-<p>If the customer cancels the flow at any point, they will be redirected to the redirect_url_on_cancelled.</p>
+<p>If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.</p>
 <h1 id='errors'>Errors</h1>
 <blockquote>
 <p>Example Response:</p>
