@@ -423,6 +423,74 @@ Field | Description | Format
 
 # Order
 
+## Get Order
+
+> Example Request:
+
+```shell
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
+  "https://[partner].banxa.com/api/orders/7f954c2eaea52db2d7e57d839620a764"
+```
+
+> Example Response:
+
+```json
+{
+  "data": {
+    "order": {
+      "id": "7f954c2eaea52db2d7e57d839620a764",
+      "account_id": "564d914ba50d51d67095817f1559e0a7",
+      "order_type": "CRYPTO-BUY",
+      "payment_type": "POLI",
+      "ref": 1,
+      "fiat_code": "AUD",
+      "fiat_amount": 200,
+      "coin_code": "BTC",
+      "coin_amount": 0.015,
+      "wallet_address": "1LbQ1WNTsm1Nzj1hbh3WDCbEim1oUg5rfi",
+      "fee": 4.3,
+      "payment_fee": 0,
+      "commission": 0.03,
+      "tx_hash": "323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35",
+      "created_at": "16-Sep-2019 00:20:51",
+      "status": "complete"
+    }
+  }
+}
+```
+
+Get details for an order that has been submitted
+
+### Request
+`GET https://[partner].banxa.com/api/orders/{orderId}`
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+`data.order.id`        | The id of the order | number
+`data.order.account_id`| The account ID for the order | string
+`data.order.order_type`      | Order type | string
+`data.order.payment_type`      | Payment type | string
+`data.order.ref`      | Order reference | string
+`data.order.fiat_code` | Fiat currency code | string
+`data.order.fiat_amount`     | Fiat currency value for the order | decimal
+`data.order.coin_code`       | Cryptocurrency code | string
+`data.order.coin_amount`     | Cryptocurrency value for the order | decimal
+`data.order.wallet_address`  | Cryptocurrency wallet address | string
+`data.order.fee`  | Order fee in fiat currency | string
+`data.order.payment_fee`  | Payment fee in fiat currency | string
+`data.order.commission`  | Commission amount in fiat currency | string
+`data.order.tx_hash`  | Blockchain transaction hash | string
+`data.order.created_at`      | Timestamp when order was created in UTC time | string
+`data.order.status`    | Order status | string
+
 ## Create Order
 
 > Example Request:
@@ -473,6 +541,7 @@ Parameter | Required | Description
 `account_reference`           | Yes | Partner's account reference for the customer / user string.
 `account_id`                  | No  | The account_id the order belongs to
 `payment_method_id`           | No  | The payment method to be used for this order
+`payment`                     | No  | The code for the payment method to be used for this order 
 `fiat_amount`                 | No  | The fiat currency amount of type *float* up to *2* decimal points.
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
 `coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
