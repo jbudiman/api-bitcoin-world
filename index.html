@@ -266,6 +266,9 @@
             <a href="#order" class="toc-h1 toc-link" data-title="Order">Order</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
+                  </li>
+                  <li>
                     <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
                   </li>
               </ul>
@@ -832,7 +835,137 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 </tbody></table>
-<h1 id='order'>Order</h1><h2 id='create-order'>Create Order</h2>
+<h1 id='order'>Order</h1><h2 id='get-order'>Get Order</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/orders/7f954c2eaea52db2d7e57d839620a764"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f954c2eaea52db2d7e57d839620a764"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"564d914ba50d51d67095817f1559e0a7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1LbQ1WNTsm1Nzj1hbh3WDCbEim1oUg5rfi"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payment_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16-Sep-2019 00:20:51"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get details for an order that has been submitted</p>
+<h3 id='request-5'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/orders/{orderId}</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='response-5'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>data.order.id</code></td>
+<td>The id of the order</td>
+<td>number</td>
+</tr>
+<tr>
+<td><code>data.order.account_id</code></td>
+<td>The account ID for the order</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.order_type</code></td>
+<td>Order type</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.payment_type</code></td>
+<td>Payment type</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.ref</code></td>
+<td>Order reference</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.fiat_code</code></td>
+<td>Fiat currency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.fiat_amount</code></td>
+<td>Fiat currency value for the order</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td><code>data.order.coin_code</code></td>
+<td>Cryptocurrency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.coin_amount</code></td>
+<td>Cryptocurrency value for the order</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td><code>data.order.wallet_address</code></td>
+<td>Cryptocurrency wallet address</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.fee</code></td>
+<td>Order fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.payment_fee</code></td>
+<td>Payment fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.commission</code></td>
+<td>Commission amount in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.tx_hash</code></td>
+<td>Blockchain transaction hash</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.created_at</code></td>
+<td>Timestamp when order was created in UTC time</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.status</code></td>
+<td>Order status</td>
+<td>string</td>
+</tr>
+</tbody></table>
+<h2 id='create-order'>Create Order</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -864,7 +997,7 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. The customer should be redirected to this URL to complete the checkout process. The URL will expire after 1 minute if a redirect does not occur.</p>
-<h3 id='request-5'>Request</h3>
+<h3 id='request-6'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/orders</code></p>
 
 <aside class="notice">
@@ -892,6 +1025,11 @@ Requires <strong>Authentication</strong>
 <td><code>payment_method_id</code></td>
 <td>No</td>
 <td>The payment method to be used for this order</td>
+</tr>
+<tr>
+<td><code>payment</code></td>
+<td>No</td>
+<td>The code for the payment method to be used for this order</td>
 </tr>
 <tr>
 <td><code>fiat_amount</code></td>
@@ -934,7 +1072,7 @@ Requires <strong>Authentication</strong>
 <td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
 </tbody></table>
-<h3 id='response-5'>Response</h3>
+<h3 id='response-6'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
