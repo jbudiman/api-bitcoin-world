@@ -404,7 +404,7 @@ Parameter | Required | Description
 `target`                   | Yes  | The target currency code of type *string*. e.g. 'BTC'
 `source_amount`                 | No  | The source amount of type *float*, cannot be sent with target_amount
 `target_amount`                 | No  | The target amount of type *float*, cannot be sent with source_amount 
-`payment_method_id`           | No  | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`payment_method_id`           | No  | The id of the payment method to get prices for
 
 ### Response
 
