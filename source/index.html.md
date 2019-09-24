@@ -304,8 +304,8 @@ Field | Description | Format
 `data.payment_methods.transaction_fees.fiat_code`    | The currency of the fee | string
 `data.payment_methods.transaction_fees.coin_code`    | The coin this fee applies to | string
 `data.payment_methods.transaction_fees.fees.name`    | The name of the fee | string
-`data.payment_methods.transaction_fees.amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
-`data.payment_methods.transaction_fees.type`    | The fee type. One of percentage or fixed | string
+`data.payment_methods.transaction_fees.fees.amount`    | The amount of the fee based on the type, e.g. if 5 with percentage then read as 5% | number
+`data.payment_methods.transaction_fees.fees.type`    | The fee type. One of percentage or fixed | string
 `data.payment_methods.transaction_limits.fiat_code`    | The currency of the limits | number
 `data.payment_methods.transaction_limits.min`    | The minimum order size for this payment method | number
 `data.payment_methods.transaction_limits.max`    | The maximum order size for this payment method | number
