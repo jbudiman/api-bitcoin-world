@@ -640,12 +640,12 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 <tr>
-<td><code>data.payment_methods.transaction_fees.amount</code></td>
+<td><code>data.payment_methods.transaction_fees.fees.amount</code></td>
 <td>The amount of the fee based on the type, e.g. if 5 with percentage then read as 5%</td>
 <td>number</td>
 </tr>
 <tr>
-<td><code>data.payment_methods.transaction_fees.type</code></td>
+<td><code>data.payment_methods.transaction_fees.fees.type</code></td>
 <td>The fee type. One of percentage or fixed</td>
 <td>string</td>
 </tr>
@@ -773,7 +773,7 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>payment_method_id</code></td>
 <td>No</td>
-<td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
+<td>The id of the payment method to get prices for</td>
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
@@ -963,6 +963,52 @@ Requires <strong>Authentication</strong>
 <td><code>data.order.status</code></td>
 <td>Order status</td>
 <td>string</td>
+</tr>
+</tbody></table>
+<h3 id='order-statuses'>Order Statuses</h3>
+<p>Below is a list of the possible order statuses. </p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pendingPayment</td>
+<td>Order has been created and is pending for payment to be made by customer</td>
+</tr>
+<tr>
+<td>waitingPayment</td>
+<td>Payment has been initiated by customer and is being verified</td>
+</tr>
+<tr>
+<td>paymentReceived</td>
+<td>Payment has been received and verified</td>
+</tr>
+<tr>
+<td>inProgress</td>
+<td>Payment has been received, order is being processed</td>
+</tr>
+<tr>
+<td>coinTransferred</td>
+<td>Payment has been received, order is being processed, cryptocurrency has been sent</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>Cryptocurrency has been sent and have received confirmations</td>
+</tr>
+<tr>
+<td>cancelled</td>
+<td>Payment has been cancelled</td>
+</tr>
+<tr>
+<td>declined</td>
+<td>Payment has been declined</td>
+</tr>
+<tr>
+<td>expired</td>
+<td>Payment has not been made, order has been expired</td>
 </tr>
 </tbody></table>
 <h2 id='create-order'>Create Order</h2>
