@@ -491,6 +491,23 @@ Field | Description | Format
 `data.order.created_at`      | Timestamp when order was created in UTC time | string
 `data.order.status`    | Order status | string
 
+
+### Order Statuses
+
+Below is a list of the possible order statuses. 
+
+Status | Description
+-------|------------
+pendingPayment | Order has been created and is pending for payment to be made by customer
+waitingPayment | Payment has been initiated by customer and is being verified
+paymentReceived | Payment has been received and verified
+inProgress | Payment has been received, order is being processed
+coinTransferred | Payment has been received, order is being processed, cryptocurrency has been sent
+complete | Cryptocurrency has been sent and have received confirmations
+cancelled | Payment has been cancelled
+declined | Payment has been declined
+expired | Payment has not been made, order has been expired
+
 ## Create Order
 
 > Example Request:
