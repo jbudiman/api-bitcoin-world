@@ -445,9 +445,9 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
       "payment_type": "POLI",
       "ref": 1,
       "fiat_code": "AUD",
-      "fiat_amount": 200,
+      "fiat_amount": "200",
       "coin_code": "BTC",
-      "coin_amount": 0.015,
+      "coin_amount": "0.015",
       "wallet_address": "1LbQ1WNTsm1Nzj1hbh3WDCbEim1oUg5rfi",
       "fee": 4.3,
       "payment_fee": 0,
@@ -559,9 +559,9 @@ Parameter | Required | Description
 `account_id`                  | No  | The account_id the order belongs to
 `payment_method_id`           | No  | The payment method to be used for this order
 `payment`                     | No  | The code for the payment method to be used for this order 
-`fiat_amount`                 | No  | The fiat currency amount of type *float* up to *2* decimal points.
+`fiat_amount`                 | No  | The fiat currency amount of type *string* e.g. '200'
 `fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
-`coin_amount`                 | No  | The cryptocurrency amount of type *float* up to *8* decimal points. e.g 0.12345678 
+`coin_amount`                 | No  | The cryptocurrency amount of type *string*. e.g '0.12345678' 
 `coin_code`                   | Yes | The cryptocurrency code of type *string*. e.g. 'BTC'
 `wallet_address`              | Yes | Wallet address of type *string*. We would prefer you to do the validation on your side.
 `return_url_on_success`     | Yes | The return URL when the customer completed the checkout process
