@@ -198,7 +198,7 @@ Field | Description | Format
 ```shell
 curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   -H "Accept: application/json" \
-  "https://[partner].banxa.com/api/payment-methods"
+  "https://[partner].banxa.com/api/payment-methods?source=AUD"
 ```
 
 > Example Response:
@@ -272,7 +272,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 }
 ```
 
-Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target. Currently only fiat codes are supported in source and crypto codes in target.
+Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target.
 
 ### Request
 
@@ -286,8 +286,8 @@ Requires <strong>Authentication</strong>
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`source` | No  | The source currency of type *string* e.g. 'AUD'
-`target` | No  | The target currency of type *string* e.g. 'BTC'
+`source` | No  | The source currency of type *string* e.g. 'AUD' for buy and 'BTC' for sell
+`target` | No  | The target currency of type *string* e.g. 'BTC' for buy and 'AUD' for sell
 
 ### Response
 
@@ -387,7 +387,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 }
 ```
 
-Get prices for the different payment methods that Banxa offer. Currently only fiat codes are supported in source and crypto codes in target.
+Get prices for the different payment methods that Banxa offer.
 
 ### Request
 `GET https://[partner].banxa.com/api/prices`
@@ -400,8 +400,8 @@ Requires <strong>Authentication</strong>
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`source`                   | Yes  | The source currency code of type *string* e.g. 'AUD'
-`target`                   | Yes  | The target currency code of type *string*. e.g. 'BTC'
+`source`                   | Yes  | The source currency code of type *string* e.g. 'AUD' for buy and 'BTC' for sell
+`target`                   | Yes  | The target currency code of type *string*. e.g. 'BTC' for buy and 'AUD' for sell
 `source_amount`                 | No  | The source amount of type *float*, cannot be sent with target_amount
 `target_amount`                 | No  | The target amount of type *float*, cannot be sent with source_amount 
 `payment_method_id`           | No  | The id of the payment method to get prices for
@@ -544,7 +544,9 @@ curl -X POST "https://[partner].banxa.com/api/orders" \
 }
 ```
 
-This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. The customer should be redirected to this URL to complete the checkout process. The URL will expire after 1 minute if a redirect does not occur.
+This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. 
+The customer should be redirected to this URL to complete the checkout process. 
+The URL will expire after 1 minute if a redirect does not occur. The type of order is determined based on the codes provided to the source and target.
 
 ### Request
 `POST https://[partner].banxa.com/api/orders`
@@ -561,14 +563,27 @@ Parameter | Required | Description
 `account_id`                  | No  | The account_id the order belongs to
 `payment_method_id`           | No  | The payment method to be used for this order
 `payment`                     | No  | The code for the payment method to be used for this order 
-`fiat_amount`                 | No  | The fiat currency amount of type *string* e.g. '200'
-`fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD'
-`coin_amount`                 | No  | The cryptocurrency amount of type *string*. e.g '0.12345678' 
-`coin_code`                   | Yes | The cryptocurrency code of type *string*. e.g. 'BTC'
-`wallet_address`              | Yes | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`fiat_amount`                 | No  | The fiat currency amount of type *string* e.g. '200' (**deprecated**)
+`fiat_code`                   | No  | The fiat currency code of type *string* e.g. 'AUD' (**deprecated**)
+`coin_amount`                 | No  | The cryptocurrency amount of type *string* e.g '0.12345678' (**deprecated**) 
+`coin_code`                   | No | The cryptocurrency code of type *string*. e.g. 'BTC' (**deprecated**)
+`source`                      | Yes  | The source currency code of type *string* e.g. 'AUD' for buy and 'BTC' for sell
+`source_amount`               | Yes  | The source amount of type *string* e.g. '200'
+`target`                      | Yes  | The target currency code of type *string*. e.g. 'BTC' for buy and 'AUD' for sell
+`target_amount`               | No  | The target amount of type *string* e.g. '0.12345678'. This will be overridden if a source_amount is also passed based on our conversion calculation 
+`wallet_address`              | Yes+ | Wallet address of type *string*. We would prefer you to do the validation on your side.
 `return_url_on_success`     | Yes | The return URL when the customer completed the checkout process
 `return_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `return_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
+
+<aside class="notice">
++ Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response
+</aside>      
+<aside class="notice">
+fiat_amount, fiat_code, coin_amount and coin_code have all been deprecated in place of source_amount, source, target_amount and target to allow for a better BUY and SELL flow. 
+The old ones will continue to work for now but will be removed at a later date. Please update accordingly.
+</aside>      
+
 
 ### Response
 
