@@ -1020,7 +1020,8 @@ Requires <strong>Authentication</strong>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -d <span class="se">\</span>
   <span class="s1">'{"account_reference": "partner_ref",
-    "coin_code": "BTC",
+    "source": "AUD",
+    "target": "BTC",
     "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
     "return_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'</span>
 </code></pre>
@@ -1034,6 +1035,7 @@ Requires <strong>Authentication</strong>
       </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"checkout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://[partner].banxa.com/portal?expires=xxx&amp;oid=xxx&amp;signature=xxx"</span><span class="p">,</span><span class="w">
@@ -1168,7 +1170,7 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>data.order.wallet_address</code></td>
-<td>Cryptocurrency wallet address</td>
+<td>Cryptocurrency wallet address. For buy this is the customers wallet. For sell this is our wallet to send crypto to</td>
 <td>string</td>
 </tr>
 <tr>
