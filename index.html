@@ -478,7 +478,7 @@ Requires <strong>Authentication</strong>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  <span class="s2">"https://[partner].banxa.com/api/payment-methods"</span>
+  <span class="s2">"https://[partner].banxa.com/api/payment-methods?source=AUD"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -550,7 +550,7 @@ Requires <strong>Authentication</strong>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target. Currently only fiat codes are supported in source and crypto codes in target.</p>
+<p>Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target.</p>
 <h3 id='request-3'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/payment-methods</code></p>
 
@@ -568,12 +568,12 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>source</code></td>
 <td>No</td>
-<td>The source currency of type <em>string</em> e.g. &#39;AUD&#39;</td>
+<td>The source currency of type <em>string</em> e.g. &#39;AUD&#39; for buy and &#39;BTC&#39; for sell</td>
 </tr>
 <tr>
 <td><code>target</code></td>
 <td>No</td>
-<td>The target currency of type <em>string</em> e.g. &#39;BTC&#39;</td>
+<td>The target currency of type <em>string</em> e.g. &#39;BTC&#39; for buy and &#39;AUD&#39; for sell</td>
 </tr>
 </tbody></table>
 <h3 id='response-3'>Response</h3>
@@ -735,7 +735,7 @@ Requires <strong>Authentication</strong>
   </span><span class="p">}</span><span class="w">  
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Get prices for the different payment methods that Banxa offer. Currently only fiat codes are supported in source and crypto codes in target.</p>
+<p>Get prices for the different payment methods that Banxa offer.</p>
 <h3 id='request-4'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/prices</code></p>
 
@@ -753,12 +753,12 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>source</code></td>
 <td>Yes</td>
-<td>The source currency code of type <em>string</em> e.g. &#39;AUD&#39;</td>
+<td>The source currency code of type <em>string</em> e.g. &#39;AUD&#39; for buy and &#39;BTC&#39; for sell</td>
 </tr>
 <tr>
 <td><code>target</code></td>
 <td>Yes</td>
-<td>The target currency code of type <em>string</em>. e.g. &#39;BTC&#39;</td>
+<td>The target currency code of type <em>string</em>. e.g. &#39;BTC&#39; for buy and &#39;AUD&#39; for sell</td>
 </tr>
 <tr>
 <td><code>source_amount</code></td>
@@ -1044,7 +1044,9 @@ Requires <strong>Authentication</strong>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. The customer should be redirected to this URL to complete the checkout process. The URL will expire after 1 minute if a redirect does not occur.</p>
+<p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. 
+The customer should be redirected to this URL to complete the checkout process. 
+The URL will expire after 1 minute if a redirect does not occur. The type of order is determined based on the codes provided to the source and target.</p>
 <h3 id='request-6'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/orders</code></p>
 
@@ -1082,26 +1084,46 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>fiat_amount</code></td>
 <td>No</td>
-<td>The fiat currency amount of type <em>string</em> e.g. &#39;200&#39;</td>
+<td>The fiat currency amount of type <em>string</em> e.g. &#39;200&#39; (<strong>deprecated</strong>)</td>
 </tr>
 <tr>
 <td><code>fiat_code</code></td>
 <td>No</td>
-<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39;</td>
+<td>The fiat currency code of type <em>string</em> e.g. &#39;AUD&#39; (<strong>deprecated</strong>)</td>
 </tr>
 <tr>
 <td><code>coin_amount</code></td>
 <td>No</td>
-<td>The cryptocurrency amount of type <em>string</em>. e.g &#39;0.12345678&#39;</td>
+<td>The cryptocurrency amount of type <em>string</em> e.g &#39;0.12345678&#39; (<strong>deprecated</strong>)</td>
 </tr>
 <tr>
 <td><code>coin_code</code></td>
+<td>No</td>
+<td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39; (<strong>deprecated</strong>)</td>
+</tr>
+<tr>
+<td><code>source</code></td>
 <td>Yes</td>
-<td>The cryptocurrency code of type <em>string</em>. e.g. &#39;BTC&#39;</td>
+<td>The source currency code of type <em>string</em> e.g. &#39;AUD&#39; for buy and &#39;BTC&#39; for sell</td>
+</tr>
+<tr>
+<td><code>source_amount</code></td>
+<td>Yes</td>
+<td>The source amount of type <em>string</em> e.g. &#39;200&#39;</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>Yes</td>
+<td>The target currency code of type <em>string</em>. e.g. &#39;BTC&#39; for buy and &#39;AUD&#39; for sell</td>
+</tr>
+<tr>
+<td><code>target_amount</code></td>
+<td>No</td>
+<td>The target amount of type <em>string</em> e.g. &#39;0.12345678&#39;. This will be overridden if a source_amount is also passed based on our conversion calculation</td>
 </tr>
 <tr>
 <td><code>wallet_address</code></td>
-<td>Yes</td>
+<td>Yes+</td>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
 </tr>
 <tr>
@@ -1120,6 +1142,15 @@ Requires <strong>Authentication</strong>
 <td>The return URL when the customer failed to complete the checkout process</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
++ Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response
+</aside>      
+
+<aside class="notice">
+fiat_amount, fiat_code, coin_amount and coin_code have all been deprecated in place of source_amount, source, target_amount and target to allow for a better BUY and SELL flow. 
+The old ones will continue to work for now but will be removed at a later date. Please update accordingly.
+</aside>      
 <h3 id='response-6'>Response</h3>
 <table><thead>
 <tr>
