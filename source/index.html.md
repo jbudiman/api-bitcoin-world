@@ -518,7 +518,8 @@ curl -X POST "https://[partner].banxa.com/api/orders" \
   -H "Accept: application/json" \
   -d \
   '{"account_reference": "partner_ref",
-    "coin_code": "BTC",
+    "source": "AUD",
+    "target": "BTC",
     "wallet_address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
     "return_url_on_success": "https:\/\/partner-site.com\/callback\/success"}'
 ```
@@ -533,6 +534,7 @@ curl -X POST "https://[partner].banxa.com/api/orders" \
 	  "account_id": "098f6bcd4621d373cade4e832627b4f6",
 	  "account_reference": "098f6bcd4621d373cade4e832627b4f6",
       "order_type": "CRYPTO-BUY",
+      "fiat_code": "AUD",
       "coin_code": "BTC",
       "wallet_address": "39Mn6uYF1C1ZHbi5KgmyAjrTPX5RCWThbp",
       "checkout_url": "https://[partner].banxa.com/portal?expires=xxx&oid=xxx&signature=xxx",
@@ -580,7 +582,7 @@ Field | Description | Format
 `data.order.fiat_amount`     | Fiat currency value for the order | decimal
 `data.order.coin_code`       | Cryptocurrency code | string
 `data.order.coin_amount`     | Cryptocurrency value for the order | decimal
-`data.order.wallet_address`  | Cryptocurrency wallet address | string
+`data.order.wallet_address`  | Cryptocurrency wallet address. For buy this is the customers wallet. For sell this is our wallet to send crypto to | string
 `data.order.created_at`      | Timestamp when order was created in UTC time | string
 `data.order.checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
