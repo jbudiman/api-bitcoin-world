@@ -548,6 +548,8 @@ This allows the partner to create an order in Banxa. Upon success of this reques
 The customer should be redirected to this URL to complete the checkout process. 
 The URL will expire after 1 minute if a redirect does not occur. The type of order is determined based on the codes provided to the source and target.
 
+The `account_reference` that is passed in the request should be unique per customer. This is used on our side to remember a customer. In order to avoid customers from having to enter personal information or KYC again please use the same string for each order from the same customer.
+
 ### Request
 `POST https://[partner].banxa.com/api/orders`
 
