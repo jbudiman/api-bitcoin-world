@@ -1047,6 +1047,8 @@ Requires <strong>Authentication</strong>
 <p>This allows the partner to create an order in Banxa. Upon success of this request, the response will contain a checkout_url which will be unique for this order. 
 The customer should be redirected to this URL to complete the checkout process. 
 The URL will expire after 1 minute if a redirect does not occur. The type of order is determined based on the codes provided to the source and target.</p>
+
+<p>The <code>account_reference</code> that is passed in the request should be unique per customer. This is used on our side to remember a customer. In order to avoid customers from having to enter personal information or KYC again please use the same string for each order from the same customer.</p>
 <h3 id='request-6'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/orders</code></p>
 
