@@ -691,7 +691,7 @@ Parameter | Required | Description
 `middle_name`                 | No  | The customers middle name
 `surname`                     | Yes | The customers last name 
 `dob`                         | Yes | The customers date of birth (D-M-Y format)
-`mobile_number`               | Yes | The customers mobile phone number
+`mobile_number`               | No | The customers mobile phone number
 `email`                       | Yes | The customers email 
 `nationality`                 | Yes | The nationality of the customer based on their documents
 `residential_address`         | No  | The customers address
