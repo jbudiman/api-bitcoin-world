@@ -603,6 +603,134 @@ Field | Description | Format
 `data.order.created_at`      | Timestamp when order was created in UTC time | string
 `data.order.checkout_url`    | The url redirect for the customer to complete the checkout process | string
 
+# Identity
+
+## Create Identity
+
+> Example Request:
+
+```shell
+curl -X POST "https://[partner].banxa.com/api/identities" \
+  -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
+  -d \
+'{
+	"account_reference": "test001001",
+    "given_name": "Joe",
+    "middle_name": "",
+    "surname": "Bloggs",
+    "dob": "01-01-1990",
+    "mobile_number": "61431000001",
+    "email": "test@bitcoin.com.au",
+    "nationality": "AU"
+    "residential_address": {
+    	"street_number": "44",
+    	"street_name": "Gwynne",
+    	"street_type": "STREET",
+    	"suburb": "Cremorne",
+    	"post_code": "3121",
+    	"state": "VIC",
+    	"country": "AU"
+    },
+    "identity_documents": [
+    	{
+    	"type": "Passport",
+    	"data": {
+    		"given_name": "Joe",
+	    	"middle_name": "",
+	    	"surname": "Bloggs",
+	    	"dob": "01-01-1990",
+	    	"gender": "M",
+	    	"country": "AU",
+	    	"number": "11111111",
+	    	"expiry_date": "01-01-2030"
+    	},
+    	"link": "http://www.orimi.com/pdf-test.pdf",
+    	"verification": {
+    		"verified": true,
+	    	"verified_at": "20-02-2020",
+	    	"link": "http://testlink.com.au",
+	    	"authorizer": "rapidid",
+	    	"comment": "Test comment"
+    	}
+    }],
+}'
+```
+
+> Example Response:
+
+```json
+{
+    "data": {
+        "account": {
+            "account_id": "d3be8dfe1eea6f55725d5784a83d4ce9",
+            "account_reference": "test001001"
+        }
+    }
+}
+```
+
+This allows the partner to create a customer's identity in Banxa. This will allow us to pre-identify a customer based on KYC that the partner has completed already. 
+Please speak to your account manager about setting up the processing rules. 
+
+The `account_reference` that is passed in the request should be the same one passed when the order is created. 
+
+### Request
+`POST https://[partner].banxa.com/api/identities`
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+
+### Body Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+`account_reference`           | Yes | Partner's account reference for the customer / user string.
+`given_name`                  | Yes | The customers first name
+`middle_name`                 | No  | The customers middle name
+`surname`                     | Yes | The customers last name 
+`dob`                         | Yes | The customers date of birth (D-M-Y format)
+`mobile_number`               | No | The customers mobile phone number
+`email`                       | Yes | The customers email 
+`nationality`                 | Yes | The nationality of the customer based on their documents
+`residential_address`         | No  | The customers address
+`residential_address.street_number` | Yes | The number of the house on the street 
+`residential_address.street_name`   | Yes | The name of the street without the number or type
+`residential_address.street_type`   | Yes | The street type, e.g. Road, Street, etc
+`residential_address.suburb`        | Yes | The suburb, town or city of the address
+`residential_address.state`         | Yes | The state, county or principality of the address
+`residential_address.post_code`     | Yes | The postal code or zip code of the address
+`residential_address.country`       | Yes | The country of the address 
+`identity_documents`          | No | A list of identity documents for the customer
+`identity_documents.type`     | Yes | The type of the document (Passport, Driver License, National Identity Card)
+`identity_documents.link`     | Yes | The link to download the document of this type
+`identity_documents.data`     | No | The data extracted from this document
+`identity_documents.data.number`          | Yes | The number on the document
+`identity_documents.data.country`         | Yes | The country on the document
+`identity_documents.data.given_name`      | Yes | The first name on the document 
+`identity_documents.data.middle_name`     | No  | The middle name on the document
+`identity_documents.data.surname`         | Yes | The last name on the document
+`identity_documents.data.dob`             | Yes | The date of birth on the document (D-M-Y format)
+`identity_documents.data.gender`          | No | The gender on the document
+`identity_documents.data.state`           | No | The state on the document
+`identity_documents.data.expiry_date`     | No | The expiry date on the document (D-M-Y format)
+`identity_documents.verification` | No | The verification proof of the document
+`identity_documents.verification.verified` | Yes | Whether of not the partner verification was successful 
+`identity_documents.verification.verified_at` | Yes | The date the document was last verified (D-M-Y format) 
+`identity_documents.verification.authorizer` | Yes | The name of the 3rd party or manual if manually verified 
+`identity_documents.verification.link` | No | Link to the verification document provided by identity 3rd party 
+`identity_documents.verification.comment` | No | Any additional comments that were added to this verification 
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+`data.account.account_id`| The account ID for the customer | string
+`data.account.account_reference`| Partner's account reference for the customer / user string. | string
+
+
+
 # Callbacks
 
 ## Customer Return URL
