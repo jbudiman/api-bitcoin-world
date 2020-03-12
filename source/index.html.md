@@ -703,7 +703,7 @@ Parameter | Required | Description
 `residential_address.post_code`     | Yes | The postal code or zip code of the address
 `residential_address.country`       | Yes | The country of the address 
 `identity_documents`          | No | A list of identity documents for the customer
-`identity_documents.type`     | Yes | The type of the document (Passport, Driver License, National Identity Card)
+`identity_documents.type`     | Yes | The type of the document (PASSPORT, DRIVING_LICENSE, IDENTIFICATION)
 `identity_documents.link`     | Yes | The link to download the document of this type
 `identity_documents.data`     | No | The data extracted from this document
 `identity_documents.data.number`          | Yes | The number on the document
