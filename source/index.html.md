@@ -616,28 +616,28 @@ curl -X POST "https://[partner].banxa.com/api/identities" \
   -d \
 '{
 	"account_reference": "test001001",
-    "given_name": "Joe",
-    "middle_name": "",
-    "surname": "Bloggs",
-    "dob": "01-01-1990",
     "mobile_number": "61431000001",
     "email": "test@bitcoin.com.au",
-    "nationality": "AU"
-    "residential_address": {
-    	"street_number": "44",
-    	"street_name": "Gwynne",
-    	"street_type": "STREET",
-    	"suburb": "Cremorne",
-    	"post_code": "3121",
-    	"state": "VIC",
-    	"country": "AU"
+    "nationality": "AU",
+    "customer_identity": {
+        "given_name": "Joe",
+        "surname": "Bloggs",
+        "dob": "01-01-1990",
+        "residential_address": {
+            "street_number": "44",
+            "street_name": "Gwynne",
+            "street_type": "STREET",
+            "suburb": "Cremorne",
+            "post_code": "3121",
+            "state": "VIC",
+            "country": "AU"
+        }
     },
     "identity_documents": [
     	{
-    	"type": "Passport",
+    	"type": "PASSPORT",
     	"data": {
     		"given_name": "Joe",
-	    	"middle_name": "",
 	    	"surname": "Bloggs",
 	    	"dob": "01-01-1990",
 	    	"gender": "M",
@@ -645,7 +645,9 @@ curl -X POST "https://[partner].banxa.com/api/identities" \
 	    	"number": "11111111",
 	    	"expiry_date": "01-01-2030"
     	},
-    	"link": "http://www.orimi.com/pdf-test.pdf",
+        "images": [{
+            "link": "http://www.orimi.com/pdf-test.pdf"
+        }],
     	"verification": {
     		"verified": true,
 	    	"verified_at": "20-02-2020",
@@ -675,6 +677,9 @@ Please speak to your account manager about setting up the processing rules.
 
 The `account_reference` that is passed in the request should be the same one passed when the order is created. 
 
+Although certain properties are optional, they may still be required for us to complete the checkout process. If this is the 
+case we may still ask customers for additional information in order to fulfil our regulatory requirements.
+
 ### Request
 `POST https://[partner].banxa.com/api/identities`
 
@@ -687,24 +692,33 @@ Requires <strong>Authentication</strong>
 Parameter | Required | Description
 --------- | -------- | -----------
 `account_reference`           | Yes | Partner's account reference for the customer / user string.
-`given_name`                  | Yes | The customers first name
-`middle_name`                 | No  | The customers middle name
-`surname`                     | Yes | The customers last name 
-`dob`                         | Yes | The customers date of birth (D-M-Y format)
 `mobile_number`               | No | The customers mobile phone number
 `email`                       | Yes | The customers email 
 `nationality`                 | Yes | The nationality of the customer based on their documents
-`residential_address`         | No  | The customers address
-`residential_address.street_number` | Yes | The number of the house on the street 
-`residential_address.street_name`   | Yes | The name of the street without the number or type
-`residential_address.street_type`   | Yes | The street type, e.g. Road, Street, etc
-`residential_address.suburb`        | Yes | The suburb, town or city of the address
-`residential_address.state`         | Yes | The state, county or principality of the address
-`residential_address.post_code`     | Yes | The postal code or zip code of the address
-`residential_address.country`       | Yes | The country of the address 
+`customer_identity`           | Yes | The customers personal information
+`customer_identity.given_name`                  | Yes | The customers first name
+`customer_identity.middle_name`                 | No  | The customers middle name
+`customer_identity.surname`                     | Yes | The customers last name 
+`customer_identity.dob`                         | Yes | The customers date of birth (D-M-Y format)
+`customer_identity.residential_address`         | No  | The customers address
+`customer_identity.residential_address.street_number` | Yes | The number of the house on the street 
+`customer_identity.residential_address.street_name`   | Yes | The name of the street without the number or type
+`customer_identity.residential_address.street_type`   | Yes | The street type, e.g. Road, Street, etc
+`customer_identity.residential_address.suburb`        | Yes | The suburb, town or city of the address
+`customer_identity.residential_address.state`         | Yes | The state, county or principality of the address
+`customer_identity.residential_address.post_code`     | Yes | The postal code or zip code of the address
+`customer_identity.residential_address.country`       | Yes | The country of the address 
+`customer_identity.verification` | No | The verification proof of the customers information
+`customer_identity.verification.verified` | Yes | Whether or not the partner verification was successful 
+`customer_identity.verification.verified_at` | Yes | The date the document was last verified (D-M-Y format) 
+`customer_identity.verification.authorizer` | Yes | The name of the 3rd party or manual if manually verified 
+`customer_identity.verification.link` | No | Link to the verification document provided by identity 3rd party 
+`customer_identity.verification.comment` | No | Any additional comments that were added to this verification 
 `identity_documents`          | No | A list of identity documents for the customer
 `identity_documents.type`     | Yes | The type of the document (PASSPORT, DRIVING_LICENSE, IDENTIFICATION)
-`identity_documents.link`     | Yes | The link to download the document of this type
+`identity_documents.images`     | Yes | The list of images that are of the original document
+`identity_documents.images.link`     | Yes | The link to download the document of this type
+`identity_documents.images.tag`     | No | An optional tag to describe this image, e.g. FRONT or BACK for driving license
 `identity_documents.data`     | No | The data extracted from this document
 `identity_documents.data.number`          | Yes | The number on the document
 `identity_documents.data.country`         | Yes | The country on the document
@@ -716,7 +730,7 @@ Parameter | Required | Description
 `identity_documents.data.state`           | No | The state on the document
 `identity_documents.data.expiry_date`     | No | The expiry date on the document (D-M-Y format)
 `identity_documents.verification` | No | The verification proof of the document
-`identity_documents.verification.verified` | Yes | Whether of not the partner verification was successful 
+`identity_documents.verification.verified` | Yes | Whether or not the partner verification was successful 
 `identity_documents.verification.verified_at` | Yes | The date the document was last verified (D-M-Y format) 
 `identity_documents.verification.authorizer` | Yes | The name of the 3rd party or manual if manually verified 
 `identity_documents.verification.link` | No | Link to the verification document provided by identity 3rd party 
