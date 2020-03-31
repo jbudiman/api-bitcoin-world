@@ -1235,28 +1235,28 @@ The old ones will continue to work for now but will be removed at a later date. 
   -d <span class="se">\</span>
 <span class="s1">'{
     "account_reference": "test001001",
-    "given_name": "Joe",
-    "middle_name": "",
-    "surname": "Bloggs",
-    "dob": "01-01-1990",
     "mobile_number": "61431000001",
     "email": "test@bitcoin.com.au",
-    "nationality": "AU"
-    "residential_address": {
-        "street_number": "44",
-        "street_name": "Gwynne",
-        "street_type": "STREET",
-        "suburb": "Cremorne",
-        "post_code": "3121",
-        "state": "VIC",
-        "country": "AU"
+    "nationality": "AU",
+    "customer_identity": {
+        "given_name": "Joe",
+        "surname": "Bloggs",
+        "dob": "01-01-1990",
+        "residential_address": {
+            "street_number": "44",
+            "street_name": "Gwynne",
+            "street_type": "STREET",
+            "suburb": "Cremorne",
+            "post_code": "3121",
+            "state": "VIC",
+            "country": "AU"
+        }
     },
     "identity_documents": [
         {
-        "type": "Passport",
+        "type": "PASSPORT",
         "data": {
             "given_name": "Joe",
-            "middle_name": "",
             "surname": "Bloggs",
             "dob": "01-01-1990",
             "gender": "M",
@@ -1264,7 +1264,9 @@ The old ones will continue to work for now but will be removed at a later date. 
             "number": "11111111",
             "expiry_date": "01-01-2030"
         },
-        "link": "http://www.orimi.com/pdf-test.pdf",
+        "images": [{
+            "link": "http://www.orimi.com/pdf-test.pdf"
+        }],
         "verification": {
             "verified": true,
             "verified_at": "20-02-2020",
@@ -1291,6 +1293,9 @@ The old ones will continue to work for now but will be removed at a later date. 
 Please speak to your account manager about setting up the processing rules. </p>
 
 <p>The <code>account_reference</code> that is passed in the request should be the same one passed when the order is created. </p>
+
+<p>Although certain properties are optional, they may still be required for us to complete the checkout process. If this is the 
+case we may still ask customers for additional information in order to fulfil our regulatory requirements.</p>
 <h3 id='request-7'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/identities</code></p>
 
@@ -1311,26 +1316,6 @@ Requires <strong>Authentication</strong>
 <td>Partner&#39;s account reference for the customer / user string.</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
-<td>Yes</td>
-<td>The customers first name</td>
-</tr>
-<tr>
-<td><code>middle_name</code></td>
-<td>No</td>
-<td>The customers middle name</td>
-</tr>
-<tr>
-<td><code>surname</code></td>
-<td>Yes</td>
-<td>The customers last name</td>
-</tr>
-<tr>
-<td><code>dob</code></td>
-<td>Yes</td>
-<td>The customers date of birth (D-M-Y format)</td>
-</tr>
-<tr>
 <td><code>mobile_number</code></td>
 <td>No</td>
 <td>The customers mobile phone number</td>
@@ -1346,44 +1331,99 @@ Requires <strong>Authentication</strong>
 <td>The nationality of the customer based on their documents</td>
 </tr>
 <tr>
-<td><code>residential_address</code></td>
+<td><code>customer_identity</code></td>
+<td>Yes</td>
+<td>The customers personal information</td>
+</tr>
+<tr>
+<td><code>customer_identity.given_name</code></td>
+<td>Yes</td>
+<td>The customers first name</td>
+</tr>
+<tr>
+<td><code>customer_identity.middle_name</code></td>
+<td>No</td>
+<td>The customers middle name</td>
+</tr>
+<tr>
+<td><code>customer_identity.surname</code></td>
+<td>Yes</td>
+<td>The customers last name</td>
+</tr>
+<tr>
+<td><code>customer_identity.dob</code></td>
+<td>Yes</td>
+<td>The customers date of birth (D-M-Y format)</td>
+</tr>
+<tr>
+<td><code>customer_identity.residential_address</code></td>
 <td>No</td>
 <td>The customers address</td>
 </tr>
 <tr>
-<td><code>residential_address.street_number</code></td>
+<td><code>customer_identity.residential_address.street_number</code></td>
 <td>Yes</td>
 <td>The number of the house on the street</td>
 </tr>
 <tr>
-<td><code>residential_address.street_name</code></td>
+<td><code>customer_identity.residential_address.street_name</code></td>
 <td>Yes</td>
 <td>The name of the street without the number or type</td>
 </tr>
 <tr>
-<td><code>residential_address.street_type</code></td>
+<td><code>customer_identity.residential_address.street_type</code></td>
 <td>Yes</td>
 <td>The street type, e.g. Road, Street, etc</td>
 </tr>
 <tr>
-<td><code>residential_address.suburb</code></td>
+<td><code>customer_identity.residential_address.suburb</code></td>
 <td>Yes</td>
 <td>The suburb, town or city of the address</td>
 </tr>
 <tr>
-<td><code>residential_address.state</code></td>
+<td><code>customer_identity.residential_address.state</code></td>
 <td>Yes</td>
 <td>The state, county or principality of the address</td>
 </tr>
 <tr>
-<td><code>residential_address.post_code</code></td>
+<td><code>customer_identity.residential_address.post_code</code></td>
 <td>Yes</td>
 <td>The postal code or zip code of the address</td>
 </tr>
 <tr>
-<td><code>residential_address.country</code></td>
+<td><code>customer_identity.residential_address.country</code></td>
 <td>Yes</td>
 <td>The country of the address</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification</code></td>
+<td>No</td>
+<td>The verification proof of the customers information</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.verified</code></td>
+<td>Yes</td>
+<td>Whether or not the partner verification was successful</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.verified_at</code></td>
+<td>Yes</td>
+<td>The date the document was last verified (D-M-Y format)</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.authorizer</code></td>
+<td>Yes</td>
+<td>The name of the 3rd party or manual if manually verified</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.link</code></td>
+<td>No</td>
+<td>Link to the verification document provided by identity 3rd party</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.comment</code></td>
+<td>No</td>
+<td>Any additional comments that were added to this verification</td>
 </tr>
 <tr>
 <td><code>identity_documents</code></td>
@@ -1396,9 +1436,19 @@ Requires <strong>Authentication</strong>
 <td>The type of the document (PASSPORT, DRIVING_LICENSE, IDENTIFICATION)</td>
 </tr>
 <tr>
-<td><code>identity_documents.link</code></td>
+<td><code>identity_documents.images</code></td>
+<td>Yes</td>
+<td>The list of images that are of the original document</td>
+</tr>
+<tr>
+<td><code>identity_documents.images.link</code></td>
 <td>Yes</td>
 <td>The link to download the document of this type</td>
+</tr>
+<tr>
+<td><code>identity_documents.images.tag</code></td>
+<td>No</td>
+<td>An optional tag to describe this image, e.g. FRONT or BACK for driving license</td>
 </tr>
 <tr>
 <td><code>identity_documents.data</code></td>
@@ -1458,7 +1508,7 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>identity_documents.verification.verified</code></td>
 <td>Yes</td>
-<td>Whether of not the partner verification was successful</td>
+<td>Whether or not the partner verification was successful</td>
 </tr>
 <tr>
 <td><code>identity_documents.verification.verified_at</code></td>
