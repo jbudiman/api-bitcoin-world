@@ -1245,7 +1245,7 @@ The old ones will continue to work for now but will be removed at a later date. 
         "residential_address": {
             "street_number": "44",
             "street_name": "Gwynne",
-            "street_type": "STREET",
+            "street_type": "Street",
             "suburb": "Cremorne",
             "post_code": "3121",
             "state": "VIC",
@@ -1322,22 +1322,22 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>email</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The customers email</td>
 </tr>
 <tr>
 <td><code>nationality</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The nationality of the customer based on their documents</td>
 </tr>
 <tr>
 <td><code>customer_identity</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The customers personal information</td>
 </tr>
 <tr>
 <td><code>customer_identity.given_name</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The customers first name</td>
 </tr>
 <tr>
@@ -1347,12 +1347,12 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>customer_identity.surname</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The customers last name</td>
 </tr>
 <tr>
 <td><code>customer_identity.dob</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The customers date of birth (D-M-Y format)</td>
 </tr>
 <tr>
@@ -1362,32 +1362,42 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>customer_identity.residential_address.street_number</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The number of the house on the street</td>
 </tr>
 <tr>
 <td><code>customer_identity.residential_address.street_name</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The name of the street without the number or type</td>
 </tr>
 <tr>
 <td><code>customer_identity.residential_address.street_type</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The street type, e.g. Road, Street, etc</td>
 </tr>
 <tr>
+<td><code>customer_identity.residential_address.address_line_1</code></td>
+<td>No</td>
+<td>Address line 1 or street address. Basically a combination of street number, name and type</td>
+</tr>
+<tr>
+<td><code>customer_identity.residential_address.address_line_2</code></td>
+<td>No</td>
+<td>Additional address line</td>
+</tr>
+<tr>
 <td><code>customer_identity.residential_address.suburb</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The suburb, town or city of the address</td>
 </tr>
 <tr>
 <td><code>customer_identity.residential_address.state</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The state, county or principality of the address</td>
 </tr>
 <tr>
 <td><code>customer_identity.residential_address.post_code</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The postal code or zip code of the address</td>
 </tr>
 <tr>
@@ -1402,18 +1412,23 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>customer_identity.verification.verified</code></td>
-<td>Yes</td>
-<td>Whether or not the partner verification was successful</td>
+<td>No</td>
+<td>Whether or not the partner verification was successful (If not given assumed to be false)</td>
 </tr>
 <tr>
 <td><code>customer_identity.verification.verified_at</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The date the document was last verified (D-M-Y format)</td>
 </tr>
 <tr>
 <td><code>customer_identity.verification.authorizer</code></td>
-<td>Yes</td>
-<td>The name of the 3rd party or manual if manually verified</td>
+<td>No</td>
+<td>The name of the 3rd party  (If not given assumed to be manual)</td>
+</tr>
+<tr>
+<td><code>customer_identity.verification.is_manual</code></td>
+<td>No</td>
+<td>True if the information was manually verified by the partner and not the 3rd party (If not given assumed to be false)</td>
 </tr>
 <tr>
 <td><code>customer_identity.verification.link</code></td>
@@ -1433,16 +1448,16 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>identity_documents.type</code></td>
 <td>Yes</td>
-<td>The type of the document (PASSPORT, DRIVING_LICENSE, IDENTIFICATION)</td>
+<td>The type of the document (PASSPORT, DRIVING_LICENSE, IDENTIFICATION, SELFIE, PROOF_OF_ADDRESS, SOURCE_OF_FUNDS)</td>
 </tr>
 <tr>
 <td><code>identity_documents.images</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The list of images that are of the original document</td>
 </tr>
 <tr>
 <td><code>identity_documents.images.link</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The link to download the document of this type</td>
 </tr>
 <tr>
@@ -1457,17 +1472,17 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>identity_documents.data.number</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The number on the document</td>
 </tr>
 <tr>
 <td><code>identity_documents.data.country</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The country on the document</td>
 </tr>
 <tr>
 <td><code>identity_documents.data.given_name</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The first name on the document</td>
 </tr>
 <tr>
@@ -1477,12 +1492,12 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>identity_documents.data.surname</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The last name on the document</td>
 </tr>
 <tr>
 <td><code>identity_documents.data.dob</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The date of birth on the document (D-M-Y format)</td>
 </tr>
 <tr>
@@ -1507,18 +1522,23 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>identity_documents.verification.verified</code></td>
-<td>Yes</td>
-<td>Whether or not the partner verification was successful</td>
+<td>No</td>
+<td>WWhether or not the partner verification was successful (If not given assumed to be false)</td>
 </tr>
 <tr>
 <td><code>identity_documents.verification.verified_at</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>The date the document was last verified (D-M-Y format)</td>
 </tr>
 <tr>
 <td><code>identity_documents.verification.authorizer</code></td>
-<td>Yes</td>
-<td>The name of the 3rd party or manual if manually verified</td>
+<td>No</td>
+<td>The name of the 3rd party  (If not given assumed to be manual)</td>
+</tr>
+<tr>
+<td><code>identity_documents.verification.is_manual</code></td>
+<td>No</td>
+<td>True if the information was manually verified by the partner and not the 3rd party (If not given assumed to be false)</td>
 </tr>
 <tr>
 <td><code>identity_documents.verification.link</code></td>
@@ -1531,6 +1551,29 @@ Requires <strong>Authentication</strong>
 <td>Any additional comments that were added to this verification</td>
 </tr>
 </tbody></table>
+
+<p><strong> Customer Identity </strong></p>
+
+<p>Note: while all fields are not required, we do recommend you send at least given name, surname, dob and address. 
+Otherwise we will request the rest of the information from the customer when they are redirected to our platform</p>
+
+<p>With address we request you send either the street number, name and type or the address line 1 depending on how your addresses are formatted. 
+To classify this as a complete address we also request you send the country, and where available the suburb, state and post code (or equivalent).</p>
+
+<p><strong> Identity Documents </strong></p>
+
+<p>Note: With the passport, driving license and identification types, we request you send the data field to provide the document information. These are not required with the others.</p>
+
+<p>For the image link, this should ideally be a one time link to download the document that shows the information captured, to ensure it will not be downloaded by any other party.</p>
+
+<p><strong> Verification </strong></p>
+
+<p>For both customer and document information we request you identify the steps take to verify the authenticity. 
+Preferably this should be a trusted 3rd party who have a good history of accurate KYC verification. We ask you to provide 
+a link to the certificate provided by the 3rd party so that we may audit any KYC performed.</p>
+
+<p>If the document was manually verified by your support team then the is_manual flag should be set and the authorizer field can be excluded. 
+Please attach any additional information from your system in the comment field   </p>
 <h3 id='response-7'>Response</h3>
 <table><thead>
 <tr>
