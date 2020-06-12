@@ -1133,8 +1133,13 @@ Requires <strong>Authentication</strong>
 </tr>
 <tr>
 <td><code>wallet_address</code></td>
-<td>Yes+</td>
+<td>Yes†</td>
 <td>Wallet address of type <em>string</em>. We would prefer you to do the validation on your side.</td>
+</tr>
+<tr>
+<td><code>wallet_address_tag</code></td>
+<td>Yes††</td>
+<td>Wallet address tag/memo of type <em>string</em>. This is required when sending wallet address for BNB (Memo) or XRP (Tag)</td>
 </tr>
 <tr>
 <td><code>return_url_on_success</code></td>
@@ -1154,7 +1159,9 @@ Requires <strong>Authentication</strong>
 </tbody></table>
 
 <aside class="notice">
-+ Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response
+† Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response<br/>
+†† Wallet address tag is only required for orders where the target is BNB or XRP. This is used to handle the additional Memo or Tag fields respectively that these coins require for sending. 
+If this field is not included for order creation for these coins it will fail with error code 422
 </aside>      
 
 <aside class="notice">
