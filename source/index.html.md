@@ -573,13 +573,16 @@ Parameter | Required | Description
 `source_amount`               | Yes  | The source amount of type *string* e.g. '200'
 `target`                      | Yes  | The target currency code of type *string*. e.g. 'BTC' for buy and 'AUD' for sell
 `target_amount`               | No  | The target amount of type *string* e.g. '0.12345678'. This will be overridden if a source_amount is also passed based on our conversion calculation 
-`wallet_address`              | Yes+ | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`wallet_address`              | Yes† | Wallet address of type *string*. We would prefer you to do the validation on your side.
+`wallet_address_tag`          | Yes†† | Wallet address tag/memo of type *string*. This is required when sending wallet address for BNB (Memo) or XRP (Tag)
 `return_url_on_success`     | Yes | The return URL when the customer completed the checkout process
 `return_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `return_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
 
 <aside class="notice">
-+ Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response
+† Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response<br/>
+†† Wallet address tag is only required for orders where the target is BNB or XRP. This is used to handle the additional Memo or Tag fields respectively that these coins require for sending. 
+If this field is not included for order creation for these coins it will fail with error code 422
 </aside>      
 <aside class="notice">
 fiat_amount, fiat_code, coin_amount and coin_code have all been deprecated in place of source_amount, source, target_amount and target to allow for a better BUY and SELL flow. 
