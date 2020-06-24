@@ -27,6 +27,49 @@ Please contact your account representative or <a href="mailto:support@banxa.com"
 
 The URLs will be of the format https://[partner].banxa.com and https://[partner].banxa-sandbox.com 
 
+## Checkout Approaches
+There are 2 approaches available to our partners for integrating with Banxa to take the customer through the on-ramp experience.
+
+### Redirect
+Redirect is when the partner redirects the customer to our domain to complete the checkout process. In this case you will take advantage of the checkout_url that is returned in the response to the Create Order. The pros to this approach are:
+
+* Lowest development effort to setup as no need to do not need to setup an location for the iframe to be hosted.
+* Best approach if you have not yet integrated with our Create Identity endpoint as otherwise it will force the customer's browser to be redirected to our site to complete KYC 
+
+### Widget
+Widget is when the partner hosts our site in an iframe to complete the checkout process. In this case you will take advantage of the checkout_iframe that is returned in the response. 
+Note this will only be returned if you send the iframe_domain in the request body of the Create Order. The pros to this approach are:
+
+* More integrated experience for your customer. For many payment methods the customer will not leave your site for the whole flow (see below for details).
+* If used in collaboration with the checkout look and feel below it will feel as part of your own experience.
+
+The Widget will force a redirect to have the order completed on our site in the following scenarios:
+
+* If the browser does not support 3rd party cookies, e.g. Safari. In some browsers they have strict rules around what iframes of 3rd party sites can do, and one of them is the ability to store cookies. Because we require this to maintain state, if this cannot be saved the customer will be redirected to our site to complete.
+* If the customer needs to complete KYC. Due to potential restrictions of accessing the camera from an iframe if the customer requires KYC then we will redirect to our site to complete this. Note that when the customer makes their next order it will all be done from the widget.
+* If the customer uses iDEAL payment method. For security reasons, iDEAL does not work within iframes and therefore we need to redirect the customer in order to have them login into their bank. They will then be redirected to the order status page on our site where they can then redirect back to the partner site.
+* If the customer uses Credit Card they will be redirected for the order status only. This is a limitation of our provider where they will redirect the customer to our site, where they can then go back to the partner page after viewing their status. 
+
+The iframe should be loaded within a modal div and below is the recommended iframe format:
+
+`
+<iframe src="{checkout_iframe}" style="border:0; width: 100%; min-height: 80vh;"></iframe>
+`
+
+## Checkout Look and Feel
+If you would like the colour scheme of your site to be reflected on Banxa then please get in touch with your account manager and provide the following colours for us to setup this customization:
+
+* Primary Font Colour in HEX e.g #2D99FF
+* Secondary Font Colour in HEX e.g. #2DAFA0
+* Background Colour in HEX e.g. #121638
+* Font Colour for out of app errors which will go directly on background (e.g. 404) in HEX e.g. #EDF2F7
+* Footer Background Colour in HEX e.g. #FFFFFF
+* Footer Font Colour in HEX e.g. #999999
+* Base footer Font Colour in HEX e.g. #A0AEC0
+* Border colour at the footer in HEX e.g. #EDF2F7
+* Font Family e.g. Noto Sans, -apple-system, Helvetica Neue, sans-serif
+
+
 # Headers
 
 Please include the Accept header for Json as per the below in all requests
@@ -578,6 +621,7 @@ Parameter | Required | Description
 `return_url_on_success`     | Yes | The return URL when the customer completed the checkout process
 `return_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `return_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
+`iframe_domain`             | No  | The domain what will be authorised to display the returned checkout_iframe URL in an iframe e.g. example.com. This must be the exact domain so if this is on a subdomain we would expect sub.example.com
 
 <aside class="notice">
 † Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response<br/>
@@ -736,7 +780,7 @@ Parameter | Required | Description
 `identity_documents.data.state`           | No | The state on the document
 `identity_documents.data.expiry_date`     | No | The expiry date on the document (D-M-Y format)
 `identity_documents.verification` | No | The verification proof of the document
-`identity_documents.verification.verified` | No | WWhether or not the partner verification was successful (If not given assumed to be false) 
+`identity_documents.verification.verified` | No | Whether or not the partner verification was successful (If not given assumed to be false) 
 `identity_documents.verification.verified_at` | No | The date the document was last verified (D-M-Y format) 
 `identity_documents.verification.authorizer` | No | The name of the 3rd party  (If not given assumed to be manual) 
 `identity_documents.verification.is_manual` | No | True if the information was manually verified by the partner and not the 3rd party (If not given assumed to be false)
@@ -785,3 +829,14 @@ When the customer completes the checkout page the customer will be redirected to
 If there are any issues completing the order then they will be redirected to return_url_on_failure.
 
 If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.
+
+# Changelog
+
+## 24 Jun 2020
+
+* Added Body Parameter to Create Order for triggering the widget checkout
+* Updated documentation to detail the different checkout approaches
+
+## 12 Jun 2020
+
+* Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins
