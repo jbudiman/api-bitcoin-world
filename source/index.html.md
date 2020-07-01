@@ -484,6 +484,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "order": {
       "id": "7f954c2eaea52db2d7e57d839620a764",
       "account_id": "564d914ba50d51d67095817f1559e0a7",
+	  "account_reference": "098f6bcd4621d373cade4e832627b4f6",
       "order_type": "CRYPTO-BUY",
       "payment_type": "POLI",
       "ref": 1,
@@ -519,6 +520,7 @@ Field | Description | Format
 --------- | -------- | -----------
 `data.order.id`        | The id of the order | number
 `data.order.account_id`| The account ID for the order | string
+`data.order.account_reference`| The account reference for the customer | string
 `data.order.order_type`      | Order type | string
 `data.order.payment_type`      | Payment type | string
 `data.order.ref`      | Order reference | string
@@ -831,6 +833,10 @@ If there are any issues completing the order then they will be redirected to ret
 If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.
 
 # Changelog
+
+## 01 Jul 2020
+
+* Added account_reference to the Get Order response
 
 ## 24 Jun 2020
 
