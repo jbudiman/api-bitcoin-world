@@ -33,7 +33,7 @@ There are 2 approaches available to our partners for integrating with Banxa to t
 ### Redirect
 Redirect is when the partner redirects the customer to our domain to complete the checkout process. In this case you will take advantage of the checkout_url that is returned in the response to the Create Order. The pros to this approach are:
 
-* Lowest development effort to setup as no need to do not need to setup an location for the iframe to be hosted.
+* Lowest development effort to setup, as do not need to setup a location for the iframe to be hosted.
 * Best approach if you have not yet integrated with our Create Identity endpoint as otherwise it will force the customer's browser to be redirected to our site to complete KYC 
 
 ### Widget
@@ -466,6 +466,111 @@ Field | Description | Format
 
 # Order
 
+## Get Orders
+
+> Example Request:
+
+```shell
+curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
+  -H "Accept: application/json" \
+  "https://[partner].banxa.com/api/orders?start_date=2020-06-01&end_date=2020-06-02&per_page=50"
+```
+
+> Example Response:
+
+```json
+{
+  "data": {
+    "orders": [
+      {
+          "id": "7f954c2eaea52db2d7e57d839620a764",
+          "account_id": "564d914ba50d51d67095817f1559e0a7",
+          "account_reference": "098f6bcd4621d373cade4e832627b4f6",
+          "order_type": "CRYPTO-BUY",
+          "payment_type": "POLI",
+          "ref": 1,
+          "fiat_code": "AUD",
+          "fiat_amount": 200,
+          "coin_code": "BTC",
+          "coin_amount": 0.015,
+          "wallet_address": "1LbQ1WNTsm1Nzj1hbh3WDCbEim1oUg5rfi",
+          "fee": 4.3,
+          "payment_fee": 0,
+          "commission": 0.03,
+          "tx_hash": "323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35",
+          "created_at": "2020-06-01 00:20:51",
+          "status": "complete"
+      }
+    ]
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "per_page": 50,
+    "to": 1,
+    "total": 1
+  }
+}
+```
+
+Get details for orders that have been submitted for a time range and optionally by customer.
+
+Start and End date can either be dates or date times. The system times are all in UTC. If no time is given then it is set to midnight that day. 
+So if you want the 1st of June 2020, the dates would be 2020-06-01 and 2020-06-02. 
+
+### Request
+`GET https://[partner].banxa.com/api/orders`
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+`start_date`                   | Yes | The start date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20) 
+`end_date`                     | Yes | The end date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)
+`per_page`                     | No  | This is the page size. It is defaulted to 100
+`page`                         | No  | This is the page to get. The number of pages available is given in the meta object in the response
+`account_reference`            | No  | This is the reference that was passed in when creating an order. Use this to get all orders for a customer
+
+### Response
+
+Field | Description | Format
+--------- | -------- | -----------
+`data.orders.id`        | The id of the order | number
+`data.orders.account_id`| The account ID for the order | string
+`data.orders.account_reference`| The account reference for the customer | string
+`data.orders.order_type`      | Order type | string
+`data.orders.payment_type`      | Payment type | string
+`data.orders.ref`      | Order reference | string
+`data.orders.fiat_code` | Fiat currency code | string
+`data.orders.fiat_amount`     | Fiat currency value for the order | decimal
+`data.orders.coin_code`       | Cryptocurrency code | string
+`data.orders.coin_amount`     | Cryptocurrency value for the order | decimal
+`data.orders.wallet_address`  | Cryptocurrency wallet address | string
+`data.orders.wallet_address_tag`  | Cryptocurrency wallet address tag (if required) | string
+`data.orders.fee`  | Order fee in fiat currency | string
+`data.orders.fee_tax`  | Tax charged on the order fee in fiat currency | string
+`data.orders.payment_fee`  | Payment fee in fiat currency | string
+`data.orders.payment_fee_tax`  | Tax charged on the payment fee in fiat currency | string
+`data.orders.commission`  | Commission amount in fiat currency | string
+`data.orders.tx_hash`  | Blockchain transaction hash | string
+`data.orders.tx_confirms`  | Number of blockchain confirmations | string
+`data.orders.created_at`      | Timestamp when order was created in UTC time | string
+`data.orders.created_date`      | Date when order was created in UTC time | string
+`data.orders.status`    | Order status | string
+`data.orders.merchant_fee`    | Merchant defined fee | string
+`data.orders.merchant_commission`    | Merchant defined commission | string
+`meta.current_page`  | The page requested
+`meta.last_page`  | The last page that can be requested
+`meta.from`  | Index of the first item in this response
+`meta.to`  | Index of the last item in this response
+`meta.per_page`  | The max number of items per page
+`meta.total`  | The total number of items found
+
 ## Get Order
 
 > Example Request:
@@ -484,6 +589,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "order": {
       "id": "7f954c2eaea52db2d7e57d839620a764",
       "account_id": "564d914ba50d51d67095817f1559e0a7",
+	  "account_reference": "098f6bcd4621d373cade4e832627b4f6",
       "order_type": "CRYPTO-BUY",
       "payment_type": "POLI",
       "ref": 1,
@@ -519,6 +625,7 @@ Field | Description | Format
 --------- | -------- | -----------
 `data.order.id`        | The id of the order | number
 `data.order.account_id`| The account ID for the order | string
+`data.order.account_reference`| The account reference for the customer | string
 `data.order.order_type`      | Order type | string
 `data.order.payment_type`      | Payment type | string
 `data.order.ref`      | Order reference | string
@@ -550,6 +657,7 @@ complete | Cryptocurrency has been sent and have received confirmations
 cancelled | Payment has been cancelled
 declined | Payment has been declined
 expired | Payment has not been made, order has been expired
+refunded | Payment was made, but we were unable to complete the order due to our checks, so the customer was refunded
 
 ## Create Order
 
@@ -832,6 +940,10 @@ If the customer cancels the flow at any point, they will be redirected to the re
 
 # Changelog
 
+## 01 Jul 2020
+
+* Added account_reference to the Get Order response
+
 ## 24 Jun 2020
 
 * Added Body Parameter to Create Order for triggering the widget checkout
@@ -840,3 +952,8 @@ If the customer cancels the flow at any point, they will be redirected to the re
 ## 12 Jun 2020
 
 * Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins
+
+## 21 Jul 2020
+
+* Added Get Orders API documentation
+* Added refunded order status
