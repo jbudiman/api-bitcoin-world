@@ -274,6 +274,9 @@
             <a href="#order" class="toc-h1 toc-link" data-title="Order">Order</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#get-orders" class="toc-h2 toc-link" data-title="Get Orders">Get Orders</a>
+                  </li>
+                  <li>
                     <a href="#get-order" class="toc-h2 toc-link" data-title="Get Order">Get Order</a>
                   </li>
                   <li>
@@ -301,10 +304,16 @@
             <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog">Changelog</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#01-jul-2020" class="toc-h2 toc-link" data-title="01 Jul 2020">01 Jul 2020</a>
+                  </li>
+                  <li>
                     <a href="#24-jun-2020" class="toc-h2 toc-link" data-title="24 Jun 2020">24 Jun 2020</a>
                   </li>
                   <li>
                     <a href="#12-jun-2020" class="toc-h2 toc-link" data-title="12 Jun 2020">12 Jun 2020</a>
+                  </li>
+                  <li>
+                    <a href="#21-jul-2020" class="toc-h2 toc-link" data-title="21 Jul 2020">21 Jul 2020</a>
                   </li>
               </ul>
           </li>
@@ -339,7 +348,7 @@ All API responses are in <strong>JSON</strong> format and follow <a href="https:
 <p>Redirect is when the partner redirects the customer to our domain to complete the checkout process. In this case you will take advantage of the checkout_url that is returned in the response to the Create Order. The pros to this approach are:</p>
 
 <ul>
-<li>Lowest development effort to setup as no need to do not need to setup an location for the iframe to be hosted.</li>
+<li>Lowest development effort to setup, as do not need to setup a location for the iframe to be hosted.</li>
 <li>Best approach if you have not yet integrated with our Create Identity endpoint as otherwise it will force the customer&#39;s browser to be redirected to our site to complete KYC </li>
 </ul>
 <h3 id='widget'>Widget</h3>
@@ -908,7 +917,255 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 </tbody></table>
-<h1 id='order'>Order</h1><h2 id='get-order'>Get Order</h2>
+<h1 id='order'>Order</h1><h2 id='get-orders'>Get Orders</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -H <span class="s2">"Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/orders?start_date=2020-06-01&amp;end_date=2020-06-02&amp;per_page=50"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f954c2eaea52db2d7e57d839620a764"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"564d914ba50d51d67095817f1559e0a7"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"account_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLI"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fiat_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coin_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coin_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"wallet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1LbQ1WNTsm1Nzj1hbh3WDCbEim1oUg5rfi"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.3</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"payment_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-01 00:20:51"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get details for orders that have been submitted for a time range and optionally by customer.</p>
+
+<p>Start and End date can either be dates or date times. The system times are all in UTC. If no time is given then it is set to midnight that day. 
+So if you want the 1st of June 2020, the dates would be 2020-06-01 and 2020-06-02. </p>
+<h3 id='request-5'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/orders</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>start_date</code></td>
+<td>Yes</td>
+<td>The start date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>Yes</td>
+<td>The end date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)</td>
+</tr>
+<tr>
+<td><code>per_page</code></td>
+<td>No</td>
+<td>This is the page size. It is defaulted to 100</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>No</td>
+<td>This is the page to get. The number of pages available is given in the meta object in the response</td>
+</tr>
+<tr>
+<td><code>account_reference</code></td>
+<td>No</td>
+<td>This is the reference that was passed in when creating an order. Use this to get all orders for a customer</td>
+</tr>
+</tbody></table>
+<h3 id='response-5'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>data.orders.id</code></td>
+<td>The id of the order</td>
+<td>number</td>
+</tr>
+<tr>
+<td><code>data.orders.account_id</code></td>
+<td>The account ID for the order</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.account_reference</code></td>
+<td>The account reference for the customer</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.order_type</code></td>
+<td>Order type</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.payment_type</code></td>
+<td>Payment type</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.ref</code></td>
+<td>Order reference</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.fiat_code</code></td>
+<td>Fiat currency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.fiat_amount</code></td>
+<td>Fiat currency value for the order</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td><code>data.orders.coin_code</code></td>
+<td>Cryptocurrency code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.coin_amount</code></td>
+<td>Cryptocurrency value for the order</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td><code>data.orders.wallet_address</code></td>
+<td>Cryptocurrency wallet address</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.wallet_address_tag</code></td>
+<td>Cryptocurrency wallet address tag (if required)</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.fee</code></td>
+<td>Order fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.fee_tax</code></td>
+<td>Tax charged on the order fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.payment_fee</code></td>
+<td>Payment fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.payment_fee_tax</code></td>
+<td>Tax charged on the payment fee in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.commission</code></td>
+<td>Commission amount in fiat currency</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.tx_hash</code></td>
+<td>Blockchain transaction hash</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.tx_confirms</code></td>
+<td>Number of blockchain confirmations</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.created_at</code></td>
+<td>Timestamp when order was created in UTC time</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.created_date</code></td>
+<td>Date when order was created in UTC time</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.status</code></td>
+<td>Order status</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.merchant_fee</code></td>
+<td>Merchant defined fee</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.merchant_commission</code></td>
+<td>Merchant defined commission</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>meta.current_page</code></td>
+<td>The page requested</td>
+<td></td>
+</tr>
+<tr>
+<td><code>meta.last_page</code></td>
+<td>The last page that can be requested</td>
+<td></td>
+</tr>
+<tr>
+<td><code>meta.from</code></td>
+<td>Index of the first item in this response</td>
+<td></td>
+</tr>
+<tr>
+<td><code>meta.to</code></td>
+<td>Index of the last item in this response</td>
+<td></td>
+</tr>
+<tr>
+<td><code>meta.per_page</code></td>
+<td>The max number of items per page</td>
+<td></td>
+</tr>
+<tr>
+<td><code>meta.total</code></td>
+<td>The total number of items found</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='get-order'>Get Order</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -924,6 +1181,7 @@ Requires <strong>Authentication</strong>
     </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f954c2eaea52db2d7e57d839620a764"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"564d914ba50d51d67095817f1559e0a7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"098f6bcd4621d373cade4e832627b4f6"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYPTO-BUY"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLI"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -943,13 +1201,13 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get details for an order that has been submitted</p>
-<h3 id='request-5'>Request</h3>
+<h3 id='request-6'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/orders/{orderId}</code></p>
 
 <aside class="notice">
 Requires <strong>Authentication</strong>
 </aside>      
-<h3 id='response-5'>Response</h3>
+<h3 id='response-6'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -965,6 +1223,11 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>data.order.account_id</code></td>
 <td>The account ID for the order</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.order.account_reference</code></td>
+<td>The account reference for the customer</td>
 <td>string</td>
 </tr>
 <tr>
@@ -1083,6 +1346,10 @@ Requires <strong>Authentication</strong>
 <td>expired</td>
 <td>Payment has not been made, order has been expired</td>
 </tr>
+<tr>
+<td>refunded</td>
+<td>Payment was made, but we were unable to complete the order due to our checks, so the customer was refunded</td>
+</tr>
 </tbody></table>
 <h2 id='create-order'>Create Order</h2>
 <blockquote>
@@ -1122,7 +1389,7 @@ The customer should be redirected to this URL to complete the checkout process.
 The URL will expire after 1 minute if a redirect does not occur. The type of order is determined based on the codes provided to the source and target.</p>
 
 <p>The <code>account_reference</code> that is passed in the request should be unique per customer. This is used on our side to remember a customer. In order to avoid customers from having to enter personal information or KYC again please use the same string for each order from the same customer.</p>
-<h3 id='request-6'>Request</h3>
+<h3 id='request-7'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/orders</code></p>
 
 <aside class="notice">
@@ -1238,7 +1505,7 @@ If this field is not included for order creation for these coins it will fail wi
 fiat_amount, fiat_code, coin_amount and coin_code have all been deprecated in place of source_amount, source, target_amount and target to allow for a better BUY and SELL flow. 
 The old ones will continue to work for now but will be removed at a later date. Please update accordingly.
 </aside>      
-<h3 id='response-6'>Response</h3>
+<h3 id='response-7'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1373,7 +1640,7 @@ Please speak to your account manager about setting up the processing rules. </p>
 
 <p>Although certain properties are optional, they may still be required for us to complete the checkout process. If this is the 
 case we may still ask customers for additional information in order to fulfil our regulatory requirements.</p>
-<h3 id='request-7'>Request</h3>
+<h3 id='request-8'>Request</h3>
 <p><code>POST https://[partner].banxa.com/api/identities</code></p>
 
 <aside class="notice">
@@ -1651,7 +1918,7 @@ a link to the certificate provided by the 3rd party so that we may audit any KYC
 
 <p>If the document was manually verified by your support team then the is_manual flag should be set and the authorizer field can be excluded. 
 Please attach any additional information from your system in the comment field   </p>
-<h3 id='response-7'>Response</h3>
+<h3 id='response-8'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1679,7 +1946,11 @@ The redirect URL must be specified in <strong>Create Order</strong> API paramete
 <p>If there are any issues completing the order then they will be redirected to return_url_on_failure.</p>
 
 <p>If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.</p>
-<h1 id='changelog'>Changelog</h1><h2 id='24-jun-2020'>24 Jun 2020</h2>
+<h1 id='changelog'>Changelog</h1><h2 id='01-jul-2020'>01 Jul 2020</h2>
+<ul>
+<li>Added account_reference to the Get Order response</li>
+</ul>
+<h2 id='24-jun-2020'>24 Jun 2020</h2>
 <ul>
 <li>Added Body Parameter to Create Order for triggering the widget checkout</li>
 <li>Updated documentation to detail the different checkout approaches</li>
@@ -1687,6 +1958,11 @@ The redirect URL must be specified in <strong>Create Order</strong> API paramete
 <h2 id='12-jun-2020'>12 Jun 2020</h2>
 <ul>
 <li>Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins</li>
+</ul>
+<h2 id='21-jul-2020'>21 Jul 2020</h2>
+<ul>
+<li>Added Get Orders API documentation</li>
+<li>Added refunded order status</li>
 </ul>
 <h1 id='errors'>Errors</h1>
 <blockquote>
