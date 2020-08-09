@@ -499,7 +499,8 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
           "commission": 0.03,
           "tx_hash": "323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35",
           "created_at": "2020-06-01 00:20:51",
-          "status": "complete"
+          "status": "complete",
+          "meta_data": "{'tracking_id': 'HSKJDGHKSJG0393LJKJF'}"
       }
     ]
   },
@@ -516,8 +517,8 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 Get details for orders that have been submitted for a time range and optionally by customer.
 
-Start and End date can either be dates or date times. The system times are all in UTC. If no time is given then it is set to midnight that day. 
-So if you want the 1st of June 2020, the dates would be 2020-06-01 and 2020-06-02. 
+Start and End date must be dates of the format YYYY-MM-DD. The system times are all returned in UTC. We default the end time to be end of that day. 
+So if you want just the 1st of June 2020, the start and end dates would be 2020-06-01. 
 
 ### Request
 `GET https://[partner].banxa.com/api/orders`
@@ -530,8 +531,8 @@ Requires <strong>Authentication</strong>
 
 Parameter | Required | Description
 --------- | -------- | -----------
-`start_date`                   | Yes | The start date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20) 
-`end_date`                     | Yes | The end date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)
+`start_date`                   | Yes | The start date for the lookup. Format YYYY-MM-DD 
+`end_date`                     | Yes | The end date for the lookup. Format YYYY-MM-DD
 `per_page`                     | No  | This is the page size. It is defaulted to 100
 `page`                         | No  | This is the page to get. The number of pages available is given in the meta object in the response
 `account_reference`            | No  | This is the reference that was passed in when creating an order. Use this to get all orders for a customer
@@ -564,6 +565,7 @@ Field | Description | Format
 `data.orders.status`    | Order status | string
 `data.orders.merchant_fee`    | Merchant defined fee | string
 `data.orders.merchant_commission`    | Merchant defined commission | string
+`data.orders.meta_data` | Returning meta data that was passed in the init order | string
 `meta.current_page`  | The page requested
 `meta.last_page`  | The last page that can be requested
 `meta.from`  | Index of the first item in this response
@@ -730,6 +732,7 @@ Parameter | Required | Description
 `return_url_on_cancelled`   | No  | The return URL when the customer cancelled the checkout process
 `return_url_on_failure`     | No  | The return URL when the customer failed to complete the checkout process
 `iframe_domain`             | No  | The domain what will be authorised to display the returned checkout_iframe URL in an iframe e.g. example.com. This must be the exact domain so if this is on a subdomain we would expect sub.example.com
+`meta_data`                 | No  | A free form string that the partner can use to send us any information that will be returned in the GET /orders request
 
 <aside class="notice">
 † Wallet address is only required for a buy. For a sell we will send back the wallet to send to in the response<br/>
@@ -940,6 +943,10 @@ If the customer cancels the flow at any point, they will be redirected to the re
 
 # Changelog
 
+## 09 Aug 2020
+
+* Added meta_data to the Create Order request and Get Orders response
+
 ## 01 Jul 2020
 
 * Added account_reference to the Get Order response
@@ -949,11 +956,11 @@ If the customer cancels the flow at any point, they will be redirected to the re
 * Added Body Parameter to Create Order for triggering the widget checkout
 * Updated documentation to detail the different checkout approaches
 
-## 12 Jun 2020
-
-* Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins
-
 ## 21 Jul 2020
 
 * Added Get Orders API documentation
 * Added refunded order status
+
+## 12 Jun 2020
+
+* Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins
