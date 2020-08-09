@@ -304,16 +304,19 @@
             <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog">Changelog</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#09-aug-2020" class="toc-h2 toc-link" data-title="09 Aug 2020">09 Aug 2020</a>
+                  </li>
+                  <li>
                     <a href="#01-jul-2020" class="toc-h2 toc-link" data-title="01 Jul 2020">01 Jul 2020</a>
                   </li>
                   <li>
                     <a href="#24-jun-2020" class="toc-h2 toc-link" data-title="24 Jun 2020">24 Jun 2020</a>
                   </li>
                   <li>
-                    <a href="#12-jun-2020" class="toc-h2 toc-link" data-title="12 Jun 2020">12 Jun 2020</a>
+                    <a href="#21-jul-2020" class="toc-h2 toc-link" data-title="21 Jul 2020">21 Jul 2020</a>
                   </li>
                   <li>
-                    <a href="#21-jul-2020" class="toc-h2 toc-link" data-title="21 Jul 2020">21 Jul 2020</a>
+                    <a href="#12-jun-2020" class="toc-h2 toc-link" data-title="12 Jun 2020">12 Jun 2020</a>
                   </li>
               </ul>
           </li>
@@ -948,7 +951,8 @@ Requires <strong>Authentication</strong>
           </span><span class="s2">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
           </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"323bf75d66fd5a4fe8c903f950d81c5f0170bacd0f872cde8f4f3d6e7c94db35"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-01 00:20:51"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"meta_data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'tracking_id': 'HSKJDGHKSJG0393LJKJF'}"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -964,8 +968,8 @@ Requires <strong>Authentication</strong>
 </span></code></pre>
 <p>Get details for orders that have been submitted for a time range and optionally by customer.</p>
 
-<p>Start and End date can either be dates or date times. The system times are all in UTC. If no time is given then it is set to midnight that day. 
-So if you want the 1st of June 2020, the dates would be 2020-06-01 and 2020-06-02. </p>
+<p>Start and End date must be dates of the format YYYY-MM-DD. The system times are all returned in UTC. We default the end time to be end of that day. 
+So if you want just the 1st of June 2020, the start and end dates would be 2020-06-01. </p>
 <h3 id='request-5'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/orders</code></p>
 
@@ -983,12 +987,12 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>start_date</code></td>
 <td>Yes</td>
-<td>The start date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)</td>
+<td>The start date for the lookup. Format YYYY-MM-DD</td>
 </tr>
 <tr>
 <td><code>end_date</code></td>
 <td>Yes</td>
-<td>The end date for the lookup. Format YYYY-MM-DD or YYYY-MM-DD HH:MM:SS (Note this will need to be URI encoded for the space to be %20)</td>
+<td>The end date for the lookup. Format YYYY-MM-DD</td>
 </tr>
 <tr>
 <td><code>per_page</code></td>
@@ -1132,6 +1136,11 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>data.orders.merchant_commission</code></td>
 <td>Merchant defined commission</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.orders.meta_data</code></td>
+<td>Returning meta data that was passed in the init order</td>
 <td>string</td>
 </tr>
 <tr>
@@ -1492,6 +1501,11 @@ Requires <strong>Authentication</strong>
 <td><code>iframe_domain</code></td>
 <td>No</td>
 <td>The domain what will be authorised to display the returned checkout_iframe URL in an iframe e.g. example.com. This must be the exact domain so if this is on a subdomain we would expect sub.example.com</td>
+</tr>
+<tr>
+<td><code>meta_data</code></td>
+<td>No</td>
+<td>A free form string that the partner can use to send us any information that will be returned in the GET /orders request</td>
 </tr>
 </tbody></table>
 
@@ -1946,7 +1960,11 @@ The redirect URL must be specified in <strong>Create Order</strong> API paramete
 <p>If there are any issues completing the order then they will be redirected to return_url_on_failure.</p>
 
 <p>If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.</p>
-<h1 id='changelog'>Changelog</h1><h2 id='01-jul-2020'>01 Jul 2020</h2>
+<h1 id='changelog'>Changelog</h1><h2 id='09-aug-2020'>09 Aug 2020</h2>
+<ul>
+<li>Added meta_data to the Create Order request and Get Orders response</li>
+</ul>
+<h2 id='01-jul-2020'>01 Jul 2020</h2>
 <ul>
 <li>Added account_reference to the Get Order response</li>
 </ul>
@@ -1955,14 +1973,14 @@ The redirect URL must be specified in <strong>Create Order</strong> API paramete
 <li>Added Body Parameter to Create Order for triggering the widget checkout</li>
 <li>Updated documentation to detail the different checkout approaches</li>
 </ul>
-<h2 id='12-jun-2020'>12 Jun 2020</h2>
-<ul>
-<li>Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins</li>
-</ul>
 <h2 id='21-jul-2020'>21 Jul 2020</h2>
 <ul>
 <li>Added Get Orders API documentation</li>
 <li>Added refunded order status</li>
+</ul>
+<h2 id='12-jun-2020'>12 Jun 2020</h2>
+<ul>
+<li>Added Body Parameter to Create Order for specifying the address tag for use with XRP and BNB coins</li>
 </ul>
 <h1 id='errors'>Errors</h1>
 <blockquote>
