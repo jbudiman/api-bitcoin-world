@@ -26,10 +26,11 @@ Field | Description | Format
 `errors.title`    | The title for the error | string
 `errors.description`    | (optional) A more detailed description of the error | string
 
-The API uses the following error codes:
+The API uses the following HTTP Statuses:
 
-Error Code | Meaning
+Status | Meaning
 ---------- | -------
+200 | Successful -- Your request was successful
 400 | Bad Request -- Your request is invalid.
 401 | Unauthorized -- Your API key is incorrect or the packet was malformed.
 403 | Forbidden -- The request is not allowed.
@@ -41,3 +42,13 @@ Error Code | Meaning
 429 | Too Many Requests 
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
+
+The API uses the following Error Codes:
+
+Code | Meaning
+---------- | -------
+227  | Customer's account has temporarily been placed on hold
+228  | Customer has reached their payment limit
+305  | We are waiting for funds to arrive for a customer from a previous order
+4007 | The selected payment is not available
+

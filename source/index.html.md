@@ -373,7 +373,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "spot_price": 15402,
     "prices": [
       {
-        "payment_method_id": "1",
+        "payment_method_id": 1,
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
@@ -384,7 +384,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "fee_amount": 10
       },
       {
-        "payment_method_id": "2",
+        "payment_method_id": 2,
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 1078,
         "spot_price_including_fee": 14324,
@@ -415,7 +415,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
     "spot_price": 15402,
     "prices": [
       {
-        "payment_method_id": "1",
+        "payment_method_id": 1,
         "type": "FIAT_TO_CRYPTO",
         "spot_price_fee": 770,
         "spot_price_including_fee": 14632,
@@ -454,7 +454,7 @@ Parameter | Required | Description
 Field | Description | Format
 --------- | -------- | -----------
 `data.spot_price`        | The spot price of the cryptocurrency | number
-`data.prices.payment_method_id`        | The id of the payment method | string
+`data.prices.payment_method_id`        | The id of the payment method | number
 `data.prices.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
 `data.prices.spot_price_fee`        | The fee charged on the spot price | string
 `data.prices.spot_price_including_fee`        | The adjusted spot price including the fee | string
@@ -942,6 +942,11 @@ If there are any issues completing the order then they will be redirected to ret
 If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.
 
 # Changelog
+
+## 31 Aug 2020
+
+* Added new API error codes
+* Fixed incorrect return type for payment_method_id
 
 ## 09 Aug 2020
 
