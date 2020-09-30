@@ -1,5 +1,6 @@
 # Errors
 
+If any request returns an error it will be in the following format:
 
 > Example Response:
 
@@ -15,9 +16,7 @@
 }
 ```
 
-If any request returns an error it will be in the following format:
-
-### Response
+### Error Responses
 
 Field | Description | Format
 --------- | -------- | -----------
