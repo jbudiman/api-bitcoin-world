@@ -2,6 +2,11 @@
 
 ## Get Fiat Currencies
 
+Retrieve all available fiat currencies
+
+
+### Request
+
 > Example Request:
 
 ```shell
@@ -26,10 +31,6 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 }
 ```
 
-Retrieve all available fiat currencies
-
-### Request
-
 `GET https://[partner].banxa.com/api/fiats`
 
 <aside class="notice">
@@ -45,6 +46,8 @@ Field | Description | Format
 `data.fiats.fiat_symbol`    | The fiat currency symbol | string
 
 ## Get Crypto Currencies
+
+Retrieve all available crypto currencies
 
 > Example Request:
 
@@ -72,8 +75,6 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
   }
 }
 ```
-
-Retrieve all available crypto currencies
 
 ### Request
 

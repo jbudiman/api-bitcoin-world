@@ -75,7 +75,7 @@ html, body {
   .logo {
     display: block;
     //max-width: 100%;
-    max-width: 80%;
+    max-width: 75%;
     //margin-bottom: $logo-margin;
     margin: $logo-margin;
   }
@@ -255,6 +255,7 @@ html, body {
   z-index: 10;
   background-color: $main-bg;
   min-height: 100%;
+  width: 100%;
 
   padding-bottom: 1px; // prevent margin overflow
 
