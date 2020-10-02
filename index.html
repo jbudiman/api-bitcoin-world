@@ -421,7 +421,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Banxa partner integration API. </p>
+<p>Welcome to the Banxa partner integration API.</p>
 
 <p>This API documentation will guide you through the integration with Banxa payment APIs and processes.</p>
 
@@ -431,7 +431,7 @@ All API responses are in <strong>JSON</strong> format and follow <a href="https:
 
 <p>Please contact your account representative or <a href="mailto:support@banxa.com">support@banxa.com</a> to receive your production and testing URLs and your API credentials.</p>
 
-<p>The URLs will be of the format https://[partner].banxa.com and https://[partner].banxa-sandbox.com </p>
+<p>The URLs will be of the format https://[partner].banxa.com and https://[partner].banxa-sandbox.com</p>
 <h2 id='checkout-approaches'>Checkout Approaches</h2>
 <p>There are 2 approaches available to our partners for integrating with Banxa to take the customer through the on-ramp experience.</p>
 <h3 id='redirect'>Redirect</h3>
@@ -439,10 +439,10 @@ All API responses are in <strong>JSON</strong> format and follow <a href="https:
 
 <ul>
 <li>Lowest development effort to setup, as do not need to setup a location for the iframe to be hosted.</li>
-<li>Best approach if you have not yet integrated with our Create Identity endpoint as otherwise it will force the customer&#39;s browser to be redirected to our site to complete KYC </li>
+<li>Best approach if you have not yet integrated with our Create Identity endpoint as otherwise it will force the customer&#39;s browser to be redirected to our site to complete KYC</li>
 </ul>
 <h3 id='widget'>Widget</h3>
-<p>Widget is when the partner hosts our site in an iframe to complete the checkout process. In this case you will take advantage of the checkout_iframe that is returned in the response. 
+<p>Widget is when the partner hosts our site in an iframe to complete the checkout process. In this case you will take advantage of the checkout_iframe that is returned in the response.
 Note this will only be returned if you send the iframe_domain in the request body of the Create Order. The pros to this approach are:</p>
 
 <ul>
@@ -456,7 +456,7 @@ Note this will only be returned if you send the iframe_domain in the request bod
 <li>If the browser does not support 3rd party cookies, e.g. Safari. In some browsers they have strict rules around what iframes of 3rd party sites can do, and one of them is the ability to store cookies. Because we require this to maintain state, if this cannot be saved the customer will be redirected to our site to complete.</li>
 <li>If the customer needs to complete KYC. Due to potential restrictions of accessing the camera from an iframe if the customer requires KYC then we will redirect to our site to complete this. Note that when the customer makes their next order it will all be done from the widget.</li>
 <li>If the customer uses iDEAL payment method. For security reasons, iDEAL does not work within iframes and therefore we need to redirect the customer in order to have them login into their bank. They will then be redirected to the order status page on our site where they can then redirect back to the partner site.</li>
-<li>If the customer uses Credit Card they will be redirected for the order status only. This is a limitation of our provider where they will redirect the customer to our site, where they can then go back to the partner page after viewing their status. </li>
+<li>If the customer uses Credit Card they will be redirected for the order status only. This is a limitation of our provider where they will redirect the customer to our site, where they can then go back to the partner page after viewing their status.</li>
 </ul>
 
 <p>The iframe should be loaded within a modal div and below is the recommended iframe format:</p>
@@ -469,49 +469,55 @@ Note this will only be returned if you send the iframe_domain in the request bod
 
 <table><thead>
 <tr>
+<th>No.</th>
 <th>Colour</th>
-<th>Format</th>
 <th>Example</th>
 <th>Additional Information</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Primary Colour</td>
-<td>HEX</td>
+<td>1</td>
+<td>Primary colour</td>
 <td>#2D99FF</td>
 <td>Used throughout the app mainly for headers/buttons as primary app colour</td>
 </tr>
 <tr>
-<td>Background Colour</td>
-<td>HEX</td>
+<td>2</td>
+<td>Primary Background colour</td>
 <td>#121638</td>
 <td>Main app background colour</td>
 </tr>
 <tr>
-<td>Text color on background</td>
-<td>HEX</td>
+<td>3</td>
+<td>Text colour over dark background</td>
 <td>#EDF2F7</td>
 <td>Used on 404/500 error pages</td>
 </tr>
 <tr>
-<td>Footer Background Colour</td>
-<td>HEX</td>
+<td>4</td>
+<td>Footer background colour</td>
 <td>#FFFFFF</td>
 <td>Bottom footer background colour</td>
 </tr>
 <tr>
-<td>Footer Font Colour</td>
-<td>HEX</td>
+<td>5</td>
+<td>Footer text colour</td>
 <td>#999999</td>
 <td>Text color on the footer</td>
 </tr>
 <tr>
-<td>Border colour at the footer</td>
-<td>HEX</td>
+<td>6</td>
+<td>Thin separator colour</td>
 <td>#EDF2F7</td>
-<td>Thin border used on the footer</td>
+<td>Thin Line separator colour used on the footer</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+All colour values are in HEX (e.g. #2D99FF)
+</aside>
+<h3 id='colour-guide'>Colour Guide</h3>
+<p><img src="images/colour-guide-f57eeeac.png" alt="" /></p>
 <h1 id='headers'>Headers</h1>
 <p>Please include the Accept header for Json as per the below in all requests</p>
 
