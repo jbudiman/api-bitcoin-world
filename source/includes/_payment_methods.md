@@ -23,6 +23,7 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
         "logo_url": "https://banxa.com/img/poli.png",
         "status": "ACTIVE",
         "type": "FIAT_TO_CRYPTO",
+        "supported_agents": null,
         "supported_fiat": ["AUD"],
         "supported_coin": ["BTC", "ETH"],
         "transaction_fees": [
@@ -48,11 +49,25 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
       },
       {
         "id": "2",
-        "name": "Newsagent",
-        "description": "Pay for your crypto in cash at your local newsagent",
-        "logo_url": "https://banxa.com/img/newsagent.png",
+        "name": "WORLDPAYAPPLE",
+        "description": "Apple Pay",
+        "logo_url": "https://banxa.com/img/apple-pay.png",
         "status": "ACTIVE",
         "type": "FIAT_TO_CRYPTO",
+        "supported_agents": [
+          {
+            "os": "ios",
+            "browser": "safari"
+          },
+          {
+            "os": "macos",
+            "browser": "safari"
+          },
+          {
+            "os": "ipados",
+            "browser": "safari"
+          }
+        ],
         "supported_fiat": ["AUD"],
         "supported_coin": ["BTC", "ETH"],
         "transaction_fees": [
@@ -83,6 +98,8 @@ curl -H "Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx" \
 
 Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target.
 
+If the payment has a supported_agents field which is not null then there are limitations for accessing this payment by browser and operating system. To avoid the payment failing please block customers from accessing those payments from the wrong device
+
 ### Request
 
 `GET https://[partner].banxa.com/api/payment-methods`
@@ -108,6 +125,8 @@ Field | Description | Format
 `data.payment_methods.logo_url`    | Url to get a logo for this payment method | uri
 `data.payment_methods.status`    | ACTIVE or INACTIVE | string
 `data.payment_methods.type`                   | The exchange type e.g. 'FIAT_TO_CRYPTO' | string
+`data.payment_methods.supported_agents.os`    | The operating system required for this payment | string
+`data.payment_methods.supported_agents.browser`    | The browser required for this payment | string
 `data.payment_methods.supported_fiat`    | List of supported currencies | array&lt;string&gt;
 `data.payment_methods.supported_coin`    | List of supported crypto coins | array&lt;string&gt;
 `data.payment_methods.transaction_fees.fiat_code`    | The currency of the fee | string

@@ -1,5 +1,10 @@
 # Changelog
 
+## 02 Oct 2020
+
+* Added country and US states endpoints
+* Added supported_agents field to payment methods
+
 ## 31 Aug 2020
 
 * Added new API error codes
