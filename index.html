@@ -339,6 +339,17 @@
               </ul>
           </li>
           <li>
+            <a href="#countries" class="toc-h1 toc-link" data-title="Countries">Countries</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-countries" class="toc-h2 toc-link" data-title="Get Countries">Get Countries</a>
+                  </li>
+                  <li>
+                    <a href="#get-us-states" class="toc-h2 toc-link" data-title="Get US States">Get US States</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#payment-methods" class="toc-h1 toc-link" data-title="Payment Methods">Payment Methods</a>
               <ul class="toc-list-h2">
                   <li>
@@ -387,6 +398,9 @@
           <li>
             <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog">Changelog</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#02-oct-2020" class="toc-h2 toc-link" data-title="02 Oct 2020">02 Oct 2020</a>
+                  </li>
                   <li>
                     <a href="#31-aug-2020" class="toc-h2 toc-link" data-title="31 Aug 2020">31 Aug 2020</a>
                   </li>
@@ -684,6 +698,106 @@ Requires <strong>Authentication</strong>
 <td>string</td>
 </tr>
 </tbody></table>
+<h1 id='countries'>Countries</h1><h2 id='get-countries'>Get Countries</h2>
+<p>Retrieve all available countries</p>
+<h3 id='request'>Request</h3>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/countries"</span>
+</code></pre></div>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">  
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET https://[partner].banxa.com/api/countries</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>data.countries.country_code</code></td>
+<td>The ISO 2 country code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.countries.country_name</code></td>
+<td>The country full name</td>
+<td>string</td>
+</tr>
+</tbody></table>
+<h2 id='get-us-states'>Get US States</h2>
+<p>Retrieve all available US States</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer xxxxxxxx:xxxx-xxxx-xxxx:xxxxxxxx"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  <span class="s2">"https://[partner].banxa.com/api/countries/us/states"</span>
+</code></pre></div>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  
+    </span><span class="nl">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"state_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"state_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alabama"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"state_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AK"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"state_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alaska"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='request-2'>Request</h3>
+<p><code>GET https://[partner].banxa.com/api/countries/us/states</code></p>
+
+<aside class="notice">
+Requires <strong>Authentication</strong>
+</aside>      
+<h3 id='response-2'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>data.states.state_code</code></td>
+<td>2 letter state code</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.states.state_name</code></td>
+<td>The state name</td>
+<td>string</td>
+</tr>
+</tbody></table>
 <h1 id='payment-methods'>Payment Methods</h1><h2 id='get-payment-methods'>Get Payment Methods</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -705,6 +819,7 @@ Requires <strong>Authentication</strong>
         </span><span class="nl">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/poli.png"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"supported_agents"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
         </span><span class="nl">"supported_coin"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">],</span><span class="w">
         </span><span class="nl">"transaction_fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -730,11 +845,25 @@ Requires <strong>Authentication</strong>
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newsagent"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pay for your crypto in cash at your local newsagent"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/newsagent.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WORLDPAYAPPLE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple Pay"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://banxa.com/img/apple-pay.png"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIAT_TO_CRYPTO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"supported_agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ios"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safari"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"macos"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safari"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ipados"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safari"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
         </span><span class="nl">"supported_fiat"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AUD"</span><span class="p">],</span><span class="w">
         </span><span class="nl">"supported_coin"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">],</span><span class="w">
         </span><span class="nl">"transaction_fees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -763,6 +892,8 @@ Requires <strong>Authentication</strong>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Retrieve all possible payment methods or filter the available by a fiat or coin code. The type of exchange is determined based on the codes provided to the source and target.</p>
+
+<p>If the payment has a supported_agents field which is not null then there are limitations for accessing this payment by browser and operating system. To avoid the payment failing please block customers from accessing those payments from the wrong device</p>
 <h3 id='request'>Request</h3>
 <p><code>GET https://[partner].banxa.com/api/payment-methods</code></p>
 
@@ -824,6 +955,16 @@ Requires <strong>Authentication</strong>
 <tr>
 <td><code>data.payment_methods.type</code></td>
 <td>The exchange type e.g. &#39;FIAT_TO_CRYPTO&#39;</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.payment_methods.supported_agents.os</code></td>
+<td>The operating system required for this payment</td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>data.payment_methods.supported_agents.browser</code></td>
+<td>The browser required for this payment</td>
 <td>string</td>
 </tr>
 <tr>
@@ -2087,7 +2228,12 @@ The redirect URL must be specified in <strong>Create Order</strong> API paramete
 <p>If there are any issues completing the order then they will be redirected to return_url_on_failure.</p>
 
 <p>If the customer cancels the flow at any point, they will be redirected to the return_url_on_cancelled.</p>
-<h1 id='changelog'>Changelog</h1><h2 id='31-aug-2020'>31 Aug 2020</h2>
+<h1 id='changelog'>Changelog</h1><h2 id='02-oct-2020'>02 Oct 2020</h2>
+<ul>
+<li>Added country and US states endpoints</li>
+<li>Added supported_agents field to payment methods</li>
+</ul>
+<h2 id='31-aug-2020'>31 Aug 2020</h2>
 <ul>
 <li>Added new API error codes</li>
 <li>Fixed incorrect return type for payment_method_id</li>
