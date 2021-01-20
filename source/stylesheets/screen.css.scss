@@ -59,8 +59,8 @@ html, body {
   bottom: 0;
   width: $nav-width;
   background-color: $nav-bg;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 12px;
+  //font-weight: bold;
 
   // language selector for mobile devices
   .lang-selector {
@@ -75,7 +75,7 @@ html, body {
   .logo {
     display: block;
     //max-width: 100%;
-    max-width: 75%;
+    max-width: 80%;
     //margin-bottom: $logo-margin;
     margin: $logo-margin;
   }
@@ -143,7 +143,8 @@ html, body {
     list-style: none;
     margin: 0;
     padding: 0;
-    line-height: 28px;
+    //line-height: 28px;
+    line-height: 32px;
   }
 
   li {
@@ -157,6 +158,7 @@ html, body {
   .toc-link.active {
     background-color: $nav-active-bg;
     color: $nav-active-text;
+    font-weight: bold;
   }
 
   // this is parent links of the currently selected ToC entry
