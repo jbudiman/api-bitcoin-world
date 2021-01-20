@@ -1,5 +1,10 @@
 # Changelog
 
+## 20 Jan 2021
+
+* Updated the Logo
+* Updated 'Checkout Look and Feel' section
+
 ## 02 Oct 2020
 
 * Added country and US states endpoints
